@@ -1,24 +1,13 @@
-import React from "react";
-import { useState } from "react";
-import { fetchData } from "./testFetch";
-import { useEffect } from "react";
+import * as React from "react";
+import Dashboard from "./pages/Dashboard";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetchData("http://127.0.0.1:5000/demo").then((value) => {
-      setData(value);
-    });
-  }, []);
-
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{data}</p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
