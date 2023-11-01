@@ -3,18 +3,14 @@ import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { mainListItems } from "../helper/listitems";
+import { DrawerItems } from "../helper/DrawerItems";
+import Typography from "@mui/material/Typography";
+import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 
-export default function Drawer() {
+export const drawerWidth: number = 230;
+
+export function Drawer() {
   const [open, setOpen] = React.useState(true);
-
-  const drawerWidth: number = 240;
-
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
 
   const DrawerMod = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -48,15 +44,32 @@ export default function Drawer() {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
           px: [1],
         }}
       >
-        <IconButton onClick={toggleDrawer}>
-          <ChevronLeftIcon />
-        </IconButton>
+        <AccountTreeOutlinedIcon
+          sx={{
+            display: { xs: "none", md: "flex" },
+            mr: 1,
+          }}
+          color="secondary"
+        />
+        <Typography
+          component="h1"
+          variant="h4"
+          color="secondary"
+          noWrap
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: "",
+            fontWeight: 400,
+          }}
+        >
+          SkillSync
+        </Typography>
       </Toolbar>
-      <List component="nav">{mainListItems}</List>
+      <List component="nav">{DrawerItems}</List>
     </DrawerMod>
   );
 }

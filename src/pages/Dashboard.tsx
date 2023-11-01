@@ -3,15 +3,17 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Drawer from "../components/Drawer";
+import { Drawer } from "../components/Drawer";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import AppBar from "../components/AppBar";
 
 export default function Dashboard() {
   return (
     <Box sx={{ display: "flex" }}>
+      <AppBar />
       <Drawer />
       <Box
         component="main"
@@ -21,16 +23,7 @@ export default function Dashboard() {
           overflow: "auto",
         }}
       >
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Typography
-            component="h1"
-            variant="h4"
-            color="secondary"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            SkillSync
-          </Typography>
+        <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
@@ -62,22 +55,6 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          display: "flex",
-          alignItems: "flex-start",
-          marginTop: 2,
-          marginRight: 2,
-          overflow: "visible",
-        }}
-      >
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
       </Box>
     </Box>
   );

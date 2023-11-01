@@ -9,7 +9,7 @@ import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Divider from "@mui/material/Divider";
 
-export const mainListItems = (
+export const DrawerItems = (
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
