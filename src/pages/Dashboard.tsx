@@ -3,17 +3,19 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material";
 
 export default function Dashboard() {
+  const MainBox = styled(Box)(({ theme }) => ({
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+    background: theme.palette.grey[100],
+    boxShadow: "none",
+  }));
+
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
-      }}
-    >
+    <MainBox component="main">
       <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
         <Grid container spacing={3}>
           {/* Chart */}
@@ -46,6 +48,6 @@ export default function Dashboard() {
           </Grid>
         </Grid>
       </Container>
-    </Box>
+    </MainBox>
   );
 }

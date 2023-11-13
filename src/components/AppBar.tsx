@@ -1,34 +1,22 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { drawerWidth } from "./Drawer";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Tooltip from "@mui/material/Tooltip";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 
 export default function AppBar() {
-  interface AppBarProps extends MuiAppBarProps {
-    open?: boolean;
-  }
-
-  const AppBarMod = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-  })<AppBarProps>(({ theme, open }) => ({
-    color: "inherit",
-    background: "background",
-    ...(open && {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-    }),
+  const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
+    background: theme.palette.background.default,
+    boxShadow: "none",
+    zIndex: theme.zIndex.drawer + 1,
+    position: "absolute",
   }));
 
   const Search = styled("div")(({ theme }) => ({
@@ -38,13 +26,12 @@ export default function AppBar() {
     "&:hover": {
       backgroundColor: theme.palette.grey[100],
     },
-    marginLeft: 0,
-    marginRight: 0,
     width: "50%",
   }));
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
+    color: "black",
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -61,6 +48,7 @@ export default function AppBar() {
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create("width"),
       width: "100%",
+      color: "black",
       [theme.breakpoints.up("sm")]: {
         width: "12ch",
         "&:focus": {
@@ -71,14 +59,45 @@ export default function AppBar() {
   }));
 
   return (
-    <AppBarMod elevation={0} position="absolute">
+    <AppBarMod>
       <Toolbar
         sx={{
+          ml: 2,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: "flex",
+            alignItems: "flex-start",
+            ml: -2,
+          }}
+        >
+          <AccountTreeOutlinedIcon
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 2,
+            }}
+            color="secondary"
+          />
+          <Typography
+            component="h1"
+            variant="h4"
+            color="secondary"
+            noWrap
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "",
+              fontWeight: 400,
+            }}
+          >
+            SkillSync
+          </Typography>
+        </Box>
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
@@ -97,9 +116,9 @@ export default function AppBar() {
           }}
         >
           <Avatar alt="user" src={"a"} sx={{ p: 0, mr: 2, ml: 2 }} />
-          <Typography sx={{ mr: 2 }}>Manuel Neuer</Typography>
+          <Typography sx={{ mr: 2, color: "black" }}>Manuel Neuer</Typography>
           <Badge badgeContent={4} color="secondary" sx={{ ml: 2 }}>
-            <NotificationsIcon />
+            <NotificationsIcon color="primary" />
           </Badge>
         </Box>
       </Toolbar>
