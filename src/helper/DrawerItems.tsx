@@ -8,39 +8,55 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Divider from "@mui/material/Divider";
+import { NavLink } from "react-router-dom";
+
+const linkStyle = {
+  textDecoration: "none",
+  color: "black",
+};
 
 export const DrawerItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Anfragen" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Stellen" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Bewerber" />
-    </ListItemButton>
+    <NavLink to="/" style={linkStyle}>
+      <ListItemButton>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemButton>
+    </NavLink>
+    <NavLink to="/positions" style={linkStyle}>
+      <ListItemButton>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Positions" />
+      </ListItemButton>
+    </NavLink>
+    <NavLink to="/inquiries" style={linkStyle}>
+      <ListItemButton>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inquiries" />
+      </ListItemButton>
+    </NavLink>
+    <NavLink to="/applicants" style={linkStyle}>
+      <ListItemButton>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Applicants" />
+      </ListItemButton>
+    </NavLink>
     <Divider sx={{ my: 1 }} />
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Einstellungen" />
-    </ListItemButton>
+    <NavLink to="/settings" style={linkStyle}>
+      <ListItemButton>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Settings" />
+      </ListItemButton>
+    </NavLink>
   </React.Fragment>
 );

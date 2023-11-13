@@ -14,26 +14,11 @@ import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-//import user1 from "../../public/assets/images/user1.jpg";
 
 export default function AppBar() {
   interface AppBarProps extends MuiAppBarProps {
     open?: boolean;
   }
-  const [open, setOpen] = React.useState(true);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   const AppBarMod = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -54,11 +39,8 @@ export default function AppBar() {
       backgroundColor: theme.palette.grey[100],
     },
     marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "75%",
-    },
+    marginRight: 0,
+    width: "50%",
   }));
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -89,7 +71,7 @@ export default function AppBar() {
   }));
 
   return (
-    <AppBarMod elevation={0} position="absolute" open={open}>
+    <AppBarMod elevation={0} position="absolute">
       <Toolbar
         sx={{
           display: "flex",
@@ -106,41 +88,20 @@ export default function AppBar() {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="user" src={"ads"} />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: "45px", ml: "100vh" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-        <Typography>Manuel Neuer</Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "right",
+          }}
+        >
+          <Avatar alt="user" src={"a"} sx={{ p: 0, mr: 2, ml: 2 }} />
+          <Typography sx={{ mr: 2 }}>Manuel Neuer</Typography>
+          <Badge badgeContent={4} color="secondary" sx={{ ml: 2 }}>
             <NotificationsIcon />
           </Badge>
-        </IconButton>
+        </Box>
       </Toolbar>
     </AppBarMod>
   );

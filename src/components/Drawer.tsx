@@ -9,7 +9,7 @@ import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 
 export const drawerWidth: number = 230;
 
-export function Drawer() {
+export default function Drawer() {
   const [open, setOpen] = React.useState(true);
 
   const DrawerMod = styled(MuiDrawer, {
