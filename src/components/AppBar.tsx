@@ -13,7 +13,7 @@ import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 
 export default function AppBar() {
   const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
-    background: theme.palette.background.default,
+    background: theme.palette.grey[100],
     boxShadow: "none",
     zIndex: theme.zIndex.drawer + 1,
     position: "absolute",
@@ -98,7 +98,7 @@ export default function AppBar() {
             SkillSync
           </Typography>
         </Box>
-        <Search>
+        {/* <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -106,7 +106,7 @@ export default function AppBar() {
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
           />
-        </Search>
+        </Search> */}
         <Box
           sx={{
             flexGrow: 0,
