@@ -1,49 +1,22 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { drawerWidth } from "./Drawer";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Tooltip from "@mui/material/Tooltip";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-//import user1 from "../../public/assets/images/user1.jpg";
+import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
 
 export default function AppBar() {
-  interface AppBarProps extends MuiAppBarProps {
-    open?: boolean;
-  }
-  const [open, setOpen] = React.useState(true);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-  const AppBarMod = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-  })<AppBarProps>(({ theme, open }) => ({
-    color: "inherit",
-    background: "background",
-    ...(open && {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-    }),
+  const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
+    background: theme.palette.grey[100],
+    boxShadow: "none",
+    zIndex: theme.zIndex.drawer + 1,
+    position: "absolute",
   }));
 
   const Search = styled("div")(({ theme }) => ({
@@ -53,16 +26,12 @@ export default function AppBar() {
     "&:hover": {
       backgroundColor: theme.palette.grey[100],
     },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "75%",
-    },
+    width: "50%",
   }));
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
+    color: "black",
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -79,6 +48,7 @@ export default function AppBar() {
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create("width"),
       width: "100%",
+      color: "black",
       [theme.breakpoints.up("sm")]: {
         width: "12ch",
         "&:focus": {
@@ -89,15 +59,46 @@ export default function AppBar() {
   }));
 
   return (
-    <AppBarMod elevation={0} position="absolute" open={open}>
+    <AppBarMod>
       <Toolbar
         sx={{
+          ml: 2,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <Search>
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: "flex",
+            alignItems: "flex-start",
+            ml: -2,
+          }}
+        >
+          <AccountTreeOutlinedIcon
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 2,
+            }}
+            color="secondary"
+          />
+          <Typography
+            component="h1"
+            variant="h4"
+            color="secondary"
+            noWrap
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "",
+              fontWeight: 400,
+            }}
+          >
+            SkillSync
+          </Typography>
+        </Box>
+        {/* <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -105,42 +106,21 @@ export default function AppBar() {
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
           />
-        </Search>
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="user" src={"ads"} />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: "45px", ml: "100vh" }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-        <Typography>Manuel Neuer</Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
+        </Search> */}
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "right",
+          }}
+        >
+          <Avatar alt="user" src={"a"} sx={{ p: 0, mr: 2, ml: 2 }} />
+          <Typography sx={{ mr: 2, color: "black" }}>Manuel Neuer</Typography>
+          <Badge badgeContent={4} color="secondary" sx={{ ml: 2 }}>
+            <NotificationsIcon color="primary" />
           </Badge>
-        </IconButton>
+        </Box>
       </Toolbar>
     </AppBarMod>
   );
