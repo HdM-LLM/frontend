@@ -1,24 +1,24 @@
-import * as React from "react";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import Divider from "@mui/material/Divider";
-import { NavLink } from "react-router-dom";
-import Collapse from "@mui/material/Collapse";
-import List from "@mui/material/List";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import GridViewIcon from "@mui/icons-material/GridView";
+import * as React from 'react';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleIcon from '@mui/icons-material/People';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import LayersIcon from '@mui/icons-material/Layers';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import Divider from '@mui/material/Divider';
+import { NavLink } from 'react-router-dom';
+import Collapse from '@mui/material/Collapse';
+import List from '@mui/material/List';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import GridViewIcon from '@mui/icons-material/GridView';
 
 const linkStyle = {
-  textDecoration: "none",
-  color: "black",
+  textDecoration: 'none',
+  color: 'black',
 };
 
 export default function DrawerItems() {
