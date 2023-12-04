@@ -4,23 +4,30 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import API from "../api/api";
+import Alert from "@mui/material/Alert";
 
 export default function UploadPage() {
   const [cover_letter, setCoverLetter] = React.useState<File | null>(null);
   const [resume, setResume] = React.useState<File | null>(null);
+  const [alert, setAlert] = React.useState<boolean>(false);
+  const [success, setSuccess] = React.useState<boolean>(false);
 
-  const sendCoverLetter = () => {
-    if (!cover_letter) {
-      return;
+  const pdfs = new FormData();
+
+  const sendFiles = () => {
+    if (cover_letter == null || resume == null) {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
     } else {
-      API.getAPI().addCoverLetter(cover_letter);
-    }
-  };
-  const sendResume = () => {
-    if (!resume) {
-      return;
-    } else {
-      API.getAPI().addResume(resume);
+      pdfs.append("cover_letter", cover_letter);
+      pdfs.append("resume", resume);
+      //API.getAPI().addPdfs(pdfs);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
     }
   };
 
@@ -31,7 +38,7 @@ export default function UploadPage() {
       <Box sx={{ display: "flex", mb: 2, flexDirection: "row" }}>
         <TextField
           disabled
-          id="outlined-disabled"
+          id="cover_letter-input"
           label="Cover Letter"
           defaultValue="Insert File here"
           size="small"
@@ -44,7 +51,6 @@ export default function UploadPage() {
           component="label"
           color="secondary"
           sx={{ width: "100px" }}
-          onClick={sendCoverLetter}
         >
           Upload
           <input
@@ -54,16 +60,15 @@ export default function UploadPage() {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (!event.target.files) return;
               setCoverLetter(event.target.files[0]);
-              sendCoverLetter();
             }}
           />
         </Button>
       </Box>
       <h4>Resume</h4>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <Box sx={{ display: "flex", flexDirection: "row", mb: 4 }}>
         <TextField
           disabled
-          id="outlined-disabled"
+          id="resume-input"
           label="Resume"
           defaultValue="Insert File here"
           size="small"
@@ -76,7 +81,6 @@ export default function UploadPage() {
           variant="contained"
           component="label"
           sx={{ width: "100px" }}
-          onClick={sendResume}
         >
           Upload
           <input
@@ -86,11 +90,34 @@ export default function UploadPage() {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (!event.target.files) return;
               setResume(event.target.files[0]);
-              sendResume();
             }}
           />
         </Button>
       </Box>
+      <Box sx={{ display: "flex", flexDirection: "row", mb: 30 }}>
+        <Button
+          size="medium"
+          color="secondary"
+          variant="contained"
+          component="label"
+          sx={{ width: "100px" }}
+          onClick={sendFiles}
+        >
+          Send
+        </Button>
+      </Box>
+      {alert ? (
+        <Alert severity="error">
+          Oops, something went wrong... Please add files
+        </Alert>
+      ) : (
+        <></>
+      )}
+      {success ? (
+        <Alert severity="success">🎉 Files send successfully!</Alert>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 }
