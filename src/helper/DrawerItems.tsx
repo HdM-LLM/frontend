@@ -43,7 +43,7 @@ export default function DrawerItems() {
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" sx={{ fontWeight: 'bold' }} />
+          <ListItemText primary="Dashboard" />
         </ListItemButton>
       </NavLink>
       <NavLink to="/positions" style={linkStyle}>

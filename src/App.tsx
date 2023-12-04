@@ -12,7 +12,6 @@ import AppBar from './components/AppBar';
 import Drawer from './components/Drawer';
 import { styled } from '@mui/material';
 import { DRAWER_WIDTH } from './constants';
-import { APP_BAR_HEIGHT } from './constants';
 
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({

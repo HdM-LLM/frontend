@@ -10,7 +10,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CallMergeIcon from '@mui/icons-material/CallMerge';
-import { APP_BAR_HEIGHT } from '../constants';
 import { useNavigate } from 'react-router-dom';
 
 export default function AppBar() {
