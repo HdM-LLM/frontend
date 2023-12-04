@@ -12,6 +12,8 @@ export default function Drawer() {
       background: theme.palette.grey[100],
       width: theme.spacing(DRAWER_WIDTH),
       marginTop: theme.spacing(APP_BAR_HEIGHT),
+      height: `calc(100vh - ${APP_BAR_HEIGHT}px)`,
+      boxShadow: 'none',
     },
   }));
 

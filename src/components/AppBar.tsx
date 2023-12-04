@@ -11,23 +11,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CallMergeIcon from '@mui/icons-material/CallMerge';
 import { APP_BAR_HEIGHT } from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 export default function AppBar() {
+  const navigate = useNavigate();
+
   const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
     background: theme.palette.grey[100],
     boxShadow: 'none',
-    zIndex: theme.zIndex.drawer + 1,
-    position: 'absolute',
+    position: 'fixed',
     height: theme.spacing(8),
   }));
 
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 8,
     backgroundColor: theme.palette.grey[100],
-    '&:hover': {
-      backgroundColor: theme.palette.grey[100],
-    },
     width: '50%',
   }));
 
@@ -72,10 +71,16 @@ export default function AppBar() {
       >
         <Box
           sx={{
-            flexGrow: 0,
+            flex: 1,
             display: 'flex',
             alignItems: 'flex-start',
             ml: -2,
+            '&:hover': {
+              cursor: 'pointer',
+            },
+          }}
+          onClick={() => {
+            navigate('/');
           }}
         >
           <CallMergeIcon
@@ -95,7 +100,7 @@ export default function AppBar() {
             sx={{
               mr: 2,
               display: { md: 'flex' },
-              fontFamily: '',
+              fontFamily: 'Lato',
               fontWeight: 'bold',
             }}
           >
@@ -110,7 +115,7 @@ export default function AppBar() {
         </Search>
         <Box
           sx={{
-            flexGrow: 0,
+            flex: 1,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'right',

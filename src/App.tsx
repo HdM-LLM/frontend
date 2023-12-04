@@ -16,8 +16,7 @@ import { APP_BAR_HEIGHT } from './constants';
 
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({
-    flexGrow: 1,
-    height: '100dvh',
+    flex: 1,
     overflow: 'auto',
     background: theme.palette.background.default,
     boxShadow: 'none',
