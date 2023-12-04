@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -9,7 +9,8 @@ import InputBase from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
+import CallMergeIcon from '@mui/icons-material/CallMerge';
+import { APP_BAR_HEIGHT } from '../constants';
 
 export default function AppBar() {
   const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
@@ -17,6 +18,7 @@ export default function AppBar() {
     boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     position: 'absolute',
+    height: theme.spacing(8),
   }));
 
   const Search = styled('div')(({ theme }) => ({
@@ -76,12 +78,14 @@ export default function AppBar() {
             ml: -2,
           }}
         >
-          <AccountTreeOutlinedIcon
+          <CallMergeIcon
             sx={{
-              display: { xs: 'none', md: 'flex' },
+              display: { md: 'flex' },
               mr: 2,
             }}
             color="secondary"
+            fontSize="large"
+            fontWeight="bold"
           />
           <Typography
             component="h1"
@@ -90,23 +94,20 @@ export default function AppBar() {
             noWrap
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: { md: 'flex' },
               fontFamily: '',
-              fontWeight: 400,
+              fontWeight: 'bold',
             }}
           >
             SkillSync
           </Typography>
         </Box>
-        {/* <Search>
+        <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search> */}
+          <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+        </Search>
         <Box
           sx={{
             flexGrow: 0,

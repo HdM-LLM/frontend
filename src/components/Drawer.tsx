@@ -2,14 +2,16 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import DrawerItems from '../helper/DrawerItems';
+import { DRAWER_WIDTH } from '../constants';
+import { APP_BAR_HEIGHT } from '../constants';
 
 export default function Drawer() {
   const DrawerMod = styled(MuiDrawer)(({ theme }) => ({
     '& .MuiDrawer-paper': {
       position: 'fixed',
       background: theme.palette.grey[100],
-      width: theme.spacing(28),
-      marginTop: theme.spacing(8),
+      width: theme.spacing(DRAWER_WIDTH),
+      marginTop: theme.spacing(APP_BAR_HEIGHT),
     },
   }));
 

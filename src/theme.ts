@@ -20,6 +20,7 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  spacing: 8, // 8 is the default value from MUI
 });
 
 export default theme;
