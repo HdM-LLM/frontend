@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -9,23 +9,23 @@ import InputBase from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
+import CallMergeIcon from '@mui/icons-material/CallMerge';
+import { useNavigate } from 'react-router-dom';
 
 export default function AppBar() {
+  const navigate = useNavigate();
+
   const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
     background: theme.palette.grey[100],
     boxShadow: 'none',
-    zIndex: theme.zIndex.drawer + 1,
-    position: 'absolute',
+    position: 'fixed',
+    height: theme.spacing(8),
   }));
 
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 8,
     backgroundColor: theme.palette.grey[100],
-    '&:hover': {
-      backgroundColor: theme.palette.grey[100],
-    },
     width: '50%',
   }));
 
@@ -70,18 +70,26 @@ export default function AppBar() {
       >
         <Box
           sx={{
-            flexGrow: 0,
+            flex: 1,
             display: 'flex',
             alignItems: 'flex-start',
             ml: -2,
           }}
         >
-          <AccountTreeOutlinedIcon
+          <CallMergeIcon
             sx={{
-              display: { xs: 'none', md: 'flex' },
+              display: { md: 'flex' },
               mr: 2,
+              '&:hover': {
+                cursor: 'pointer',
+              },
             }}
             color="secondary"
+            fontSize="large"
+            fontWeight="bold"
+            onClick={() => {
+              navigate('/');
+            }}
           />
           <Typography
             component="h1"
@@ -90,26 +98,29 @@ export default function AppBar() {
             noWrap
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: '',
-              fontWeight: 400,
+              display: { md: 'flex' },
+              fontFamily: 'Lato',
+              fontWeight: 'bold',
+              '&:hover': {
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => {
+              navigate('/');
             }}
           >
             SkillSync
           </Typography>
         </Box>
-        {/* <Search>
+        <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search> */}
+          <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+        </Search>
         <Box
           sx={{
-            flexGrow: 0,
+            flex: 1,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'right',

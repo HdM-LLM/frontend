@@ -18,7 +18,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'black',
+  color: '#4d4d4d',
 };
 
 export default function DrawerItems() {
@@ -31,7 +31,15 @@ export default function DrawerItems() {
   return (
     <React.Fragment>
       <NavLink to="/" style={linkStyle}>
-        <ListItemButton>
+        <ListItemButton
+          sx={{
+            backgroundColor: '#f5f5f5',
+            '&:hover': {
+              backgroundColor: '#edf5e1',
+              cursor: 'pointer',
+            },
+          }}
+        >
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
@@ -39,15 +47,31 @@ export default function DrawerItems() {
         </ListItemButton>
       </NavLink>
       <NavLink to="/positions" style={linkStyle}>
-        <ListItemButton>
+        <ListItemButton
+          sx={{
+            backgroundColor: '#f5f5f5',
+            '&:hover': {
+              backgroundColor: '#edf5e1',
+              cursor: 'pointer',
+            },
+          }}
+        >
           <ListItemIcon>
             <LayersIcon />
           </ListItemIcon>
-          <ListItemText primary="Positions" />
+          <ListItemText primary="Vacancies" />
         </ListItemButton>
       </NavLink>
       <NavLink to="/inquiries" style={linkStyle}>
-        <ListItemButton>
+        <ListItemButton
+          sx={{
+            backgroundColor: '#f5f5f5',
+            '&:hover': {
+              backgroundColor: '#edf5e1',
+              cursor: 'pointer',
+            },
+          }}
+        >
           <ListItemIcon>
             <BarChartIcon />
           </ListItemIcon>
@@ -55,7 +79,16 @@ export default function DrawerItems() {
         </ListItemButton>
       </NavLink>
       <NavLink to="/applicants" style={linkStyle}>
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton
+          sx={{
+            backgroundColor: '#f5f5f5',
+            '&:hover': {
+              backgroundColor: '#edf5e1',
+              cursor: 'pointer',
+            },
+          }}
+          onClick={handleClick}
+        >
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
@@ -66,7 +99,16 @@ export default function DrawerItems() {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <NavLink to="/applicants/overview" style={linkStyle}>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton
+              sx={{
+                pl: 4,
+                backgroundColor: '#f5f5f5',
+                '&:hover': {
+                  backgroundColor: '#edf5e1',
+                  cursor: 'pointer',
+                },
+              }}
+            >
               <ListItemIcon>
                 <GridViewIcon />
               </ListItemIcon>
@@ -74,7 +116,16 @@ export default function DrawerItems() {
             </ListItemButton>
           </NavLink>
           <NavLink to="/applicants/upload" style={linkStyle}>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton
+              sx={{
+                pl: 4,
+                backgroundColor: '#f5f5f5',
+                '&:hover': {
+                  backgroundColor: '#edf5e1',
+                  cursor: 'pointer',
+                },
+              }}
+            >
               <ListItemIcon>
                 <FileUploadIcon />
               </ListItemIcon>
@@ -85,7 +136,15 @@ export default function DrawerItems() {
       </Collapse>
       <Divider sx={{ my: 1 }} />
       <NavLink to="/settings" style={linkStyle}>
-        <ListItemButton>
+        <ListItemButton
+          sx={{
+            backgroundColor: '#f5f5f5',
+            '&:hover': {
+              backgroundColor: '#edf5e1',
+              cursor: 'pointer',
+            },
+          }}
+        >
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>

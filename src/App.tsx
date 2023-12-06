@@ -4,22 +4,22 @@ import ApplicantsPage from './pages/ApplicantsPage';
 import OverviewPage from './pages/OverviewPage';
 import UploadPage from './pages/UploadPage';
 import InquiriesPage from './pages/InquiriesPage';
-import PositionPage from './pages/PositionPage';
+import VacancyPage from './pages/VacancyPage';
 import SettingsPage from './pages/SettingsPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import AppBar from './components/AppBar';
 import Drawer from './components/Drawer';
 import { styled } from '@mui/material';
+import { DRAWER_WIDTH } from './constants';
 
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({
-    flexGrow: 1,
-    height: '100dvh',
+    flex: 1,
     overflow: 'auto',
     background: theme.palette.background.default,
     boxShadow: 'none',
-    marginLeft: theme.spacing(28),
+    marginLeft: theme.spacing(DRAWER_WIDTH),
   }));
   return (
     <BrowserRouter>
@@ -29,7 +29,7 @@ export default function App() {
         <MainBox component="main">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/positions" element={<PositionPage />} />
+            <Route path="/positions" element={<VacancyPage />} />
             <Route path="/inquiries" element={<InquiriesPage />} />
             <Route path="/applicants" element={<ApplicantsPage />} />
             <Route path="/applicants/overview" element={<OverviewPage />} />
