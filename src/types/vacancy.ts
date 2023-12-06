@@ -1,6 +1,8 @@
+import { UUID } from 'crypto';
+
 // TODO: Change the type of the createdAt and updatedAt fields to Date once the database is set up
 export type Vacancy = {
-  id: number;
+  id: UUID;
   vacancyTitle: string;
   department: string;
   fullTime: boolean;

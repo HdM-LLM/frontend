@@ -2,7 +2,7 @@ import { Vacancy } from '../types/vacancy';
 
 export let mockVacancies: Vacancy[] = [
   {
-    id: 1,
+    id: 'f7955799-be79-4ee4-be17-dac2985c7f2b',
     vacancyTitle: 'Java Backend Developer',
     department: 'IT Department',
     fullTime: true,
@@ -13,7 +13,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 2,
+    id: '3de79d1c-fcdf-42db-adfe-86ad270739ca',
     vacancyTitle: 'Web Developer (React, Angular)',
     department: 'IT Department',
     fullTime: true,
@@ -24,7 +24,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 3,
+    id: '58bdeb00-c8b8-4cdc-817f-51b337e64c57',
     vacancyTitle: 'Frontend Developer',
     department: 'IT Department',
     fullTime: true,
@@ -35,7 +35,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 4,
+    id: '055a910b-cfda-4587-b58d-88ab203c136f',
     vacancyTitle: 'Database Administrator',
     department: 'IT Department',
     fullTime: true,
@@ -46,7 +46,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 5,
+    id: 'd092af90-537a-4261-8071-b4a41d186552',
     vacancyTitle: 'Financial Analyst',
     department: 'Finance Department',
     fullTime: true,
@@ -57,7 +57,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 6,
+    id: 'dde3ae38-e724-4bde-a8a6-de75c4486ea0',
     vacancyTitle: 'SAP Developer',
     department: 'IT Department',
     fullTime: true,
@@ -68,7 +68,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 7,
+    id: '3b87de67-38d9-4685-b426-13e4b169728b',
     vacancyTitle: 'Team Lead for Product X',
     department: 'IT Department',
     fullTime: true,
@@ -79,7 +79,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 8,
+    id: '7cdb7a62-f2c5-43e9-afa4-b50d996dd6eb',
     vacancyTitle: 'Procurement Manager',
     department: 'Procurement Department',
     fullTime: true,
@@ -90,7 +90,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 9,
+    id: '0d39fabb-e526-4c45-a17a-b63899177a54',
     vacancyTitle: 'HR Recruiter',
     department: 'HR Department',
     fullTime: true,
@@ -102,7 +102,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 10,
+    id: '6fa9e523-4ca6-4b66-8f3b-3b48658f9f9b',
     vacancyTitle: 'IT Security Specialist',
     department: 'IT Department',
     fullTime: true,
@@ -113,7 +113,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 11,
+    id: 'ff1c9dc9-2219-43a7-abfc-e3d50fe3701b',
     vacancyTitle: 'Hardware Engineer',
     department: 'Hardware Development Department',
     fullTime: true,
@@ -124,7 +124,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 12,
+    id: 'f1bdc005-000e-4736-a44d-addc0097c801',
     vacancyTitle: 'Forklift Driver',
     department: 'Logistics Department',
     fullTime: true,
@@ -135,7 +135,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 13,
+    id: '497f15fd-d86f-4a11-b29f-8e29f64b0206',
     vacancyTitle: 'IT Security Specialist',
     department: 'IT Department',
     fullTime: true,
@@ -146,7 +146,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 14,
+    id: 'ef684898-9b50-4774-a2c1-4f5a2b6e0f3e',
     vacancyTitle: 'IT Security Specialist',
     department: 'IT Department',
     fullTime: true,
@@ -157,7 +157,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 15,
+    id: '3b232e39-427f-4a7b-89b2-5380b71db308',
     vacancyTitle: 'Software Architect',
     department: 'IT Department',
     fullTime: true,
@@ -168,7 +168,7 @@ export let mockVacancies: Vacancy[] = [
     updatedAt: '12.10.2023',
   },
   {
-    id: 16,
+    id: '4d28fac7-27ae-4cc6-bbd8-b876be75d1a7',
     vacancyTitle: 'Software Architect',
     department: 'IT Department',
     fullTime: true,
