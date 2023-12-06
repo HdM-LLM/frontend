@@ -74,22 +74,22 @@ export default function AppBar() {
             display: 'flex',
             alignItems: 'flex-start',
             ml: -2,
-            '&:hover': {
-              cursor: 'pointer',
-            },
-          }}
-          onClick={() => {
-            navigate('/');
           }}
         >
           <CallMergeIcon
             sx={{
               display: { md: 'flex' },
               mr: 2,
+              '&:hover': {
+                cursor: 'pointer',
+              },
             }}
             color="secondary"
             fontSize="large"
             fontWeight="bold"
+            onClick={() => {
+              navigate('/');
+            }}
           />
           <Typography
             component="h1"
@@ -101,6 +101,12 @@ export default function AppBar() {
               display: { md: 'flex' },
               fontFamily: 'Lato',
               fontWeight: 'bold',
+              '&:hover': {
+                cursor: 'pointer',
+              },
+            }}
+            onClick={() => {
+              navigate('/');
             }}
           >
             SkillSync
