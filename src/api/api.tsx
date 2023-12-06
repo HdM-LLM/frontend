@@ -4,10 +4,10 @@ export default class API {
   api = null;
 
   // Local Python backend
-  URL = "http://127.0.0.1:5000/skillsync/api";
+  URL = 'http://127.0.0.1:5000/';
 
   //Resume
-  addPdfsURL = () => `${this.URL}/pdfs`;
+  addPdfsURL = () => `${this.URL}/upload`;
 
   static getAPI() {
     if (this.api == null) {
@@ -18,13 +18,13 @@ export default class API {
 
   fetchAdvanced(url: string, init: RequestInit) {
     // If no init parameter is used, create empty init
-    if (typeof init === "undefined") {
+    if (typeof init === 'undefined') {
       init = { headers: {} };
     }
 
     // If no headers parameter is used, create empty header
-    if (typeof init.headers === "undefined") {
-      init["headers"] = {};
+    if (typeof init.headers === 'undefined') {
+      init['headers'] = {};
     }
     return fetch(url, init).then((res) => {
       // The Promise returned from fetch() won’t reject on HTTP error status even if the response is an HTTP 404 or 500.
@@ -37,7 +37,7 @@ export default class API {
 
   addPdfs(pdfs: FormData) {
     return this.fetchAdvanced(this.addPdfsURL(), {
-      method: "POST",
+      method: 'POST',
       body: pdfs,
     });
   }
