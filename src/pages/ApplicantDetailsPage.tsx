@@ -115,6 +115,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
             startIcon={<AttachFileIcon />}
             color="secondary"
             disableElevation
+            disabled
             sx={{ margin: 1 }}
           >
             Cover Letter
