@@ -110,16 +110,6 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
           >
             CV
           </Button>
-          <Button
-            variant="contained"
-            startIcon={<AttachFileIcon />}
-            color="secondary"
-            disableElevation
-            disabled
-            sx={{ margin: 1 }}
-          >
-            Cover Letter
-          </Button>
         </Box>
       </Box>
       <Typography sx={{ color: 'grey', marginLeft: 3, marginBottom: '3vh' }}>
