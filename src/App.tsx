@@ -12,6 +12,7 @@ import AppBar from './components/AppBar';
 import Drawer from './components/Drawer';
 import { styled } from '@mui/material';
 import { DRAWER_WIDTH } from './constants';
+import ApplicantDetailsPage from './pages/ApplicantDetailsPage';
 
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({
@@ -29,7 +30,8 @@ export default function App() {
         <MainBox component="main">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/positions" element={<VacancyPage />} />
+            {/* #TODO: Change element back to VacancyPage when ApplicantDetailsPage is done */}
+            <Route path="/positions" element={<ApplicantDetailsPage />} />
             <Route path="/inquiries" element={<InquiriesPage />} />
             <Route path="/applicants" element={<ApplicantsPage />} />
             <Route path="/applicants/overview" element={<OverviewPage />} />

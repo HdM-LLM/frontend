@@ -8,7 +8,6 @@ import Alert from '@mui/material/Alert';
 
 export default function UploadPage() {
   const [cover_letter, setCoverLetter] = React.useState<File | null>(null);
-  const [resume, setResume] = React.useState<File | null>(null);
   const [alert, setAlert] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
 
