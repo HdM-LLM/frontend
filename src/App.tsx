@@ -13,6 +13,7 @@ import Drawer from './components/Drawer';
 import { styled } from '@mui/material';
 import { DRAWER_WIDTH } from './constants';
 import ApplicantDetailsPage from './pages/ApplicantDetailsPage';
+import { mockApplicants } from './mock-data/applicants';
 
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({
@@ -30,13 +31,15 @@ export default function App() {
         <MainBox component="main">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            {/* #TODO: Change element back to VacancyPage when ApplicantDetailsPage is done */}
-            <Route path="/positions" element={<ApplicantDetailsPage />} />
+
+            <Route path="/vacancies" element={<VacancyPage />} />
             <Route path="/inquiries" element={<InquiriesPage />} />
             <Route path="/applicants" element={<ApplicantsPage />} />
             <Route path="/applicants/overview" element={<OverviewPage />} />
             <Route path="/applicants/upload" element={<UploadPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            {/** TODO: Path needs to be adjusted, when the page that shows all applicants for one vacancy is done */}
+            <Route path="/applicantDetails" element={<ApplicantDetailsPage />} />
           </Routes>
         </MainBox>
       </Box>

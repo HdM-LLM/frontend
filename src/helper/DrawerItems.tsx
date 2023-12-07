@@ -46,7 +46,7 @@ export default function DrawerItems() {
           <ListItemText primary="Dashboard" />
         </ListItemButton>
       </NavLink>
-      <NavLink to="/positions" style={linkStyle}>
+      <NavLink to="/vacancies" style={linkStyle}>
         <ListItemButton
           sx={{
             backgroundColor: '#f5f5f5',
@@ -149,6 +149,23 @@ export default function DrawerItems() {
             <AssignmentIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
+        </ListItemButton>
+      </NavLink>
+      {/* TODO: Request the removal of this link in the drawer at the end of the review process */}
+      <NavLink to="/applicantDetails" style={linkStyle}>
+        <ListItemButton
+          sx={{
+            backgroundColor: '#f5f5f5',
+            '&:hover': {
+              backgroundColor: '#edf5e1',
+              cursor: 'pointer',
+            },
+          }}
+        >
+          <ListItemIcon>
+            <LayersIcon />
+          </ListItemIcon>
+          <ListItemText primary="Applicant Details Page" sx={{ color: 'red' }} />
         </ListItemButton>
       </NavLink>
     </React.Fragment>

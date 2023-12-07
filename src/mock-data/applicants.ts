@@ -1,0 +1,43 @@
+import { Applicant } from '../types/applicant';
+
+export const mockApplicants: Applicant[] = [
+  {
+    id: '71ea697b-ef4a-4601-8fde-58ab45226fe0',
+    firstName: 'John',
+    lastName: 'Doe',
+    dateOfBirth: '20.08.2023',
+    street: 'Main Street 5',
+    postalCode: 12345,
+    city: 'Example City',
+    email: 'john.doe@example.com',
+    phoneNumber: '1234 567890',
+    skills: [],
+    rating: 1,
+  },
+  {
+    id: '71ea697b-ef7b-4601-8fde-58ab45226fe0',
+    firstName: 'Michael',
+    lastName: 'Bay',
+    dateOfBirth: '20.08.2023',
+    street: 'Main Street 5',
+    postalCode: 12345,
+    city: 'Example City',
+    email: 'john.doe@example.com',
+    phoneNumber: '1234 567890',
+    skills: [],
+    rating: 3,
+  },
+  {
+    id: '71ea697b-ef4a-4601-8fde-58ab25226fe0',
+    firstName: 'Stephen',
+    lastName: 'King',
+    dateOfBirth: '20.08.2023',
+    street: 'Main Street 5',
+    postalCode: 12345,
+    city: 'Example City',
+    email: 'john.doe@example.com',
+    phoneNumber: '1234 567890',
+    skills: [],
+    rating: 6,
+  },
+];
