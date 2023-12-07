@@ -1,17 +1,16 @@
 import React from 'react';
-import { Avatar, Box, Button, Grid, LinearProgress, Stack, Table, Typography } from '@mui/material';
+import { Avatar, Box, Button, LinearProgress, Stack, Typography } from '@mui/material';
 import { APP_BAR_HEIGHT } from '../constants';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import CollapsibleTable from '../components/CollapsibleTable';
+import { Applicant } from '../types/applicant';
 
 export interface ApplicantDetailsPageProps {
-  ratingOverall: number;
-  receivingDate: string; // #TODO: Switch later to Date type when backend and db are 'connected'
+  receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
+  applicant: Applicant;
 }
 
 export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
-  const { ratingOverall } = props;
-
   return (
     <Box
       sx={{
@@ -48,7 +47,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
             minWidth: '10vw',
           }}
         >
-          Peter Müller
+          {props.applicant.firstName + ' ' + props.applicant.lastName}
         </Typography>
         <Box
           sx={{
@@ -64,8 +63,8 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
           >
             <LinearProgress
               variant="determinate"
-              value={ratingOverall}
-              defaultValue={20}
+              value={props.applicant.rating}
+              defaultValue={0}
               color="secondary"
               sx={{
                 height: 10,
@@ -78,7 +77,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
               variant="body2"
               color="text.secondary"
               sx={{ paddingLeft: '1vw', fontSize: 30 }}
-            >{`${Math.round(props.ratingOverall)}%`}</Typography>
+            >{`${Math.round(props.applicant.rating)}%`}</Typography>
           </Box>
         </Box>
         <Box>
@@ -120,7 +119,21 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
   );
 }
 
+const defaultApplicant: Applicant = {
+  id: '71ea697b-ef4a-4601-8fde-58ab45226fe0',
+  firstName: 'John',
+  lastName: 'Doe',
+  dateOfBirth: '20.08.2023',
+  street: 'Main Street 5',
+  postalCode: 12345,
+  city: 'Example City',
+  email: 'john.doe@example.com',
+  phoneNumber: '1234 567890',
+  skills: [],
+  rating: 30,
+};
+
 ApplicantDetailsPage.defaultProps = {
-  ratingOverall: 50,
   receivingDate: '05.08.2023',
+  applicant: defaultApplicant,
 };
