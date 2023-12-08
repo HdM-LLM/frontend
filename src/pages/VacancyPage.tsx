@@ -7,6 +7,7 @@ import { mockVacancies } from '../mock-data/vacancies';
 import { APP_BAR_HEIGHT } from '../constants';
 import { Grid, Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import VacancyDetailsPage from './VacancyDetailsPage';
 
 export interface VacancyPageProps {
   vacancies: Vacancy[];
@@ -80,6 +81,7 @@ export default function VacancyPage() {
                   marginBottom={2}
                 />
               </Grid>
+              
             </NavLink>
           ))}
         </Grid>

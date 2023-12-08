@@ -14,6 +14,7 @@ import { styled } from '@mui/material';
 import { DRAWER_WIDTH } from './constants';
 import ApplicantDetailsPage from './pages/ApplicantDetailsPage';
 import { mockApplicants } from './mock-data/applicants';
+import VacancyDetailsPage from './pages/VacancyDetailsPage';
 
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="/settings" element={<SettingsPage />} />
             {/** TODO: Path needs to be adjusted, when the page that shows all applicants for one vacancy is done */}
             <Route path="/applicantDetails" element={<ApplicantDetailsPage />} />
+            <Route path={"/vacancy/" + {id}} element={<VacancyDetailsPage vacancy={vacancy}/>}
           </Routes>
         </MainBox>
       </Box>
