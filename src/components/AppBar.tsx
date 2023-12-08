@@ -80,12 +80,13 @@ export default function AppBar() {
             sx={{
               display: { md: 'flex' },
               mr: 2,
+              mt: 1,
               '&:hover': {
                 cursor: 'pointer',
               },
+              fontSize: 60,
             }}
             color="secondary"
-            fontSize="large"
             fontWeight="bold"
             onClick={() => {
               navigate('/');
@@ -93,11 +94,12 @@ export default function AppBar() {
           />
           <Typography
             component="h1"
-            variant="h4"
+            variant="h3"
             color="secondary"
             noWrap
             sx={{
               mr: 2,
+              mt: 2,
               display: { md: 'flex' },
               fontFamily: 'Lato',
               fontWeight: 'bold',
