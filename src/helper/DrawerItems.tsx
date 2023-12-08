@@ -18,6 +18,7 @@ import { useState } from 'react';
 
 const linkStyle = {
   textDecoration: 'none',
+  color: '#808080',
 };
 
 export default function DrawerItems() {
