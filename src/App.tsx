@@ -41,7 +41,7 @@ export default function App() {
             <Route path="/settings" element={<SettingsPage />} />
             {/** TODO: Path needs to be adjusted, when the page that shows all applicants for one vacancy is done */}
             <Route path="/applicantDetails" element={<ApplicantDetailsPage />} />
-            <Route path={"/vacancy/" + {id}} element={<VacancyDetailsPage vacancy={vacancy}/>}
+            <Route path={'/vacancy/' + { id }} element={<VacancyDetailsPage vacancy={vacancy} />} />
           </Routes>
         </MainBox>
       </Box>
