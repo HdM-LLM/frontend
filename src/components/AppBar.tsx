@@ -90,9 +90,10 @@ export default function AppBar() {
             }}
             color="secondary"
             fontWeight="bold"
-            onClick={() => {
-              navigate('/');
-            }}
+            //FIXME: If you click on either the icon or the text, the drawer does not highlight "Dashboard" as selected. Removing this could be easier, than trying to make it work.
+            //onClick={() => {
+            //  navigate('/');
+            //}}
           />
           <Typography
             component="h1"
@@ -109,9 +110,9 @@ export default function AppBar() {
                 cursor: 'pointer',
               },
             }}
-            onClick={() => {
-              navigate('/');
-            }}
+            //onClick={() => {
+            //  navigate('/');
+            //}}
           >
             SkillSync
           </Typography>

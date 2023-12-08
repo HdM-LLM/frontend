@@ -5,7 +5,7 @@ import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import MoveToInboxRoundedIcon from '@mui/icons-material/MoveToInboxRounded';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import Divider from '@mui/material/Divider';
+import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -150,7 +150,7 @@ export default function DrawerItems() {
               onClick={handleClick}
             >
               <ListItemIcon>
-                <PersonAddRoundedIcon
+                <AccountBoxRoundedIcon
                   sx={{
                     fontSize: 30,
                     color: selectedLink === '/applicants' ? '#4C4C4C' : '#808080',
@@ -230,7 +230,7 @@ export default function DrawerItems() {
                   }}
                 >
                   <ListItemIcon>
-                    <FileUploadRoundedIcon
+                    <PersonAddRoundedIcon
                       sx={{
                         fontSize: 30,
                         color: selectedLink === '/applicants/upload' ? '#4C4C4C' : '#808080',
@@ -252,8 +252,7 @@ export default function DrawerItems() {
             </Box>
           </List>
         </Collapse>
-        <Divider sx={{ my: 1 }} />
-        <Box sx={{ marginBottom: '3vh' }}>
+        <Box sx={{ marginBottom: '3vh', marginTop: '20vh' }}>
           <NavLink to="/settings" style={linkStyle} onClick={() => handleLinkClick('/settings')}>
             <ListItemButton
               sx={{
@@ -307,41 +306,6 @@ export default function DrawerItems() {
                     fontSize: 22,
                     fontWeight: selectedLink === '/logout' ? 'bold' : 'normal',
                     color: selectedLink === '/logout' ? '#A12C2C' : '#8C2727',
-                  },
-                }}
-              />
-            </ListItemButton>
-          </NavLink>
-        </Box>
-        <Box sx={{ marginBottom: '3vh' }}>
-          {/* TODO: Request the removal of this link in the drawer at the end of the review process */}
-          <NavLink to="/applicantDetails" style={linkStyle}>
-            <ListItemButton
-              sx={{
-                backgroundColor: selectedLink === '/applicantDetails' ? '#B4CD93' : '#f5f5f5',
-                '&:hover': {
-                  backgroundColor: '#edf5e1',
-                  cursor: 'pointer',
-                },
-                borderRadius: 2,
-              }}
-            >
-              <ListItemIcon>
-                <BadgeRoundedIcon
-                  sx={{
-                    fontSize: 30,
-                    color: selectedLink === '/applicantDetails' ? '#4C4C4C' : '#808080',
-                  }}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primary="(Applicant Details Page)"
-                sx={{ color: 'red' }}
-                primaryTypographyProps={{
-                  sx: {
-                    fontSize: 22,
-                    fontWeight: selectedLink === '/applicantDetails' ? 'bold' : 'normal',
-                    color: selectedLink === '/applicantDetails' ? '#4C4C4C' : '#808080',
                   },
                 }}
               />
