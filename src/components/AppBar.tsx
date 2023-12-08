@@ -126,7 +126,8 @@ export default function AppBar() {
             justifyContent: 'right',
           }}
         >
-          <Avatar alt="user" src={'a'} sx={{ p: 0, mr: 2, ml: 2 }} />
+          {/** TODO: Replace source with a real image served by backend */}
+          <Avatar alt="user" src={''} sx={{ p: 0, mr: 2, ml: 2 }} />
           <Typography sx={{ mr: 2, color: 'black' }}>Manuel Neuer</Typography>
           <Badge badgeContent={4} color="secondary" sx={{ ml: 2 }}>
             <NotificationsIcon color="primary" />
