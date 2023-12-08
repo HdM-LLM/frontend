@@ -3,7 +3,7 @@ import { ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import MoveToInboxRoundedIcon from '@mui/icons-material/MoveToInboxRounded';
-import ViewListRoundedIcon from '@mui/icons-material/ViewListRounded';
+import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
@@ -18,25 +18,24 @@ import { useState } from 'react';
 
 const linkStyle = {
   textDecoration: 'none',
-  color: '#4d4d4d',
 };
 
 export default function DrawerItems() {
   const [open, setOpen] = useState(true);
-  const [selectedLink, setSelectedLink] = useState<string>(''); // State to track selected link
+  const [selectedLink, setSelectedLink] = useState<string>('');
 
   const handleClick = () => {
     setOpen(!open);
   };
 
   const handleLinkClick = (link: string) => {
-    setSelectedLink(link); // Update selected link on click
+    setSelectedLink(link);
   };
 
   return (
     <React.Fragment>
-      <Box sx={{ marginTop: '5vh', marginLeft: '1vh', marginRight: '1vh' }}>
-        <Box sx={{ marginBottom: '3vh', borderRadius: 5 }}>
+      <Box sx={{ marginTop: '6vh', marginLeft: '2vh', marginRight: '1vh' }}>
+        <Box sx={{ marginBottom: '3vh', justifyContent: 'center', alignItems: 'center' }}>
           <NavLink to="/" style={linkStyle} onClick={() => handleLinkClick('/')}>
             <ListItemButton
               sx={{
@@ -45,12 +44,24 @@ export default function DrawerItems() {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
             >
               <ListItemIcon>
-                <DashboardRoundedIcon sx={{ fontSize: 30 }} />
+                <DashboardRoundedIcon
+                  sx={{ fontSize: 30, color: selectedLink === '/' ? '#4C4C4C' : '#808080' }}
+                />
               </ListItemIcon>
-              <ListItemText primary="Dashboard" primaryTypographyProps={{ sx: { fontSize: 25 } }} />
+              <ListItemText
+                primary="Dashboard"
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/' ? 'bold' : 'normal',
+                    color: selectedLink === '/' ? '#4C4C4C' : '#808080',
+                  },
+                }}
+              />
             </ListItemButton>
           </NavLink>
         </Box>
@@ -58,17 +69,32 @@ export default function DrawerItems() {
           <NavLink to="/vacancies" style={linkStyle} onClick={() => handleLinkClick('/vacancies')}>
             <ListItemButton
               sx={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: selectedLink === '/vacancies' ? '#B4CD93' : '#f5f5f5',
                 '&:hover': {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
             >
               <ListItemIcon>
-                <ViewListRoundedIcon sx={{ fontSize: 30 }} />
+                <BadgeRoundedIcon
+                  sx={{
+                    fontSize: 30,
+                    color: selectedLink === '/vacancies' ? '#4C4C4C' : '#808080',
+                  }}
+                />
               </ListItemIcon>
-              <ListItemText primary="Vacancies" primaryTypographyProps={{ sx: { fontSize: 25 } }} />
+              <ListItemText
+                primary="Vacancies"
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/vacancies' ? 'bold' : 'normal',
+                    color: selectedLink === '/vacancies' ? '#4C4C4C' : '#808080',
+                  },
+                }}
+              />
             </ListItemButton>
           </NavLink>
         </Box>
@@ -76,17 +102,32 @@ export default function DrawerItems() {
           <NavLink to="/inquiries" style={linkStyle} onClick={() => handleLinkClick('/inquiries')}>
             <ListItemButton
               sx={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: selectedLink === '/inquiries' ? '#B4CD93' : '#f5f5f5',
                 '&:hover': {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
             >
               <ListItemIcon>
-                <MoveToInboxRoundedIcon sx={{ fontSize: 30 }} />
+                <MoveToInboxRoundedIcon
+                  sx={{
+                    fontSize: 30,
+                    color: selectedLink === '/inquiries' ? '#4C4C4C' : '#808080',
+                  }}
+                />
               </ListItemIcon>
-              <ListItemText primary="Inquiries" primaryTypographyProps={{ sx: { fontSize: 25 } }} />
+              <ListItemText
+                primary="Inquiries"
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/inquiries' ? 'bold' : 'normal',
+                    color: selectedLink === '/inquiries' ? '#4C4C4C' : '#808080',
+                  },
+                }}
+              />
             </ListItemButton>
           </NavLink>
         </Box>
@@ -98,20 +139,32 @@ export default function DrawerItems() {
           >
             <ListItemButton
               sx={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: selectedLink === '/applicants' ? '#B4CD93' : '#f5f5f5',
                 '&:hover': {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
               onClick={handleClick}
             >
               <ListItemIcon>
-                <PersonAddRoundedIcon sx={{ fontSize: 30 }} />
+                <PersonAddRoundedIcon
+                  sx={{
+                    fontSize: 30,
+                    color: selectedLink === '/applicants' ? '#4C4C4C' : '#808080',
+                  }}
+                />
               </ListItemIcon>
               <ListItemText
                 primary="Applicants"
-                primaryTypographyProps={{ sx: { fontSize: 25 } }}
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/applicants' ? 'bold' : 'normal',
+                    color: selectedLink === '/applicants' ? '#4C4C4C' : '#808080',
+                  },
+                }}
               />
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
@@ -128,19 +181,32 @@ export default function DrawerItems() {
                 <ListItemButton
                   sx={{
                     pl: 4,
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor:
+                      selectedLink === '/applicants/overview' ? '#B4CD93' : '#f5f5f5',
                     '&:hover': {
                       backgroundColor: '#edf5e1',
                       cursor: 'pointer',
                     },
+                    borderRadius: 2,
                   }}
                 >
                   <ListItemIcon>
-                    <GroupsRoundedIcon sx={{ fontSize: 30 }} />
+                    <GroupsRoundedIcon
+                      sx={{
+                        fontSize: 30,
+                        color: selectedLink === '/applicants/overview' ? '#4C4C4C' : '#808080',
+                      }}
+                    />
                   </ListItemIcon>
                   <ListItemText
                     primary="Overview"
-                    primaryTypographyProps={{ sx: { fontSize: 20 } }}
+                    primaryTypographyProps={{
+                      sx: {
+                        fontSize: 20,
+                        fontWeight: selectedLink === '/applicants/overview' ? 'bold' : 'normal',
+                        color: selectedLink === '/applicants/overview' ? '#4C4C4C' : '#808080',
+                      },
+                    }}
                   />
                 </ListItemButton>
               </NavLink>
@@ -154,19 +220,31 @@ export default function DrawerItems() {
                 <ListItemButton
                   sx={{
                     pl: 4,
-                    backgroundColor: '#f5f5f5',
+                    backgroundColor: selectedLink === '/applicants/upload' ? '#B4CD93' : '#f5f5f5',
                     '&:hover': {
                       backgroundColor: '#edf5e1',
                       cursor: 'pointer',
                     },
+                    borderRadius: 2,
                   }}
                 >
                   <ListItemIcon>
-                    <FileUploadRoundedIcon sx={{ fontSize: 30 }} />
+                    <FileUploadRoundedIcon
+                      sx={{
+                        fontSize: 30,
+                        color: selectedLink === '/applicants/upload' ? '#4C4C4C' : '#808080',
+                      }}
+                    />
                   </ListItemIcon>
                   <ListItemText
                     primary="Upload"
-                    primaryTypographyProps={{ sx: { fontSize: 20 } }}
+                    primaryTypographyProps={{
+                      sx: {
+                        fontSize: 20,
+                        fontWeight: selectedLink === '/applicants/upload' ? 'bold' : 'normal',
+                        color: selectedLink === '/applicants/upload' ? '#4C4C4C' : '#808080',
+                      },
+                    }}
                   />
                 </ListItemButton>
               </NavLink>
@@ -178,17 +256,29 @@ export default function DrawerItems() {
           <NavLink to="/settings" style={linkStyle} onClick={() => handleLinkClick('/settings')}>
             <ListItemButton
               sx={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: selectedLink === '/settings' ? '#B4CD93' : '#f5f5f5',
                 '&:hover': {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
             >
               <ListItemIcon>
-                <SettingsRoundedIcon sx={{ fontSize: 30 }} />
+                <SettingsRoundedIcon
+                  sx={{ fontSize: 30, color: selectedLink === '/settings' ? '#4C4C4C' : '#808080' }}
+                />
               </ListItemIcon>
-              <ListItemText primary="Settings" primaryTypographyProps={{ sx: { fontSize: 25 } }} />
+              <ListItemText
+                primary="Settings"
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/settings' ? 'bold' : 'normal',
+                    color: selectedLink === '/settings' ? '#4C4C4C' : '#808080',
+                  },
+                }}
+              />
             </ListItemButton>
           </NavLink>
         </Box>
@@ -196,17 +286,29 @@ export default function DrawerItems() {
           <NavLink to="/logout" style={linkStyle} onClick={() => handleLinkClick('/logout')}>
             <ListItemButton
               sx={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: selectedLink === '/logout' ? '#B4CD93' : '#f5f5f5',
                 '&:hover': {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
             >
               <ListItemIcon>
-                <LogoutRoundedIcon sx={{ fontSize: 30 }} />
+                <LogoutRoundedIcon
+                  sx={{ fontSize: 30, color: selectedLink === '/logout' ? '#A12C2C' : '#8C2727' }}
+                />
               </ListItemIcon>
-              <ListItemText primary="Logout" primaryTypographyProps={{ sx: { fontSize: 25 } }} />
+              <ListItemText
+                primary="Logout"
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/logout' ? 'bold' : 'normal',
+                    color: selectedLink === '/logout' ? '#A12C2C' : '#8C2727',
+                  },
+                }}
+              />
             </ListItemButton>
           </NavLink>
         </Box>
@@ -215,20 +317,32 @@ export default function DrawerItems() {
           <NavLink to="/applicantDetails" style={linkStyle}>
             <ListItemButton
               sx={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: selectedLink === '/applicantDetails' ? '#B4CD93' : '#f5f5f5',
                 '&:hover': {
                   backgroundColor: '#edf5e1',
                   cursor: 'pointer',
                 },
+                borderRadius: 2,
               }}
             >
               <ListItemIcon>
-                <ViewListRoundedIcon sx={{ fontSize: 30 }} />
+                <BadgeRoundedIcon
+                  sx={{
+                    fontSize: 30,
+                    color: selectedLink === '/applicantDetails' ? '#4C4C4C' : '#808080',
+                  }}
+                />
               </ListItemIcon>
               <ListItemText
-                primary="Applicant Details Page"
+                primary="(Applicant Details Page)"
                 sx={{ color: 'red' }}
-                primaryTypographyProps={{ sx: { fontSize: 25 } }}
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: 22,
+                    fontWeight: selectedLink === '/applicantDetails' ? 'bold' : 'normal',
+                    color: selectedLink === '/applicantDetails' ? '#4C4C4C' : '#808080',
+                  },
+                }}
               />
             </ListItemButton>
           </NavLink>

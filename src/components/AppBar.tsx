@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CallMergeIcon from '@mui/icons-material/CallMerge';
 import { useNavigate } from 'react-router-dom';
+import { FONT_FAMILY } from '../constants';
 
 export default function AppBar() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function AppBar() {
     boxShadow: 'none',
     position: 'fixed',
     height: theme.spacing(8),
+    zIndex: theme.zIndex.drawer + 1,
   }));
 
   const Search = styled('div')(({ theme }) => ({
@@ -101,7 +103,7 @@ export default function AppBar() {
               mr: 2,
               mt: 2,
               display: { md: 'flex' },
-              fontFamily: 'Lato',
+              fontFamily: FONT_FAMILY,
               fontWeight: 'bold',
               '&:hover': {
                 cursor: 'pointer',

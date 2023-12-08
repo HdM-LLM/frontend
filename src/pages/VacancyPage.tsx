@@ -88,6 +88,7 @@ export default function VacancyPage() {
           color="secondary"
           page={currentPage}
           onChange={handlePageChange}
+          sx={{ marginTop: '2vh', marginBottom: '2vh' }}
         />
       </Box>
     </Box>
