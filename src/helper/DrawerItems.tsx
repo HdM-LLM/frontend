@@ -10,7 +10,6 @@ import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { NavLink } from 'react-router-dom';
@@ -23,7 +22,7 @@ const linkStyle = {
 
 export default function DrawerItems() {
   const [open, setOpen] = useState(true);
-  const [selectedLink, setSelectedLink] = useState<string>('');
+  const [selectedLink, setSelectedLink] = useState<string>('/');
 
   const handleClick = () => {
     setOpen(!open);
