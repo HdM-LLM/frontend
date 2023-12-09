@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CallMergeIcon from '@mui/icons-material/CallMerge';
 import { useNavigate } from 'react-router-dom';
+import { FONT_FAMILY } from '../constants';
 
 export default function AppBar() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function AppBar() {
     boxShadow: 'none',
     position: 'fixed',
     height: theme.spacing(8),
+    zIndex: theme.zIndex.drawer + 1,
   }));
 
   const Search = styled('div')(({ theme }) => ({
@@ -80,34 +82,37 @@ export default function AppBar() {
             sx={{
               display: { md: 'flex' },
               mr: 2,
+              mt: 1,
               '&:hover': {
                 cursor: 'pointer',
               },
+              fontSize: 60,
             }}
             color="secondary"
-            fontSize="large"
             fontWeight="bold"
-            onClick={() => {
-              navigate('/');
-            }}
+            //FIXME: If you click on either the icon or the text, the drawer does not highlight "Dashboard" as selected. Removing this could be easier, than trying to make it work.
+            //onClick={() => {
+            //  navigate('/');
+            //}}
           />
           <Typography
             component="h1"
-            variant="h4"
+            variant="h3"
             color="secondary"
             noWrap
             sx={{
               mr: 2,
+              mt: 2,
               display: { md: 'flex' },
-              fontFamily: 'Lato',
+              fontFamily: FONT_FAMILY,
               fontWeight: 'bold',
               '&:hover': {
                 cursor: 'pointer',
               },
             }}
-            onClick={() => {
-              navigate('/');
-            }}
+            //onClick={() => {
+            //  navigate('/');
+            //}}
           >
             SkillSync
           </Typography>
