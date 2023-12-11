@@ -1,8 +1,6 @@
-import { UUID } from 'crypto';
 import { Skill } from './skill';
 
-export type Applicant = {
-  id: UUID;
+export type Applicant = Object & {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
