@@ -3,7 +3,7 @@ import { Avatar, Box, Button, LinearProgress, Stack, Typography } from '@mui/mat
 import { APP_BAR_HEIGHT } from '../constants';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { Applicant } from '../types/applicant';
-import CustomizedTables from '../components/CustomizedTable';
+import ApplicantDetailsTable from '../components/ApplicantDetailsTable';
 import { BACKEND_URL } from '../constants';
 
 export interface ApplicantDetailsPageProps {
@@ -124,7 +124,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
         }}
       >
         <Box>
-          <CustomizedTables />
+          <ApplicantDetailsTable />
         </Box>
       </Box>
     </Box>

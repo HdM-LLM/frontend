@@ -7,15 +7,12 @@ import { mockVacancies } from '../mock-data/vacancies';
 import { APP_BAR_HEIGHT } from '../constants';
 import { Grid, Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import VacancyDetailsPage from './VacancyDetailsPage';
 
-export interface VacancyPageProps {
+interface VacancyPageProps {
   vacancies: Vacancy[];
-  cardWidth: number;
-  cardHeight: number;
 }
 
-export default function VacancyPage() {
+export default function VacancyPage(props: VacancyPageProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const vacanciesPerPage = 15;
 
@@ -71,7 +68,7 @@ export default function VacancyPage() {
           }}
         >
           {currentVacancies.map((vacancy) => (
-            <NavLink to={'/vacancy/' + vacancy.id} style={linkStyle} key={vacancy.id}>
+            <NavLink to={'/vacancies/' + vacancy.id} style={linkStyle} key={vacancy.id}>
               <Grid item>
                 <VacancyCard
                   vacancy={vacancy}

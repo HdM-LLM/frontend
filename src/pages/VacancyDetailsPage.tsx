@@ -3,10 +3,8 @@ import { Vacancy } from '../types/vacancy';
 import { Applicant } from '../types/applicant';
 import { Box, Stack, Typography } from '@mui/material';
 import { APP_BAR_HEIGHT } from '../constants';
-import CustomizedVacancyTables from '../components/CustomizedVacancyTable';
+import VacancyTable from '../components/VacancyTable';
 import { mockApplicants } from '../mock-data/applicants';
-import { mockVacancies } from '../mock-data/vacancies';
-import { Route } from 'react-router-dom';
 
 export interface VacancyDetailsPageProps {
   vacancy: Vacancy;
@@ -14,7 +12,7 @@ export interface VacancyDetailsPageProps {
 
 export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
   const applicants = mockApplicants;
-  const vacancy = mockVacancies[0];
+  const vacancy = props.vacancy;
   const receivingDate = '1st December 2023';
 
   return (
@@ -52,7 +50,7 @@ export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
         }}
       >
         <Box>
-          <CustomizedVacancyTables applicants={applicants} receivingDate={receivingDate} />
+          <VacancyTable applicants={applicants} receivingDate={receivingDate} vacancy={vacancy} />
         </Box>
       </Box>
     </Box>

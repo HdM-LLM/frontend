@@ -59,7 +59,7 @@ const rowsMockData = [
   ),
 ];
 
-export default function CustomizedTables() {
+export default function ApplicantDetailsTable() {
   const maxProgressBarValue = 10;
 
   return (
