@@ -117,10 +117,13 @@ export default function CustomizedTables(props: VacancyTableProps) {
                 </Box>
               </StyledTableCell>
               <StyledTableCell>{applicant.skills.map((skill) => skill.category)}</StyledTableCell>
-              <StyledTableCell>{receivingDate}</StyledTableCell>
-              {/** TODO: If needed, weight functionality could be implemented. Maybe the user could make adjustments to weights instead of the AI ratings? */}
+              <StyledTableCell>{applicant.id}</StyledTableCell>
               <StyledTableCell align="center">
-                <NavLink to={'/applicant/' + applicant.id} style={linkStyle} key={applicant.id}>
+                <NavLink
+                  to={'/applicantDetails/' + applicant.id}
+                  style={linkStyle}
+                  key={applicant.id}
+                >
                   <Button variant="contained" color="secondary" disableElevation>
                     Details
                   </Button>
