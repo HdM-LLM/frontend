@@ -65,7 +65,7 @@ export default function CustomizedTables(props: VacancyTableProps) {
             <StyledTableCell sx={{ paddingRight: 15 }}>Applicant</StyledTableCell>
             <StyledTableCell sx={{ paddingRight: 15 }}>Rating</StyledTableCell>
             <StyledTableCell>Skills</StyledTableCell>
-            <StyledTableCell>Application receipt</StyledTableCell>
+            <StyledTableCell>Application received</StyledTableCell>
             <StyledTableCell></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -117,7 +117,7 @@ export default function CustomizedTables(props: VacancyTableProps) {
                 </Box>
               </StyledTableCell>
               <StyledTableCell>{applicant.skills.map((skill) => skill.category)}</StyledTableCell>
-              <StyledTableCell>{applicant.id}</StyledTableCell>
+              <StyledTableCell>{receivingDate}</StyledTableCell>
               <StyledTableCell align="center">
                 <NavLink
                   to={'/applicantDetails/' + applicant.id}

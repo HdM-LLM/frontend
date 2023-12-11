@@ -81,7 +81,6 @@ export default function VacancyPage() {
                   marginBottom={2}
                 />
               </Grid>
-              
             </NavLink>
           ))}
         </Grid>

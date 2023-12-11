@@ -9,9 +9,7 @@ import { mockVacancies } from '../mock-data/vacancies';
 import { Route } from 'react-router-dom';
 
 export interface VacancyDetailsPageProps {
-  //receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
   vacancy: Vacancy;
-  //applicants: Applicant[];
 }
 
 export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
