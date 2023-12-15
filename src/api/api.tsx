@@ -9,6 +9,17 @@ export default class API {
   //Resume
   addPdfsURL = () => `${this.URL}/upload`;
 
+  // Vacancy
+  vacanciesURL = () => `${this.URL}/vacancies`;
+
+  // Get Vacancy
+  getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
+
+  // Get applicants by vacancy ID or all applicants
+  fetchApplicantsURL = (vacancyId?: string) =>
+    `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
+
+
   static getAPI() {
     if (this.api == null) {
       this.api = new API();
@@ -35,10 +46,31 @@ export default class API {
     });
   }
 
-  addPdfs(pdfs: FormData) {
+  addPdfs(pdf: File, vacancy: string) {
+    const pdfs = new FormData();
+    pdfs.append('cv', pdf);
+    pdfs.append('vacancy', vacancy);
+  
     return this.fetchAdvanced(this.addPdfsURL(), {
       method: 'POST',
       body: pdfs,
     });
   }
+
+  // Fetch vacancies
+  fetchVacancies() {
+    return this.fetchAdvanced(this.vacanciesURL(), {});  
+  }
+
+  // Get vacancy by ID
+  getVacancy(vacancyId: string) {
+    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});  
+  }
+
+  // Fetch applicants by vacancy ID
+  fetchApplicants(vacancyId?: string) {
+    return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
+  }
+  
+
 }
