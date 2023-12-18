@@ -82,7 +82,8 @@ export default function UploadPage() {
           variant="contained"
           component="label"
           color="secondary"
-          sx={{ width: '100px',  height: '40px' }}
+          sx={{ width: '100px',  height: '40px', textTransform: 'capitalize' }}
+          disableElevation
         >
           Select File
           <input
@@ -124,6 +125,7 @@ export default function UploadPage() {
           sx={{ width: '100px' }}
           onClick={sendFiles}
           disabled={isSendButtonDisabled}  // Disable the button conditionally
+          disableElevation
         >
           Send
         </Button>

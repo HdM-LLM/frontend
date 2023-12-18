@@ -35,7 +35,7 @@ export default function OverviewPage() {
     >
       <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          OverviewPage
+         Applicants overview
         </Typography>
       </Stack>
       <Box

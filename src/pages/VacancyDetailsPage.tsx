@@ -32,7 +32,6 @@ export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
 
         // Assuming you have an API method like getApplicantsByVacancyId
         const applicantsData = await api.fetchApplicants(vacancy_id);
-        console.log(applicantsData)
         setApplicants(applicantsData);
       } catch (error) {
         console.error('Error fetching data:', error);

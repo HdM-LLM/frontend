@@ -68,7 +68,7 @@ export default class API {
   }
 
   // Fetch applicants by vacancy ID
-  fetchApplicants(vacancyId?: string) {
+  fetchApplicants(vacancyId: string) {
     return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
   }
   
