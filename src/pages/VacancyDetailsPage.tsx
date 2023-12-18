@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Vacancy } from '../types/vacancy';
-import { Applicant } from '../types/applicant';
 import { Box, Stack, Typography } from '@mui/material';
 import { APP_BAR_HEIGHT } from '../constants';
-import VacancyTable from '../components/VacancyTable';
+import CustomizedVacancyTables from '../components/CustomizedVacancyTable';
+import API from '../api/api';
 import { mockApplicants } from '../mock-data/applicants';
 
 export interface VacancyDetailsPageProps {
@@ -11,9 +12,37 @@ export interface VacancyDetailsPageProps {
 }
 
 export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
-  const applicants = mockApplicants;
-  const vacancy = props.vacancy;
+  const { vacancy_id } = useParams();
+  const [vacancy, setVacancy] = useState<Vacancy | null>(null);
+  const [applicants, setApplicants] = useState<any[]>([]);
   const receivingDate = '1st December 2023';
+
+  useEffect(() => {
+    const fetchVacancy = async () => {
+      try {
+        if (!vacancy_id) {
+          console.error('Error fetching vacancy: No ID provided');
+          return;
+        }
+
+        const api = API.getAPI();
+        const vacancyData = await api.getVacancy(vacancy_id);
+        setVacancy(vacancyData);
+
+        // Assuming you have an API method like getApplicantsByVacancyId
+        const applicantsData = await api.fetchApplicants(vacancy_id);
+        setApplicants(applicantsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchVacancy();
+  }, [vacancy_id]);
+
+  if (!vacancy) {
+    return null;
+  }
 
   return (
     <Box
@@ -28,7 +57,7 @@ export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
           {vacancy.vacancyTitle}
         </Typography>
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
-          IT Department
+          {vacancy.department}
         </Typography>
       </Stack>
       <Box

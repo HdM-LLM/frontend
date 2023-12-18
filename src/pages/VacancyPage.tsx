@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 import VacancyCard from '../components/VacancyCard';
 import { Vacancy } from '../types/vacancy';
-import { mockVacancies } from '../mock-data/vacancies';
+import API from '../api/api';
 import { APP_BAR_HEIGHT } from '../constants';
 import { Grid, Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
-interface VacancyPageProps {
-  vacancies: Vacancy[];
+export interface VacancyPageProps {
+  cardWidth: number;
+  cardHeight: number;
 }
 
-export default function VacancyPage(props: VacancyPageProps) {
+export default function VacancyPage() {
+  const [vacancies, setVacancies] = useState<Vacancy[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const vacanciesPerPage = 15;
 
+  useEffect(() => {
+    const fetchVacancies = async () => {
+      try {
+        const api = API.getAPI();
+        const vacancyData = await api.fetchVacancies();
+        setVacancies(vacancyData);
+      } catch (error) {
+        console.error('Error fetching vacancies:', error);
+      }
+    };
+
+    fetchVacancies();
+  }, []);
+
   const indexOfLastVacancy = currentPage * vacanciesPerPage;
   const indexOfFirstVacancy = indexOfLastVacancy - vacanciesPerPage;
-  const currentVacancies = mockVacancies.slice(indexOfFirstVacancy, indexOfLastVacancy);
+  const currentVacancies = vacancies.slice(indexOfFirstVacancy, indexOfLastVacancy);
 
   const linkStyle = {
     textDecoration: 'none',
@@ -44,7 +60,7 @@ export default function VacancyPage(props: VacancyPageProps) {
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
           Currently open positions:{' '}
           <Typography variant="h6" fontWeight={'bold'} sx={{ color: '#B4CD93' }} component="span">
-            {mockVacancies.length}
+            {vacancies.length}
           </Typography>{' '}
         </Typography>
       </Stack>
@@ -68,7 +84,7 @@ export default function VacancyPage(props: VacancyPageProps) {
           }}
         >
           {currentVacancies.map((vacancy) => (
-            <NavLink to={'/vacancies/' + vacancy.id} style={linkStyle} key={vacancy.id}>
+            <NavLink to={`/vacancy/${vacancy.id}`} style={linkStyle} key={vacancy.id}>
               <Grid item>
                 <VacancyCard
                   vacancy={vacancy}
@@ -82,7 +98,7 @@ export default function VacancyPage(props: VacancyPageProps) {
           ))}
         </Grid>
         <Pagination
-          count={Math.ceil(mockVacancies.length / vacanciesPerPage)}
+          count={Math.ceil(vacancies.length / vacanciesPerPage)}
           color="secondary"
           page={currentPage}
           onChange={handlePageChange}

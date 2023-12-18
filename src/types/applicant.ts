@@ -11,4 +11,5 @@ export type Applicant = Object & {
   phoneNumber: string;
   skills: Skill[];
   rating: number;
+  img: string;
 };
