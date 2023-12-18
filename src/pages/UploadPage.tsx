@@ -84,7 +84,7 @@ export default function UploadPage() {
           color="secondary"
           sx={{ width: '100px',  height: '40px' }}
         >
-          Upload
+          Select File
           <input
             type="file"
             accept="application/pdf"
