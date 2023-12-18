@@ -20,7 +20,6 @@ export default function UploadPage() {
   const [alert, setAlert] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
 
-
   React.useEffect(() => {
     const fetchVacancies = async () => {
       try {
@@ -34,8 +33,6 @@ export default function UploadPage() {
 
     fetchVacancies();
   }, []);
-
-  const pdfs = new FormData();
 
   const sendFiles = async () => {
     if (!cover_letter || !selectedVacancy) {
@@ -74,7 +71,7 @@ export default function UploadPage() {
           label="Cover Letter"
           defaultValue="Insert File here"
           size="small"
-          sx={{ width: '300px', marginRight: 2}}
+          sx={{ width: '300px', marginRight: 2 }}
           value={cover_letter?.name}
         />
         <Button
@@ -82,7 +79,7 @@ export default function UploadPage() {
           variant="contained"
           component="label"
           color="secondary"
-          sx={{ width: '100px',  height: '40px', textTransform: 'capitalize' }}
+          sx={{ width: '100px', height: '40px', textTransform: 'capitalize' }}
           disableElevation
         >
           Select File
@@ -98,21 +95,20 @@ export default function UploadPage() {
         </Button>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
-        <FormControl sx={{ width: 300}} size="small">
-          <InputLabel id="vacancy-label" >Vacancy</InputLabel>
+        <FormControl sx={{ width: 300 }} size="small">
+          <InputLabel id="vacancy-label">Vacancy</InputLabel>
           <Select
-              labelId="select-vacancy-dropdown"
-              label="Select Vacancy"
-              value={selectedVacancy}
-              input={<OutlinedInput label="Vacancy" />}
-              onChange={handleSelectChange}
-              
-            >
-              {vacancies.map((vacancy) => (
-                <MenuItem key={vacancy.id} value={vacancy.id} sx={{ height: '35px' }}>
-                  {vacancy.vacancyTitle}
-                </MenuItem>
-              ))}
+            labelId="select-vacancy-dropdown"
+            label="Select Vacancy"
+            value={selectedVacancy}
+            input={<OutlinedInput label="Vacancy" />}
+            onChange={handleSelectChange}
+          >
+            {vacancies.map((vacancy) => (
+              <MenuItem key={vacancy.id} value={vacancy.id} sx={{ height: '35px' }}>
+                {vacancy.vacancyTitle}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>
@@ -124,14 +120,16 @@ export default function UploadPage() {
           component="label"
           sx={{ width: '100px' }}
           onClick={sendFiles}
-          disabled={isSendButtonDisabled}  // Disable the button conditionally
+          disabled={isSendButtonDisabled} // Disable the button conditionally
           disableElevation
         >
           Send
         </Button>
       </Box>
       {alert ? (
-        <Alert severity="error">Oops, something went wrong... Please add files and select a vacancy</Alert>
+        <Alert severity="error">
+          Oops, something went wrong... Please add files and select a vacancy
+        </Alert>
       ) : (
         <></>
       )}

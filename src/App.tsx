@@ -41,7 +41,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
 
-            <Route path="/vacancies" element={<VacancyPage vacancies={mockVacancies} />} />
+            <Route path="/vacancies" element={<VacancyPage />} />
             <Route path="/inquiries" element={<InquiriesPage />} />
             <Route path="/applicants" element={<ApplicantsPage />} />
             <Route path="/applicants/overview" element={<OverviewPage />} />

@@ -4,7 +4,7 @@ import { APP_BAR_HEIGHT } from '../constants';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { Applicant } from '../types/applicant';
 import ApplicantDetailsTable from '../components/ApplicantDetailsTable';
-import { BACKEND_URL } from '../constants';
+import API from '../api/api';
 
 export interface ApplicantDetailsPageProps {
   receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
@@ -13,10 +13,37 @@ export interface ApplicantDetailsPageProps {
 
 export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
   const [applicantRating, setApplicantRating] = useState(2);
-
+  const [applicant, setApplicant] = useState<Applicant | null>(null);
   const maxProgressBarValue = 10;
 
   const linearProgressValue = (props.applicant.rating / maxProgressBarValue) * 100;
+
+  useEffect(() => {
+    const fetchApplicant = async () => {
+      try {
+        const api = API.getAPI();
+        // if ID is provided, fetch applicant by ID
+        if (props.applicant.id) {
+          const applicantObject = await api.fetchApplicants(props.applicant.id);
+          console.log(applicantObject);
+          // null check to prevent errors during rendering
+          if (!applicantObject) {
+            console.error('Error fetching applicant: No applicant found');
+            setApplicant(null);
+          }
+          setApplicant(applicantObject);
+          return;
+        }
+        // else show error
+        // TODO: Show error message in UI; create error message component
+        console.error('Error fetching applicant: No ID provided');
+      } catch (error) {
+        console.error('Error fetching applicant:', error);
+      }
+    };
+
+    fetchApplicant();
+  }, [props.applicant.id]);
 
   useEffect(() => {
     setApplicantRating(props.applicant.rating);
@@ -62,7 +89,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
             minWidth: '8vw',
           }}
         >
-          {props.applicant.firstName + ' ' + props.applicant.lastName}
+          {applicant && applicant.firstName + ' ' + applicant.lastName}
         </Typography>
         <Box
           sx={{
@@ -143,7 +170,8 @@ const defaultApplicant: Applicant = {
   phoneNumber: '1234 567890',
   skills: [],
   rating: 5.5,
-  img: "",
+  img: '',
+  dateCreated: '20.08.2023',
 };
 
 ApplicantDetailsPage.defaultProps = {

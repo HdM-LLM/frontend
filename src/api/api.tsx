@@ -6,7 +6,7 @@ export default class API {
   // Local Python backend
   URL = 'http://127.0.0.1:5000/';
 
-  //Resume
+  // Resume
   addPdfsURL = () => `${this.URL}/upload`;
 
   // Vacancy
@@ -18,7 +18,6 @@ export default class API {
   // Get applicants by vacancy ID or all applicants
   fetchApplicantsURL = (vacancyId?: string) =>
     `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
-
 
   static getAPI() {
     if (this.api == null) {
@@ -50,7 +49,7 @@ export default class API {
     const pdfs = new FormData();
     pdfs.append('cv', pdf);
     pdfs.append('vacancy', vacancy);
-  
+
     return this.fetchAdvanced(this.addPdfsURL(), {
       method: 'POST',
       body: pdfs,
@@ -59,18 +58,16 @@ export default class API {
 
   // Fetch vacancies
   fetchVacancies() {
-    return this.fetchAdvanced(this.vacanciesURL(), {});  
+    return this.fetchAdvanced(this.vacanciesURL(), {});
   }
 
   // Get vacancy by ID
   getVacancy(vacancyId: string) {
-    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});  
+    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
   }
 
-  // Fetch applicants by vacancy ID
-  fetchApplicants(vacancyId: string) {
+  // Fetch all applicants or one applicant if a vacancy ID is provided
+  fetchApplicants(vacancyId?: string) {
     return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
   }
-  
-
 }

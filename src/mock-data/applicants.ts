@@ -13,7 +13,8 @@ export const mockApplicants: Applicant[] = [
     phoneNumber: '1234 567890',
     skills: [],
     rating: 1,
-    img: "",
+    img: '',
+    dateCreated: '20.08.2023',
   },
   {
     id: '423ee5ae-441f-4fc9-8bb7-e9a199aa28ac',
@@ -27,7 +28,8 @@ export const mockApplicants: Applicant[] = [
     phoneNumber: '1234 567890',
     skills: [],
     rating: 3,
-    img: "",
+    img: '',
+    dateCreated: '20.08.2023',
   },
   {
     id: 'dad28004-1ed5-4704-a00e-a5754ef1b349',
@@ -41,6 +43,7 @@ export const mockApplicants: Applicant[] = [
     phoneNumber: '1234 567890',
     skills: [],
     rating: 6,
-    img: "",
+    img: '',
+    dateCreated: '20.08.2023',
   },
 ];

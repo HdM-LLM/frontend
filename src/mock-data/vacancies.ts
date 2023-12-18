@@ -9,7 +9,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 65000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -20,7 +20,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a great job description for a great job.',
     salary: 63000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -31,7 +31,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 75000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -42,7 +42,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 52000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -53,7 +53,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -64,7 +64,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -75,7 +75,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -86,7 +86,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -98,7 +98,7 @@ export let mockVacancies: Vacancy[] = [
       'This is a job description. This is a super special and very important job. We desperately need someone for this job. Please apply for this job. We need you!',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -109,7 +109,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -120,7 +120,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -131,7 +131,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 30000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -142,7 +142,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -153,7 +153,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -164,7 +164,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
   {
@@ -175,7 +175,7 @@ export let mockVacancies: Vacancy[] = [
     description: 'This is a job description.',
     salary: 50000,
     company: 'Bosch AG',
-    createdAt: '08.10.2023',
+    dateCreated: '08.10.2023',
     updatedAt: '12.10.2023',
   },
 ];

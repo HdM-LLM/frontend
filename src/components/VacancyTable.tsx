@@ -8,10 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, LinearProgress, Button, Avatar } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { Applicant } from '../types/applicant';
-import { Skill } from '../types/skill';
-import { Vacancy } from '../types/vacancy';
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,15 +41,14 @@ const StyledTableRow = styled(TableRow)(() => ({
 export interface VacancyTableProps {
   applicants: Applicant[];
   receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
-  vacancy: Vacancy;
 }
 
 export default function VacancyTable(props: VacancyTableProps) {
   const maxProgressBarValue = 10;
   const applicants = props.applicants;
   const receivingDate = props.receivingDate;
+  const { vacancy_id } = useParams();
 
-  
   const linkStyle = {
     textDecoration: 'none',
   };
@@ -123,7 +120,7 @@ export default function VacancyTable(props: VacancyTableProps) {
               <StyledTableCell>{receivingDate}</StyledTableCell>
               <StyledTableCell align="center">
                 <NavLink
-                  to={'/vacancies/' + props.vacancy.id + '/applicant/' + applicant.id}
+                  to={'/vacancies/' + vacancy_id + '/applicant/' + applicant.id}
                   style={linkStyle}
                   key={applicant.id}
                 >

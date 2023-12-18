@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Vacancy } from '../types/vacancy';
 import { Box, Stack, Typography } from '@mui/material';
 import { APP_BAR_HEIGHT } from '../constants';
-import CustomizedVacancyTables from '../components/CustomizedVacancyTable';
+import VacancyTable from '../components/VacancyTable';
 import API from '../api/api';
-import { mockApplicants } from '../mock-data/applicants';
 
 export interface VacancyDetailsPageProps {
   vacancy: Vacancy;
@@ -79,7 +78,7 @@ export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
         }}
       >
         <Box>
-          <VacancyTable applicants={applicants} receivingDate={receivingDate} vacancy={vacancy} />
+          <VacancyTable applicants={applicants} receivingDate={receivingDate} />
         </Box>
       </Box>
     </Box>

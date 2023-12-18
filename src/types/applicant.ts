@@ -1,6 +1,7 @@
+import { BusinessObject } from './businessObject';
 import { Skill } from './skill';
 
-export type Applicant = Object & {
+export type Applicant = BusinessObject & {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
