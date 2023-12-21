@@ -12,9 +12,9 @@ export default class API {
   //URLs
   addPdfURL = () => `${this.URL}/upload`;
   getApplicantsURL = () => `${this.URL}/applicants`;
-  getApplicantURL = (id: string) => `${this.URL}/applicants/${id}`;
+  getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
   getVacanciesURL = () => `${this.URL}/vacancies`;
-  getVacancyURL = (id: string) => `${this.URL}/vacancies/${id}`;
+  getVacancyURL = (id: string) => `${this.URL}/vacancy/${id}`;
 
   static getAPI() {
     if (this.api == null) {
