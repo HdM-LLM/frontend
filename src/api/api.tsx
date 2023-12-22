@@ -16,8 +16,21 @@ export default class API {
   getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
 
   // Get applicants by vacancy ID or all applicants
-  fetchApplicantsURL = (vacancyId?: string) =>
-    `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
+  fetchApplicantsURL = () => `${this.URL}/applicants/`;
+
+  // Get applicants by vacancy ID or all applicants
+  fetchApplicantURL = (applicantId: string) => `${this.URL}/applicants${`/${applicantId}`}`;
+
+  // Get all applicants by vacancy ID
+  fetchApplicantsByVacancyURL = (vacancyId: string) =>
+    `${this.URL}/applicantsVacancy${`/${vacancyId}`}`;
+
+  // Get applicant rating by applicant ID and vacancy ID
+  fetchApplicantRatingURL = (vacancyId: string, applicantId: string) =>
+    `${this.URL}/applicantsRating${`/${vacancyId}/${applicantId}`}`;
+
+  // Get category data by category ID
+  fetchCategoryDataURL = (categoryId: string) => `${this.URL}/category${`/${categoryId}`}`;
 
   static getAPI() {
     if (this.api == null) {
@@ -62,12 +75,32 @@ export default class API {
   }
 
   // Get vacancy by ID
-  getVacancy(vacancyId: string) {
+  fetchVacancy(vacancyId: string) {
     return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
   }
 
-  // Fetch all applicants or one applicant if a vacancy ID is provided
-  fetchApplicants(vacancyId?: string) {
-    return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
+  // Fetch all applicants
+  fetchApplicants() {
+    return this.fetchAdvanced(this.fetchApplicantsURL(), {});
+  }
+
+  // Fetch one applicant by ID
+  fetchApplicant(applicantId: string) {
+    return this.fetchAdvanced(this.fetchApplicantURL(applicantId), {});
+  }
+
+  // Fetch all applicants by vacancy ID
+  fetchApplicantsByVacancyId(vacancyId: string) {
+    return this.fetchAdvanced(this.fetchApplicantsByVacancyURL(vacancyId), {});
+  }
+
+  // Fetch applicant ratings by applicant ID and vacancy ID
+  fetchApplicantRatings(vacancyId: string, applicantId: string) {
+    return this.fetchAdvanced(this.fetchApplicantRatingURL(vacancyId, applicantId), {});
+  }
+
+  // Fetch category data by category ID
+  fetchCategoryData(categoryId: string) {
+    return this.fetchAdvanced(this.fetchCategoryDataURL(categoryId), {});
   }
 }

@@ -11,6 +11,5 @@ export type Applicant = BusinessObject & {
   email: string;
   phoneNumber: string;
   skills: Skill[];
-  rating: number;
   img: string;
 };

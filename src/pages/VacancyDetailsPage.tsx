@@ -25,11 +25,11 @@ export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
         }
 
         const api = API.getAPI();
-        const vacancyData = await api.getVacancy(vacancy_id);
+        const vacancyData = await api.fetchVacancy(vacancy_id);
         setVacancy(vacancyData);
 
         // Assuming you have an API method like getApplicantsByVacancyId
-        const applicantsData = await api.fetchApplicants(vacancy_id);
+        const applicantsData = await api.fetchApplicantsByVacancyId(vacancy_id);
         setApplicants(applicantsData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -53,7 +53,7 @@ export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
     >
       <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          {vacancy.vacancyTitle}
+          {vacancy.title}
         </Typography>
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
           {vacancy.department}

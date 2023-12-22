@@ -106,7 +106,7 @@ export default function UploadPage() {
           >
             {vacancies.map((vacancy) => (
               <MenuItem key={vacancy.id} value={vacancy.id} sx={{ height: '35px' }}>
-                {vacancy.vacancyTitle}
+                {vacancy.title}
               </MenuItem>
             ))}
           </Select>
