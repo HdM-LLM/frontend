@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Dashboard from './pages/Dashboard';
 import ApplicantsPage from './pages/ApplicantsPage';
 import OverviewPage from './pages/OverviewPage';
@@ -15,16 +14,8 @@ import { styled } from '@mui/material';
 import { DRAWER_WIDTH } from './constants';
 import ApplicantDetailsPage from './pages/ApplicantDetailsPage';
 import VacancyDetailsPage from './pages/VacancyDetailsPage';
-import { mockVacancies } from './mock-data/vacancies';
-import { Vacancy } from './types/vacancy';
 
 export default function App() {
-  const [selectedVacancy, setSelectedVacancy] = useState<Vacancy>(mockVacancies[0]);
-
-  //const handleVacancySelection = (vacancy: Vacancy) => {
-  //  setSelectedVacancy(vacancy);
-  //};
-
   const MainBox = styled(Box)(({ theme }) => ({
     flex: 1,
     overflow: 'auto',
@@ -52,10 +43,7 @@ export default function App() {
               element={<ApplicantDetailsPage />}
             />
             {/** TODO: selectedVacancy is always the same since setSelectedVacancy is never used -> must be fixed */}
-            <Route
-              path="/vacancies/:vacancy_id"
-              element={<VacancyDetailsPage vacancy={selectedVacancy} />}
-            />
+            <Route path="/vacancies/:vacancy_id" element={<VacancyDetailsPage />} />
           </Routes>
         </MainBox>
       </Box>

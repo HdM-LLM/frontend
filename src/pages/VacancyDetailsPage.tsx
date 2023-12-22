@@ -6,11 +6,7 @@ import { APP_BAR_HEIGHT } from '../constants';
 import VacancyTable from '../components/VacancyTable';
 import API from '../api/api';
 
-export interface VacancyDetailsPageProps {
-  vacancy: Vacancy;
-}
-
-export default function VacancyDetailsPage(props: VacancyDetailsPageProps) {
+export default function VacancyDetailsPage() {
   const { vacancy_id } = useParams();
   const [vacancy, setVacancy] = useState<Vacancy | null>(null);
   const [applicants, setApplicants] = useState<any[]>([]);
