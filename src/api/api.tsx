@@ -13,8 +13,16 @@ export default class API {
   addPdfURL = () => `${this.URL}/upload`;
   getApplicantsURL = () => `${this.URL}/applicants`;
   getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
-  getVacanciesURL = () => `${this.URL}/vacancies`;
-  getVacancyURL = (id: string) => `${this.URL}/vacancy/${id}`;
+
+  // Vacancy
+  vacanciesURL = () => `${this.URL}/vacancies`;
+
+  // Get Vacancy
+  getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
+
+  // Get applicants by vacancy ID or all applicants
+  fetchApplicantsURL = (vacancyId?: string) =>
+    `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
 
   static getAPI() {
     if (this.api == null) {
@@ -49,41 +57,58 @@ export default class API {
     });
   }
 
-  getApplicants() {
-    return this.fetchAdvanced(this.getApplicantsURL(), {
-      method: 'GET',
-    }).then((res) => {
-      let applicants = createApplicant(res);
-      return new Promise((resolve) => {
-        resolve(applicants);
-      });
-    });
+  // getApplicants() {
+  //   return this.fetchAdvanced(this.getApplicantsURL(), {
+  //     method: 'GET',
+  //   }).then((res) => {
+  //     let applicants = createApplicant(res);
+  //     return new Promise((resolve) => {
+  //       resolve(applicants);
+  //     });
+  //   });
+  // }
+
+  // getApplicant(id: string) {
+  //   return this.fetchAdvanced(this.getApplicantURL(id), { method: 'GET' }).then((res) => {
+  //     let applicant = createApplicant(res);
+  //     return new Promise((resolve) => {
+  //       resolve(applicant);
+  //     });
+  //   });
+  // }
+
+  // getVacancies() {
+  //   return this.fetchAdvanced(this.getVacanciesURL(), { method: 'GET' }).then((res) => {
+  //     let vacancy = createVacancy(res);
+  //     return new Promise((resolve) => {
+  //       resolve(vacancy);
+  //     });
+  //   });
+  // }
+
+  // getVacancy(id: string) {
+  //   return this.fetchAdvanced(this.getVacancyURL(id), { method: 'GET' }).then((res) => {
+  //     let vacancy = createVacancy(res);
+  //     return new Promise((resolve) => {
+  //       resolve(vacancy);
+  //     });
+  //   });
+  // }
+
+  // Fetch vacancies
+  fetchVacancies() {
+    return this.fetchAdvanced(this.vacanciesURL(), {});  
   }
 
-  getApplicant(id: string) {
-    return this.fetchAdvanced(this.getApplicantURL(id), { method: 'GET' }).then((res) => {
-      let applicant = createApplicant(res);
-      return new Promise((resolve) => {
-        resolve(applicant);
-      });
-    });
+  // Get vacancy by ID
+  getVacancy(vacancyId: string) {
+    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});  
   }
 
-  getVacancies() {
-    return this.fetchAdvanced(this.getVacanciesURL(), { method: 'GET' }).then((res) => {
-      let vacancy = createVacancy(res);
-      return new Promise((resolve) => {
-        resolve(vacancy);
-      });
-    });
+  // Fetch applicants by vacancy ID
+  fetchApplicants(vacancyId: string) {
+    return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
   }
+  
 
-  getVacancy(id: string) {
-    return this.fetchAdvanced(this.getVacancyURL(id), { method: 'GET' }).then((res) => {
-      let vacancy = createVacancy(res);
-      return new Promise((resolve) => {
-        resolve(vacancy);
-      });
-    });
-  }
 }

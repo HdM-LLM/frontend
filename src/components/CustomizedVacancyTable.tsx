@@ -49,6 +49,7 @@ export default function CustomizedTables(props: VacancyTableProps) {
   const applicants = props.applicants;
   const receivingDate = props.receivingDate;
 
+  
   const linkStyle = {
     textDecoration: 'none',
   };
@@ -81,10 +82,10 @@ export default function CustomizedTables(props: VacancyTableProps) {
                   }}
                 >
                   <Avatar
-                    src={'https://thispersondoesnotexist.com/'}
+                    src={`data:image/png;base64,${applicant.img}`}
                     sx={{
-                      width: 35,
-                      height: 35,
+                      width: 55,
+                      height: 55,
                       border: 2,
                       borderColor: '#B4CD93',
                       marginRight: 2,

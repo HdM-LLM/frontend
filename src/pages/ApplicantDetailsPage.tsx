@@ -143,6 +143,7 @@ const defaultApplicant: Applicant = {
   phoneNumber: '1234 567890',
   skills: [],
   rating: 5.5,
+  img: "",
 };
 
 ApplicantDetailsPage.defaultProps = {
