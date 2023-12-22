@@ -1,3 +1,6 @@
+import { Applicant, createApplicant } from '../types/applicant';
+import { Vacancy, createVacancy } from '../types/vacancy';
+
 export default class API {
   // Singelton instance
   static api: null | API;
@@ -6,8 +9,10 @@ export default class API {
   // Local Python backend
   URL = 'http://127.0.0.1:5000/';
 
-  //Resume
-  addPdfsURL = () => `${this.URL}/upload`;
+  //URLs
+  addPdfURL = () => `${this.URL}/upload`;
+  getApplicantsURL = () => `${this.URL}/applicants`;
+  getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
 
   // Vacancy
   vacanciesURL = () => `${this.URL}/vacancies`;
@@ -18,7 +23,6 @@ export default class API {
   // Get applicants by vacancy ID or all applicants
   fetchApplicantsURL = (vacancyId?: string) =>
     `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
-
 
   static getAPI() {
     if (this.api == null) {
@@ -46,16 +50,50 @@ export default class API {
     });
   }
 
-  addPdfs(pdf: File, vacancy: string) {
-    const pdfs = new FormData();
-    pdfs.append('cv', pdf);
-    pdfs.append('vacancy', vacancy);
-  
-    return this.fetchAdvanced(this.addPdfsURL(), {
+  addPdfs(pdf: FormData) {
+    return this.fetchAdvanced(this.addPdfURL(), {
       method: 'POST',
-      body: pdfs,
+      body: pdf,
     });
   }
+
+  // getApplicants() {
+  //   return this.fetchAdvanced(this.getApplicantsURL(), {
+  //     method: 'GET',
+  //   }).then((res) => {
+  //     let applicants = createApplicant(res);
+  //     return new Promise((resolve) => {
+  //       resolve(applicants);
+  //     });
+  //   });
+  // }
+
+  // getApplicant(id: string) {
+  //   return this.fetchAdvanced(this.getApplicantURL(id), { method: 'GET' }).then((res) => {
+  //     let applicant = createApplicant(res);
+  //     return new Promise((resolve) => {
+  //       resolve(applicant);
+  //     });
+  //   });
+  // }
+
+  // getVacancies() {
+  //   return this.fetchAdvanced(this.getVacanciesURL(), { method: 'GET' }).then((res) => {
+  //     let vacancy = createVacancy(res);
+  //     return new Promise((resolve) => {
+  //       resolve(vacancy);
+  //     });
+  //   });
+  // }
+
+  // getVacancy(id: string) {
+  //   return this.fetchAdvanced(this.getVacancyURL(id), { method: 'GET' }).then((res) => {
+  //     let vacancy = createVacancy(res);
+  //     return new Promise((resolve) => {
+  //       resolve(vacancy);
+  //     });
+  //   });
+  // }
 
   // Fetch vacancies
   fetchVacancies() {
