@@ -42,7 +42,6 @@ export default function App() {
               path="/vacancies/:vacancy_id/applicant/:applicant_id"
               element={<ApplicantDetailsPage />}
             />
-            {/** TODO: selectedVacancy is always the same since setSelectedVacancy is never used -> must be fixed */}
             <Route path="/vacancies/:vacancy_id" element={<VacancyDetailsPage />} />
           </Routes>
         </MainBox>
