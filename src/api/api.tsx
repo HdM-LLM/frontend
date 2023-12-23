@@ -1,3 +1,6 @@
+import { Applicant, createApplicant } from '../types/applicant';
+import { Vacancy, createVacancy } from '../types/vacancy';
+
 export default class API {
   // Singelton instance
   static api: null | API;
@@ -6,8 +9,10 @@ export default class API {
   // Local Python backend
   URL = 'http://127.0.0.1:5000/';
 
-  // Resume
-  addPdfsURL = () => `${this.URL}/upload`;
+  //URLs
+  addPdfURL = () => `${this.URL}/upload`;
+  getApplicantsURL = () => `${this.URL}/applicants`;
+  getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
 
   // Vacancy
   vacanciesURL = () => `${this.URL}/vacancies`;
@@ -58,14 +63,10 @@ export default class API {
     });
   }
 
-  addPdfs(pdf: File, vacancy: string) {
-    const pdfs = new FormData();
-    pdfs.append('cv', pdf);
-    pdfs.append('vacancy', vacancy);
-
-    return this.fetchAdvanced(this.addPdfsURL(), {
+  addPdfs(pdf: FormData) {
+    return this.fetchAdvanced(this.addPdfURL(), {
       method: 'POST',
-      body: pdfs,
+      body: pdf,
     });
   }
 
