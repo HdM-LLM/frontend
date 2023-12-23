@@ -42,9 +42,7 @@ export default function UploadPage() {
       }, 3000);
     } else {
       try {
-        const formData = new FormData();
-        formData.append('cover_letter', cover_letter);
-        await API.getAPI().addPdfs(formData);
+        await API.getAPI().addPdfs(cover_letter, selectedVacancy);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -129,9 +127,7 @@ export default function UploadPage() {
         </Button>
       </Box>
       {alert ? (
-        <Alert severity="error">
-          Oops, something went wrong... Please add files and select a vacancy
-        </Alert>
+        <Alert severity="error">Oops, something went wrong... Try again later.</Alert>
       ) : (
         <></>
       )}

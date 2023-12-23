@@ -1,6 +1,3 @@
-import { Applicant } from '../types/applicant';
-import { Vacancy } from '../types/vacancy';
-
 export default class API {
   // Singelton instance
   static api: null | API;
@@ -63,11 +60,11 @@ export default class API {
     });
   }
 
-  addPdfs(pdf: FormData) {
-    return this.fetchAdvanced(this.addPdfURL(), {
-      method: 'POST',
-      body: pdf,
-    });
+  addPdfs(pdf: File, vacancy: string) {
+    const pdfs = new FormData();
+    pdfs.append('cv', pdf);
+    pdfs.append('vacancy', vacancy);
+    return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
 
   // Fetch vacancies
