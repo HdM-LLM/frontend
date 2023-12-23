@@ -42,7 +42,9 @@ export default function UploadPage() {
       }, 3000);
     } else {
       try {
-        await API.getAPI().addPdfs(cover_letter, selectedVacancy);
+        const formData = new FormData();
+        formData.append('cover_letter', cover_letter);
+        await API.getAPI().addPdfs(formData);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -63,12 +65,12 @@ export default function UploadPage() {
   return (
     <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
       <h1>File Upload</h1>
-      <h4>Cover Letter</h4>
+      <h4>CV</h4>
       <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row' }}>
         <TextField
           disabled
           id="cover_letter-input"
-          label="Cover Letter"
+          label="CV"
           defaultValue="Insert File here"
           size="small"
           sx={{ width: '300px', marginRight: 2 }}

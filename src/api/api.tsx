@@ -1,5 +1,5 @@
-import { Applicant, createApplicant } from '../types/applicant';
-import { Vacancy, createVacancy } from '../types/vacancy';
+import { Applicant } from '../types/applicant';
+import { Vacancy } from '../types/vacancy';
 
 export default class API {
   // Singelton instance
