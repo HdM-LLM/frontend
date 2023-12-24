@@ -24,6 +24,8 @@ export default function DrawerItems() {
   const [open, setOpen] = useState(true);
   const [selectedLink, setSelectedLink] = useState<string>('/');
 
+  const SPACE_BETWEEN_ITEMS = '2vh';
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -35,7 +37,9 @@ export default function DrawerItems() {
   return (
     <React.Fragment>
       <Box sx={{ marginTop: '6vh', marginLeft: '2vh', marginRight: '1vh' }}>
-        <Box sx={{ marginBottom: '3vh', justifyContent: 'center', alignItems: 'center' }}>
+        <Box
+          sx={{ marginBottom: SPACE_BETWEEN_ITEMS, justifyContent: 'center', alignItems: 'center' }}
+        >
           <NavLink to="/" style={linkStyle} onClick={() => handleLinkClick('/')}>
             <ListItemButton
               sx={{
@@ -65,7 +69,7 @@ export default function DrawerItems() {
             </ListItemButton>
           </NavLink>
         </Box>
-        <Box sx={{ marginBottom: '3vh' }}>
+        <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS }}>
           <NavLink to="/vacancies" style={linkStyle} onClick={() => handleLinkClick('/vacancies')}>
             <ListItemButton
               sx={{
@@ -98,7 +102,7 @@ export default function DrawerItems() {
             </ListItemButton>
           </NavLink>
         </Box>
-        <Box sx={{ marginBottom: '3vh' }}>
+        <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS }}>
           <NavLink to="/inquiries" style={linkStyle} onClick={() => handleLinkClick('/inquiries')}>
             <ListItemButton
               sx={{
@@ -131,7 +135,7 @@ export default function DrawerItems() {
             </ListItemButton>
           </NavLink>
         </Box>
-        <Box sx={{ marginBottom: '3vh' }}>
+        <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS }}>
           <NavLink
             to="/applicants"
             style={linkStyle}
@@ -172,7 +176,7 @@ export default function DrawerItems() {
         </Box>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <Box sx={{ marginBottom: '3vh' }}>
+            <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS }}>
               <NavLink
                 to="/applicants/overview"
                 style={linkStyle}
@@ -211,7 +215,7 @@ export default function DrawerItems() {
                 </ListItemButton>
               </NavLink>
             </Box>
-            <Box sx={{ marginBottom: '3vh' }}>
+            <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS }}>
               <NavLink
                 to="/applicants/upload"
                 style={linkStyle}
@@ -251,7 +255,7 @@ export default function DrawerItems() {
             </Box>
           </List>
         </Collapse>
-        <Box sx={{ marginBottom: '3vh', marginTop: '20vh' }}>
+        <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS, marginTop: '20vh' }}>
           <NavLink to="/settings" style={linkStyle} onClick={() => handleLinkClick('/settings')}>
             <ListItemButton
               sx={{
@@ -281,7 +285,7 @@ export default function DrawerItems() {
             </ListItemButton>
           </NavLink>
         </Box>
-        <Box sx={{ marginBottom: '3vh' }}>
+        <Box sx={{ marginBottom: SPACE_BETWEEN_ITEMS }}>
           <NavLink to="/logout" style={linkStyle} onClick={() => handleLinkClick('/logout')}>
             <ListItemButton
               sx={{

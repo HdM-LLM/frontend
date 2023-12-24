@@ -1,6 +1,3 @@
-import { Applicant, createApplicant } from '../types/applicant';
-import { Vacancy, createVacancy } from '../types/vacancy';
-
 export default class API {
   // Singelton instance
   static api: null | API;
@@ -21,8 +18,21 @@ export default class API {
   getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
 
   // Get applicants by vacancy ID or all applicants
-  fetchApplicantsURL = (vacancyId?: string) =>
-    `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
+  fetchApplicantsURL = () => `${this.URL}/applicants/`;
+
+  // Get applicants by vacancy ID or all applicants
+  fetchApplicantURL = (applicantId: string) => `${this.URL}/applicants${`/${applicantId}`}`;
+
+  // Get all applicants by vacancy ID
+  fetchApplicantsByVacancyURL = (vacancyId: string) =>
+    `${this.URL}/applicantsVacancy${`/${vacancyId}`}`;
+
+  // Get applicant rating by applicant ID and vacancy ID
+  fetchApplicantRatingURL = (vacancyId: string, applicantId: string) =>
+    `${this.URL}/applicantsRating${`/${vacancyId}/${applicantId}`}`;
+
+  // Get category data by category ID
+  fetchCategoryDataURL = (categoryId: string) => `${this.URL}/category${`/${categoryId}`}`;
 
   static getAPI() {
     if (this.api == null) {
@@ -50,65 +60,45 @@ export default class API {
     });
   }
 
-  addPdfs(pdf: FormData) {
-    return this.fetchAdvanced(this.addPdfURL(), {
-      method: 'POST',
-      body: pdf,
-    });
+  addPdfs(pdf: File, vacancy: string) {
+    const pdfs = new FormData();
+    pdfs.append('cv', pdf);
+    pdfs.append('vacancy', vacancy);
+    return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
-
-  // getApplicants() {
-  //   return this.fetchAdvanced(this.getApplicantsURL(), {
-  //     method: 'GET',
-  //   }).then((res) => {
-  //     let applicants = createApplicant(res);
-  //     return new Promise((resolve) => {
-  //       resolve(applicants);
-  //     });
-  //   });
-  // }
-
-  // getApplicant(id: string) {
-  //   return this.fetchAdvanced(this.getApplicantURL(id), { method: 'GET' }).then((res) => {
-  //     let applicant = createApplicant(res);
-  //     return new Promise((resolve) => {
-  //       resolve(applicant);
-  //     });
-  //   });
-  // }
-
-  // getVacancies() {
-  //   return this.fetchAdvanced(this.getVacanciesURL(), { method: 'GET' }).then((res) => {
-  //     let vacancy = createVacancy(res);
-  //     return new Promise((resolve) => {
-  //       resolve(vacancy);
-  //     });
-  //   });
-  // }
-
-  // getVacancy(id: string) {
-  //   return this.fetchAdvanced(this.getVacancyURL(id), { method: 'GET' }).then((res) => {
-  //     let vacancy = createVacancy(res);
-  //     return new Promise((resolve) => {
-  //       resolve(vacancy);
-  //     });
-  //   });
-  // }
 
   // Fetch vacancies
   fetchVacancies() {
-    return this.fetchAdvanced(this.vacanciesURL(), {});  
+    return this.fetchAdvanced(this.vacanciesURL(), {});
   }
 
   // Get vacancy by ID
-  getVacancy(vacancyId: string) {
-    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});  
+  fetchVacancy(vacancyId: string) {
+    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
   }
 
-  // Fetch applicants by vacancy ID
-  fetchApplicants(vacancyId: string) {
-    return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
+  // Fetch all applicants
+  fetchApplicants() {
+    return this.fetchAdvanced(this.fetchApplicantsURL(), {});
   }
-  
 
+  // Fetch one applicant by ID
+  fetchApplicant(applicantId: string) {
+    return this.fetchAdvanced(this.fetchApplicantURL(applicantId), {});
+  }
+
+  // Fetch all applicants by vacancy ID
+  fetchApplicantsByVacancyId(vacancyId: string) {
+    return this.fetchAdvanced(this.fetchApplicantsByVacancyURL(vacancyId), {});
+  }
+
+  // Fetch applicant ratings by applicant ID and vacancy ID
+  fetchApplicantRatings(vacancyId: string, applicantId: string) {
+    return this.fetchAdvanced(this.fetchApplicantRatingURL(vacancyId, applicantId), {});
+  }
+
+  // Fetch category data by category ID
+  fetchCategoryData(categoryId: string) {
+    return this.fetchAdvanced(this.fetchCategoryDataURL(categoryId), {});
+  }
 }

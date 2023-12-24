@@ -10,12 +10,9 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CallMergeIcon from '@mui/icons-material/CallMerge';
-import { useNavigate } from 'react-router-dom';
 import { FONT_FAMILY } from '../constants';
 
 export default function AppBar() {
-  const navigate = useNavigate();
-
   const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
     background: theme.palette.grey[100],
     boxShadow: 'none',
