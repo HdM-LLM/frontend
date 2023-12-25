@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, Grid, Typography, Chip } from '@mui/material';
+import { Box, Card, Grid, Typography, Chip, Stack } from '@mui/material';
 import { Vacancy } from '../types/vacancy';
 import { FONT_FAMILY } from '../constants';
 
@@ -22,7 +22,7 @@ enum Departments {
 
 export default function VacancyCard(props: VacancyCardProps) {
   // Get chip color based on department that is fed in
-  const getChipColor = (department: string) => {
+  const getDepartmentChipColor = (department: string) => {
     switch (department) {
       case Departments.HR:
         return '#EDDEDE';
@@ -38,6 +38,26 @@ export default function VacancyCard(props: VacancyCardProps) {
         return '#E7DCF2';
       default:
         return '#F2F2F2'; // Grey as default
+    }
+  };
+
+  // Get chip text color based on department that is fed in
+  const getDepartmentChipTextColor = (department: string) => {
+    switch (department) {
+      case Departments.HR:
+        return '#7A4242';
+      case Departments.IT:
+        return '#427A5B';
+      case Departments.Sales:
+        return '#42527A';
+      case Departments.Marketing:
+        return '#938406';
+      case Departments.Finance:
+        return '#3498DB';
+      case Departments.Other:
+        return '#68427A';
+      default:
+        return '#4d4d4d'; // Grey as default
     }
   };
 
@@ -82,29 +102,45 @@ export default function VacancyCard(props: VacancyCardProps) {
               {props.vacancy.title}
             </Typography>
           </Grid>
-          <Grid item>
-            <Chip
-              label={props.vacancy.department + ' Department'}
-              sx={{
-                fontFamily: FONT_FAMILY,
-                backgroundColor: getChipColor(props.vacancy.department),
-                borderRadius: 2,
-              }}
-              component={'div'}
-            />
+          <Grid item sx={{ paddingBottom: '1vh' }} alignItems={'row'}>
+            <Stack direction="row" spacing={1}>
+              <Chip
+                label={props.vacancy.department + ' Department'}
+                sx={{
+                  fontFamily: FONT_FAMILY,
+                  fontWeight: 'bold',
+                  color: getDepartmentChipTextColor(props.vacancy.department),
+                  backgroundColor: getDepartmentChipColor(props.vacancy.department),
+                  borderRadius: 2,
+                }}
+                component={'div'}
+              />
+              <Grid item sx={{ paddingBottom: '1vh' }}>
+                <Chip
+                  label={props.vacancy.fullTime ? 'Full Time' : 'Part Time'}
+                  sx={{ fontFamily: FONT_FAMILY, borderRadius: 2 }}
+                />
+              </Grid>
+            </Stack>
+          </Grid>
+          <Grid item sx={{ paddingBottom: '1vh' }}>
+            <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
+              {props.vacancy.description.length > 140
+                ? props.vacancy.description.substring(0, 140) + '...'
+                : props.vacancy.description}
+            </Typography>
+          </Grid>
+          <Grid item sx={{ paddingBottom: '1vh' }}>
+            <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
+              Applications received: TODO
+            </Typography>
+          </Grid>
+          <Grid item sx={{ paddingBottom: '1vh' }}>
+            <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
+              Requested by: TODO
+            </Typography>
           </Grid>
         </Grid>
-        <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-          {props.vacancy.fullTime ? 'Full Time' : 'Part Time'}
-        </Typography>
-        <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-          {props.vacancy.description.length > 130
-            ? props.vacancy.description.substring(0, 130) + '...'
-            : props.vacancy.description}
-        </Typography>
-        <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-          Last updated: {props.vacancy.updatedAt}
-        </Typography>
       </Card>
     </Box>
   );

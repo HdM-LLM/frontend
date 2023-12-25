@@ -88,8 +88,8 @@ export default function VacancyPage() {
               <Grid item>
                 <VacancyCard
                   vacancy={vacancy}
-                  cardWidth={350}
-                  cardHeight={180}
+                  cardWidth={370}
+                  cardHeight={240}
                   marginRight={2}
                   marginBottom={2}
                 />
