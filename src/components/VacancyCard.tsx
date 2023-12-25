@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Box, Card, Grid, Typography, Chip } from '@mui/material';
 import { Vacancy } from '../types/vacancy';
 import { FONT_FAMILY } from '../constants';
 
@@ -11,7 +11,36 @@ export interface VacancyCardProps {
   marginBottom: number;
 }
 
+enum Departments {
+  HR = 'HR',
+  IT = 'IT',
+  Sales = 'Sales',
+  Marketing = 'Marketing',
+  Finance = 'Finance',
+  Other = 'Other',
+}
+
 export default function VacancyCard(props: VacancyCardProps) {
+  // Get chip color based on department that is fed in
+  const getChipColor = (department: string) => {
+    switch (department) {
+      case Departments.HR:
+        return '#EDDEDE';
+      case Departments.IT:
+        return '#DEEDE5';
+      case Departments.Sales:
+        return '#DEDFED';
+      case Departments.Marketing:
+        return '#FDF8CE';
+      case Departments.Finance:
+        return '#F2DCF1';
+      case Departments.Other:
+        return '#E7DCF2';
+      default:
+        return '#F2F2F2'; // Grey as default
+    }
+  };
+
   return (
     <Box>
       <Card
@@ -54,9 +83,15 @@ export default function VacancyCard(props: VacancyCardProps) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-              {props.vacancy.department}
-            </Typography>
+            <Chip
+              label={props.vacancy.department + ' Department'}
+              sx={{
+                fontFamily: FONT_FAMILY,
+                backgroundColor: getChipColor(props.vacancy.department),
+                borderRadius: 2,
+              }}
+              component={'div'}
+            />
           </Grid>
         </Grid>
         <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
