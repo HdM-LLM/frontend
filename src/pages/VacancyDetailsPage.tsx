@@ -5,11 +5,12 @@ import { Box, Stack, Typography } from '@mui/material';
 import { APP_BAR_HEIGHT } from '../constants';
 import VacancyTable from '../components/VacancyTable';
 import API from '../api/api';
+import { Applicant } from '../types/applicant';
 
 export default function VacancyDetailsPage() {
   const { vacancy_id } = useParams();
   const [vacancy, setVacancy] = useState<Vacancy | null>(null);
-  const [applicants, setApplicants] = useState<any[]>([]);
+  const [applicants, setApplicants] = useState<Applicant[]>([]);
   const receivingDate = '1st December 2023';
 
   useEffect(() => {

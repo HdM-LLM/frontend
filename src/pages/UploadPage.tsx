@@ -12,15 +12,18 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { useEffect, useState } from 'react';
+import { APP_BAR_HEIGHT } from '../constants';
+import { Stack, Typography } from '@mui/material';
 
 export default function UploadPage() {
-  const [cover_letter, setCoverLetter] = React.useState<File | null>(null);
-  const [vacancies, setVacancies] = React.useState<Vacancy[]>([]);
-  const [selectedVacancy, setSelectedVacancy] = React.useState<string>('');
-  const [alert, setAlert] = React.useState<boolean>(false);
-  const [success, setSuccess] = React.useState<boolean>(false);
+  const [cv, setCv] = useState<File | null>(null);
+  const [vacancies, setVacancies] = useState<Vacancy[]>([]);
+  const [selectedVacancy, setSelectedVacancy] = useState<string>('');
+  const [alert, setAlert] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchVacancies = async () => {
       try {
         const api = API.getAPI();
@@ -35,14 +38,14 @@ export default function UploadPage() {
   }, []);
 
   const sendFiles = async () => {
-    if (!cover_letter || !selectedVacancy) {
+    if (!cv || !selectedVacancy) {
       setAlert(true);
       setTimeout(() => {
         setAlert(false);
       }, 3000);
     } else {
       try {
-        await API.getAPI().addPdfs(cover_letter, selectedVacancy);
+        await API.getAPI().addPdfs(cv, selectedVacancy);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -58,21 +61,34 @@ export default function UploadPage() {
     setSelectedVacancy(event.target.value);
   };
 
-  const isSendButtonDisabled = !cover_letter || selectedVacancy === '';
+  const isSendButtonDisabled = !cv || selectedVacancy === '';
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
-      <h1>File Upload</h1>
-      <h4>CV</h4>
-      <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row' }}>
+    <Box
+      sx={{
+        flex: 1,
+        height: 'calc(100vh - APP_BAR_HEIGHT)',
+        marginTop: APP_BAR_HEIGHT,
+        flexDirection: 'column',
+      }}
+    >
+      <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
+        <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
+          Upload application
+        </Typography>
+        <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+          CV
+        </Typography>
+      </Stack>
+      <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', marginLeft: 3 }}>
         <TextField
           disabled
-          id="cover_letter-input"
+          id="cv-input"
           label="CV"
           defaultValue="Insert File here"
           size="small"
           sx={{ width: '300px', marginRight: 2 }}
-          value={cover_letter?.name}
+          value={cv?.name}
         />
         <Button
           size="small"
@@ -89,12 +105,12 @@ export default function UploadPage() {
             hidden
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (!event.target.files) return;
-              setCoverLetter(event.target.files[0]);
+              setCv(event.target.files[0]);
             }}
           />
         </Button>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2, marginLeft: 3 }}>
         <FormControl sx={{ width: 300 }} size="small">
           <InputLabel id="vacancy-label">Vacancy</InputLabel>
           <Select
@@ -112,7 +128,7 @@ export default function UploadPage() {
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30, marginLeft: 3 }}>
         <Button
           size="medium"
           color="secondary"
@@ -132,6 +148,6 @@ export default function UploadPage() {
         <></>
       )}
       {success ? <Alert severity="success">🎉 Files sent successfully!</Alert> : <></>}
-    </Container>
+    </Box>
   );
 }

@@ -18,7 +18,7 @@ export default class API {
   getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
 
   // Get applicants by vacancy ID or all applicants
-  fetchApplicantsURL = () => `${this.URL}/applicants/`;
+  fetchApplicantsURL = () => `${this.URL}/applicants`;
 
   // Get applicants by vacancy ID or all applicants
   fetchApplicantURL = (applicantId: string) => `${this.URL}/applicants${`/${applicantId}`}`;
@@ -60,9 +60,9 @@ export default class API {
     });
   }
 
-  addPdfs(pdf: File, vacancy: string) {
+  addPdfs(cv: File, vacancy: string) {
     const pdfs = new FormData();
-    pdfs.append('cv', pdf);
+    pdfs.append('cv', cv);
     pdfs.append('vacancy', vacancy);
     return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
