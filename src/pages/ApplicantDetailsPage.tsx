@@ -7,7 +7,6 @@ import ApplicantDetailsTable from '../components/ApplicantDetailsTable';
 import API from '../api/api';
 import { useParams } from 'react-router-dom';
 import { Rating } from '../types/rating';
-import api from '../api/api';
 
 export default function ApplicantDetailsPage() {
   const [applicantRatings, setApplicantRatings] = useState<Rating[]>([]);
@@ -40,6 +39,7 @@ export default function ApplicantDetailsPage() {
     };
 
     fetchApplicant();
+    console.log('Applicant:', applicant);
   }, [applicant_id]);
 
   useEffect(() => {
@@ -112,6 +112,7 @@ export default function ApplicantDetailsPage() {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          maxWidth: '100%',
         }}
       >
         <Avatar
@@ -124,7 +125,7 @@ export default function ApplicantDetailsPage() {
             color: '#4d4d4d',
             marginLeft: '1vw',
             fontWeight: 'bold',
-            minWidth: '5vw',
+            width: '12vw',
             paddingRight: '1vw',
           }}
         >
@@ -132,7 +133,7 @@ export default function ApplicantDetailsPage() {
         </Typography>
         <Box
           sx={{
-            width: '100%',
+            width: '83%',
             flexDirection: 'row',
           }}
         >
@@ -162,7 +163,38 @@ export default function ApplicantDetailsPage() {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ marginRight: '2vw', paddingLeft: 5 }}>
+        <Box sx={{ maxWidth: '25%', width: '17%' }}>
+          <Stack direction="row" spacing={1}>
+            <Button variant="contained" color="secondary" disableElevation>
+              Reject
+            </Button>
+            <Button variant="contained" color="secondary" disableElevation>
+              Accept
+            </Button>
+          </Stack>
+          <Typography variant="h6" sx={{ marginLeft: 1 }}>
+            Contact Details
+          </Typography>
+          <Typography variant="h6" sx={{ marginLeft: 1 }}>
+            {applicant && applicant.email}
+          </Typography>
+          <Typography variant="h6" sx={{ marginLeft: 1 }}>
+            {applicant && applicant.dateOfBirth}
+          </Typography>
+          {/** TODO: Add functionality to view pdf in browser */}
+          <Button
+            variant="contained"
+            startIcon={<AttachFileIcon />}
+            color="secondary"
+            disableElevation
+            sx={{ marginLeft: 1 }}
+            onClick={() => {
+              getPdf();
+              window.open('localhost:5000/applicant/' + applicant_id + '/cv');
+            }}
+          >
+            CV
+          </Button>
           <Typography variant="h6" sx={{ marginLeft: 1 }}>
             Attached Documents
           </Typography>
@@ -172,7 +204,7 @@ export default function ApplicantDetailsPage() {
             startIcon={<AttachFileIcon />}
             color="secondary"
             disableElevation
-            sx={{ margin: 1 }}
+            sx={{ marginLeft: 1 }}
             onClick={() => {
               getPdf();
               window.open('localhost:5000/applicant/' + applicant_id + '/cv');
@@ -183,7 +215,10 @@ export default function ApplicantDetailsPage() {
         </Box>
       </Box>
       {/** TODO: add receiving date */}
-      <Typography variant="h6" sx={{ marginBottom: '3vh', color: '#4d4d4d', marginLeft: 3 }}>
+      <Typography
+        variant="h6"
+        sx={{ marginBottom: '2vh', color: '#4d4d4d', marginLeft: 3, marginTop: '2vh' }}
+      >
         Application received: TODO
       </Typography>
       <Box

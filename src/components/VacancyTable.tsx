@@ -6,7 +6,6 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { Box, LinearProgress, Button, Avatar } from '@mui/material';
 import { NavLink, useParams } from 'react-router-dom';
 import { Applicant } from '../types/applicant';

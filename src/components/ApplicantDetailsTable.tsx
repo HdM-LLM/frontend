@@ -6,7 +6,6 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { Box, LinearProgress, TextField } from '@mui/material';
 import { Rating } from '../types/rating';
 import { Category } from '../types/category';
@@ -153,9 +152,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
                   id="outlined-rating-adjustment"
                   type="number"
                   defaultValue={rating.score}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
                 />
               </StyledTableCell>
             </StyledTableRow>
