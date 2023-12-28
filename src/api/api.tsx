@@ -34,6 +34,9 @@ export default class API {
   // Get category data by category ID
   fetchCategoryDataURL = (categoryId: string) => `${this.URL}/category${`/${categoryId}`}`;
 
+  // Get cv of applicant
+  fetchCvURL = (applicantId: string) => `${this.URL}/applicant${`/${applicantId}`}/cv`;
+
   static getAPI() {
     if (this.api == null) {
       this.api = new API();
@@ -100,5 +103,10 @@ export default class API {
   // Fetch category data by category ID
   fetchCategoryData(categoryId: string) {
     return this.fetchAdvanced(this.fetchCategoryDataURL(categoryId), {});
+  }
+
+  // Fetch cv of applicant
+  fetchCvByApplicant(applicantId: string) {
+    return this.fetchAdvanced(this.fetchCvURL(applicantId), {});
   }
 }

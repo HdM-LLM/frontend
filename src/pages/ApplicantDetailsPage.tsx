@@ -7,6 +7,7 @@ import ApplicantDetailsTable from '../components/ApplicantDetailsTable';
 import API from '../api/api';
 import { useParams } from 'react-router-dom';
 import { Rating } from '../types/rating';
+import api from '../api/api';
 
 export default function ApplicantDetailsPage() {
   const [applicantRatings, setApplicantRatings] = useState<Rating[]>([]);
@@ -69,6 +70,21 @@ export default function ApplicantDetailsPage() {
     const meanRating = applicantRatings.reduce((a, b) => a + b.score, 0) / applicantRatings.length;
     setMeanApplicantRating(meanRating);
   }, [applicantRatings]);
+
+  // Function to get pdf from backend
+  const getPdf = async () => {
+    const api = API.getAPI();
+    if (!applicant_id) {
+      console.error('Error fetching CV: No applicant ID provided');
+      return;
+    }
+    try {
+      const pdf = await api.fetchCvByApplicant(applicant_id);
+      return pdf;
+    } catch (error) {
+      console.error('Error fetching CV:', error);
+    }
+  };
 
   const linearProgressValue = (meanApplicantRating / maxProgressBarValue) * 100;
 
@@ -157,6 +173,10 @@ export default function ApplicantDetailsPage() {
             color="secondary"
             disableElevation
             sx={{ margin: 1 }}
+            onClick={() => {
+              getPdf();
+              window.open('localhost:5000/applicant/' + applicant_id + '/cv');
+            }}
           >
             CV
           </Button>

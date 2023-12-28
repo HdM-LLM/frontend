@@ -94,7 +94,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
 
   return (
     <TableContainer
-      component={Paper}
       sx={{
         flexDirection: 'row',
         borderRadius: 2,

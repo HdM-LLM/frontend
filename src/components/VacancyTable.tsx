@@ -93,7 +93,6 @@ export default function VacancyTable(props: VacancyTableProps) {
 
   return (
     <TableContainer
-      component={Paper}
       sx={{
         minWidth: '60%',
         maxWidth: '85%',
