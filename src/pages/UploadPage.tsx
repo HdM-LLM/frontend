@@ -12,9 +12,10 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { DropZone } from '../components/DropZone';
 
 export default function UploadPage() {
-  const [cover_letter, setCoverLetter] = React.useState<File | null>(null);
+  const [cv, setCV] = React.useState<File | null>(null);
   const [vacancies, setVacancies] = React.useState<Vacancy[]>([]);
   const [selectedVacancy, setSelectedVacancy] = React.useState<string>('');
   const [alert, setAlert] = React.useState<boolean>(false);
@@ -34,15 +35,20 @@ export default function UploadPage() {
     fetchVacancies();
   }, []);
 
+  const setFile = (file: File) => {
+    setCV(file);
+    setSuccess(true);
+  };
+
   const sendFiles = async () => {
-    if (!cover_letter || !selectedVacancy) {
+    if (!cv || !selectedVacancy) {
       setAlert(true);
       setTimeout(() => {
         setAlert(false);
       }, 3000);
     } else {
       try {
-        await API.getAPI().addPdfs(cover_letter, selectedVacancy);
+        await API.getAPI().addPdfs(cv, selectedVacancy);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -58,59 +64,14 @@ export default function UploadPage() {
     setSelectedVacancy(event.target.value);
   };
 
-  const isSendButtonDisabled = !cover_letter || selectedVacancy === '';
+  const isSendButtonDisabled = !cv || selectedVacancy === '';
 
   return (
     <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
       <h1>File Upload</h1>
       <h4>CV</h4>
-      <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row' }}>
-        <TextField
-          disabled
-          id="cover_letter-input"
-          label="CV"
-          defaultValue="Insert File here"
-          size="small"
-          sx={{ width: '300px', marginRight: 2 }}
-          value={cover_letter?.name}
-        />
-        <Button
-          size="small"
-          variant="contained"
-          component="label"
-          color="secondary"
-          sx={{ width: '100px', height: '40px', textTransform: 'capitalize' }}
-          disableElevation
-        >
-          Select File
-          <input
-            type="file"
-            accept="application/pdf"
-            hidden
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (!event.target.files) return;
-              setCoverLetter(event.target.files[0]);
-            }}
-          />
-        </Button>
-      </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
-        <FormControl sx={{ width: 300 }} size="small">
-          <InputLabel id="vacancy-label">Vacancy</InputLabel>
-          <Select
-            labelId="select-vacancy-dropdown"
-            label="Select Vacancy"
-            value={selectedVacancy}
-            input={<OutlinedInput label="Vacancy" />}
-            onChange={handleSelectChange}
-          >
-            {vacancies.map((vacancy) => (
-              <MenuItem key={vacancy.id} value={vacancy.id} sx={{ height: '35px' }}>
-                {vacancy.title}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <DropZone setFile={setFile} />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30 }}>
         <Button
