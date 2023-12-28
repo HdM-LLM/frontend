@@ -29,10 +29,12 @@ const StyledTableCell = styled(TableCell)(() => ({
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#f3f3f3',
+    boxShadow: 0,
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 5,
+    border: 0,
+    boxShadow: 0,
   },
 }));
 
@@ -91,12 +93,17 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
   const maxProgressBarValue = 10;
 
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{ minWidth: '60%', maxWidth: '85%', flexDirection: 'row' }}
-        aria-label="table with skills and their rating"
-        size="medium"
-      >
+    <TableContainer
+      component={Paper}
+      sx={{
+        flexDirection: 'row',
+        borderRadius: 2,
+        marginTop: 3,
+        marginBottom: 3,
+        maxWidth: '85%',
+      }}
+    >
+      <Table aria-label="table with skills and their rating" size="medium">
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{ paddingRight: 15 }}>Category</StyledTableCell>

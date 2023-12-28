@@ -97,7 +97,12 @@ export default function VacancyCard(props: VacancyCardProps) {
             <Typography
               variant="h6"
               component="div"
-              sx={{ color: '#4d4d4d', fontWeight: 'bold', fontFamily: FONT_FAMILY }}
+              sx={{
+                color: '#4d4d4d',
+                fontWeight: 'bold',
+                fontFamily: FONT_FAMILY,
+                paddingBottom: 0.5,
+              }}
             >
               {props.vacancy.title}
             </Typography>
@@ -131,11 +136,13 @@ export default function VacancyCard(props: VacancyCardProps) {
             </Typography>
           </Grid>
           <Grid item sx={{ paddingBottom: '1vh' }}>
+            {/** TODO: Show number of received applications (functionality in backend currently missing) */}
             <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
               Applications received: TODO
             </Typography>
           </Grid>
           <Grid item sx={{ paddingBottom: '1vh' }}>
+            {/** TODO: Show name of person that requested this vacancy (functionality in backend currently missing) */}
             <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
               Requested by: TODO
             </Typography>

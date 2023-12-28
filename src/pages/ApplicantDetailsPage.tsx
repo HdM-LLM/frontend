@@ -108,7 +108,8 @@ export default function ApplicantDetailsPage() {
             color: '#4d4d4d',
             marginLeft: '1vw',
             fontWeight: 'bold',
-            minWidth: '8vw',
+            minWidth: '5vw',
+            paddingRight: '1vw',
           }}
         >
           {applicant && applicant.firstName + ' ' + applicant.lastName}
@@ -132,7 +133,7 @@ export default function ApplicantDetailsPage() {
               sx={{
                 height: 10,
                 borderRadius: 5,
-                minWidth: '80%',
+                minWidth: '85%',
                 alignSelf: 'center',
               }}
             />
@@ -145,7 +146,7 @@ export default function ApplicantDetailsPage() {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ marginRight: '4vw' }}>
+        <Box sx={{ marginRight: '2vw', paddingLeft: 5 }}>
           <Typography variant="h6" sx={{ marginLeft: 1 }}>
             Attached Documents
           </Typography>
@@ -162,7 +163,7 @@ export default function ApplicantDetailsPage() {
         </Box>
       </Box>
       {/** TODO: add receiving date */}
-      <Typography sx={{ color: 'grey', marginLeft: 3, marginBottom: '3vh' }}>
+      <Typography variant="h6" sx={{ marginBottom: '3vh', color: '#4d4d4d', marginLeft: 3 }}>
         Application received: TODO
       </Typography>
       <Box

@@ -92,12 +92,18 @@ export default function VacancyTable(props: VacancyTableProps) {
   }, [props.applicants, vacancy_id]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{ minWidth: '60%', maxWidth: '85%', flexDirection: 'row', boxShadow: 0 }}
-        aria-label="table with skills and their rating"
-        size="medium"
-      >
+    <TableContainer
+      component={Paper}
+      sx={{
+        minWidth: '60%',
+        maxWidth: '85%',
+        flexDirection: 'row',
+        borderRadius: 2,
+        marginTop: 3,
+        marginBottom: 3,
+      }}
+    >
+      <Table aria-label="table with skills and their rating" size="medium">
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{ paddingRight: 10 }}>Applicant</StyledTableCell>
