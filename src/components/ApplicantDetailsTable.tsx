@@ -98,7 +98,7 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
         borderRadius: 2,
         marginTop: 3,
         marginBottom: 3,
-        maxWidth: '85%',
+        maxWidth: '100%',
       }}
     >
       <Table aria-label="table with skills and their rating" size="medium">

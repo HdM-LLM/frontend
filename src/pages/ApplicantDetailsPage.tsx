@@ -163,55 +163,24 @@ export default function ApplicantDetailsPage() {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ maxWidth: '25%', width: '17%' }}>
-          <Stack direction="row" spacing={1}>
-            <Button variant="contained" color="secondary" disableElevation>
+        <Box sx={{ maxWidth: '25%', width: '17%', marginRight: 3 }}>
+          <Stack direction="column" spacing={2}>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#cc7a7a',
+                '&:hover': {
+                  backgroundColor: '#966b6b',
+                },
+              }}
+              disableElevation
+            >
               Reject
             </Button>
             <Button variant="contained" color="secondary" disableElevation>
-              Accept
+              Accept & Invite
             </Button>
           </Stack>
-          <Typography variant="h6" sx={{ marginLeft: 1 }}>
-            Contact Details
-          </Typography>
-          <Typography variant="h6" sx={{ marginLeft: 1 }}>
-            {applicant && applicant.email}
-          </Typography>
-          <Typography variant="h6" sx={{ marginLeft: 1 }}>
-            {applicant && applicant.dateOfBirth}
-          </Typography>
-          {/** TODO: Add functionality to view pdf in browser */}
-          <Button
-            variant="contained"
-            startIcon={<AttachFileIcon />}
-            color="secondary"
-            disableElevation
-            sx={{ marginLeft: 1 }}
-            onClick={() => {
-              getPdf();
-              window.open('localhost:5000/applicant/' + applicant_id + '/cv');
-            }}
-          >
-            CV
-          </Button>
-          <Typography variant="h6" sx={{ marginLeft: 1 }}>
-            Attached Documents
-          </Typography>
-          {/** TODO: Add functionality to view pdf in browser */}
-          <Button
-            variant="contained"
-            startIcon={<AttachFileIcon />}
-            color="secondary"
-            disableElevation
-            sx={{ marginLeft: 1 }}
-            onClick={() => {
-              getPdf();
-              window.open('localhost:5000/applicant/' + applicant_id + '/cv');
-            }}
-          >
-            CV
-          </Button>
         </Box>
       </Box>
       {/** TODO: add receiving date */}
@@ -225,12 +194,33 @@ export default function ApplicantDetailsPage() {
         sx={{
           marginLeft: 3,
           marginRight: 3,
-          display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
+          width: '80%',
         }}
       >
-        <Box>
+        <Box
+          sx={{
+            flexDirection: 'row',
+            width: '100%',
+          }}
+        >
           <ApplicantDetailsTable applicantRatings={applicantRatings} />
+        </Box>
+        <Box>
+          <Typography variant="h6">Attached Documents</Typography>
+          {/** TODO: Add functionality to view pdf in browser */}
+          <Button
+            variant="contained"
+            startIcon={<AttachFileIcon />}
+            color="secondary"
+            disableElevation
+            onClick={() => {
+              getPdf();
+              window.open('localhost:5000/applicant/' + applicant_id + '/cv');
+            }}
+          >
+            CV
+          </Button>
         </Box>
       </Box>
     </Box>
