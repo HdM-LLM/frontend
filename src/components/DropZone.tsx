@@ -42,7 +42,6 @@ export class DropZone extends React.Component<DropZoneProps, DropZoneState> {
         <TextField
           disabled
           id="cover_letter-input"
-          label="CV"
           size="medium"
           sx={{ width: '300px', marginRight: 2 }}
           defaultValue="Drop File here"

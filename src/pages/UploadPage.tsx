@@ -37,7 +37,6 @@ export default function UploadPage() {
 
   const setFile = (file: File) => {
     setCV(file);
-    setSuccess(true);
   };
 
   const sendFiles = async () => {
@@ -69,6 +68,25 @@ export default function UploadPage() {
   return (
     <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
       <h1>File Upload</h1>
+      <h4>Vacancy</h4>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
+        <FormControl sx={{ width: 300 }} size="small">
+          <InputLabel id="vacancy-label">Vacancy</InputLabel>
+          <Select
+            labelId="select-vacancy-dropdown"
+            label="Select Vacancy"
+            value={selectedVacancy}
+            input={<OutlinedInput label="Vacancy" />}
+            onChange={handleSelectChange}
+          >
+            {vacancies.map((vacancy) => (
+              <MenuItem key={vacancy.id} value={vacancy.id} sx={{ height: '35px' }}>
+                {vacancy.title}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       <h4>CV</h4>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
         <DropZone setFile={setFile} />
