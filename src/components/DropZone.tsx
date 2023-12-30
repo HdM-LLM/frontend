@@ -44,7 +44,7 @@ export class DropZone extends React.Component<DropZoneProps, DropZoneState> {
           id="cover_letter-input"
           size="medium"
           sx={{ width: '300px', marginRight: 2 }}
-          defaultValue="Drop File here"
+          label="Drop File here"
           value={this.state.filename === '' ? 'Drop File here' : this.state.filename}
         />
         <input
