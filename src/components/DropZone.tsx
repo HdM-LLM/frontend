@@ -33,7 +33,6 @@ export class DropZone extends React.Component<DropZoneProps, DropZoneState> {
     event.preventDefault();
     this.props.setFile(e.dataTransfer.files[0]);
     this.setState({ filename: e.dataTransfer.files[0].name });
-    console.log(this.state.filename);
   };
 
   render() {

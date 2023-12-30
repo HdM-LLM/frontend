@@ -61,7 +61,6 @@ export default function UploadPage() {
   };
 
   const handleSelectChange = (event: SelectChangeEvent<string>) => {
-    console.log(event.target.value);
     setSelectedVacancy(event.target.value);
   };
 

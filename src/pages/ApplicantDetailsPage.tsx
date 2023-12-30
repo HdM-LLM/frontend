@@ -39,7 +39,6 @@ export default function ApplicantDetailsPage() {
     };
 
     fetchApplicant();
-    console.log('Applicant:', applicant);
   }, [applicant_id]);
 
   useEffect(() => {
@@ -72,23 +71,18 @@ export default function ApplicantDetailsPage() {
   }, [applicantRatings]);
 
   // Function to get pdf from backend
-  const getPdf = async () => {
+  const getCvAsPdf = () => {
     const api = API.getAPI();
     if (!applicant_id) {
       console.error('Error fetching CV: No applicant ID provided');
-      return;
+      return '';
     }
     if (!vacancy_id) {
       console.error('Error fetching CV: No vacancy ID provided');
-      return;
+      return '';
     }
 
-    try {
-      const pdf = await api.fetchCvByApplicant(applicant_id, vacancy_id);
-      return pdf;
-    } catch (error) {
-      console.error('Error fetching CV:', error);
-    }
+    return api.fetchCvURL(applicant_id, vacancy_id);
   };
 
   const linearProgressValue = (meanApplicantRating / maxProgressBarValue) * 100;
@@ -219,10 +213,8 @@ export default function ApplicantDetailsPage() {
             startIcon={<AttachFileIcon />}
             color="secondary"
             disableElevation
-            onClick={() => {
-              getPdf();
-              window.open('localhost:5000/applicant/' + applicant_id + '&' + vacancy_id + '/cv');
-            }}
+            href={getCvAsPdf()}
+            target="_blank"
           >
             CV
           </Button>

@@ -36,7 +36,7 @@ export default class API {
 
   // Get cv of applicant
   fetchCvURL = (applicantId: string, vacancyId: string) =>
-    `${this.URL}/applicant${`/${applicantId}`}&${vacancyId}/cv`;
+    `${this.URL}/applicant${`/${applicantId}`}/cv/${vacancyId}/cv.pdf`;
 
   static getAPI() {
     if (this.api == null) {
