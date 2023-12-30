@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import API from '../api/api';
@@ -11,9 +10,10 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { DropZone } from '../components/DropZone';
 import { useEffect, useState } from 'react';
 import { APP_BAR_HEIGHT } from '../constants';
-import { Stack, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export default function UploadPage() {
   const [cv, setCv] = useState<File | null>(null);
@@ -35,6 +35,10 @@ export default function UploadPage() {
 
     fetchVacancies();
   }, []);
+
+  const setFile = (file: File) => {
+    setCv(file);
+  };
 
   const sendFiles = async () => {
     if (!cv || !selectedVacancy) {
@@ -70,47 +74,20 @@ export default function UploadPage() {
         height: 'calc(100vh - APP_BAR_HEIGHT)',
         marginTop: APP_BAR_HEIGHT,
         flexDirection: 'column',
+        marginLeft: 3,
       }}
     >
-      <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
-        <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          Upload application
-        </Typography>
-        <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
-          CV
-        </Typography>
-      </Stack>
-      <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', marginLeft: 3 }}>
-        <TextField
-          disabled
-          id="cv-input"
-          label="CV"
-          defaultValue="Insert File here"
-          size="small"
-          sx={{ width: '300px', marginRight: 2 }}
-          value={cv?.name}
-        />
-        <Button
-          size="small"
-          variant="contained"
-          component="label"
-          color="secondary"
-          sx={{ width: '100px', height: '40px', textTransform: 'capitalize' }}
-          disableElevation
-        >
-          Select File
-          <input
-            type="file"
-            accept="application/pdf"
-            hidden
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (!event.target.files) return;
-              setCv(event.target.files[0]);
-            }}
-          />
-        </Button>
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2, marginLeft: 3 }}>
+      <Typography
+        variant="h4"
+        fontWeight={'bold'}
+        sx={{ color: '#4d4d4d', marginTop: 10, marginBottom: 3 }}
+      >
+        Upload your application
+      </Typography>
+      <Typography variant="h6" sx={{ color: '#4d4d4d', marginBottom: 2 }}>
+        Select the vacancy you are applying for
+      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
         <FormControl sx={{ width: 300 }} size="small">
           <InputLabel id="vacancy-label">Vacancy</InputLabel>
           <Select
@@ -128,7 +105,13 @@ export default function UploadPage() {
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30, marginLeft: 3 }}>
+      <Typography variant="h6" sx={{ color: '#4d4d4d', marginBottom: 2 }}>
+        Upload your CV
+      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
+        <DropZone setFile={setFile} />
+      </Box>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30 }}>
         <Button
           size="medium"
           color="secondary"
