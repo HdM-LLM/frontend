@@ -35,7 +35,8 @@ export default class API {
   fetchCategoryDataURL = (categoryId: string) => `${this.URL}/category${`/${categoryId}`}`;
 
   // Get cv of applicant
-  fetchCvURL = (applicantId: string) => `${this.URL}/applicant${`/${applicantId}`}/cv`;
+  fetchCvURL = (applicantId: string, vacancyId: string) =>
+    `${this.URL}/applicant${`/${applicantId}`}&${vacancyId}/cv`;
 
   static getAPI() {
     if (this.api == null) {
@@ -63,10 +64,10 @@ export default class API {
     });
   }
 
-  addPdfs(cv: File, vacancy: string) {
+  addPdfs(cv: File, vacancyId: string) {
     const pdfs = new FormData();
     pdfs.append('cv', cv);
-    pdfs.append('vacancy', vacancy);
+    pdfs.append('vacancy', vacancyId);
     return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
 
@@ -106,7 +107,7 @@ export default class API {
   }
 
   // Fetch cv of applicant
-  fetchCvByApplicant(applicantId: string) {
-    return this.fetchAdvanced(this.fetchCvURL(applicantId), {});
+  fetchCvByApplicant(applicantId: string, vacancyId: string) {
+    return this.fetchAdvanced(this.fetchCvURL(applicantId, vacancyId), {});
   }
 }

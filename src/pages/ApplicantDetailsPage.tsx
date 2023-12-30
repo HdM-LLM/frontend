@@ -78,8 +78,13 @@ export default function ApplicantDetailsPage() {
       console.error('Error fetching CV: No applicant ID provided');
       return;
     }
+    if (!vacancy_id) {
+      console.error('Error fetching CV: No vacancy ID provided');
+      return;
+    }
+
     try {
-      const pdf = await api.fetchCvByApplicant(applicant_id);
+      const pdf = await api.fetchCvByApplicant(applicant_id, vacancy_id);
       return pdf;
     } catch (error) {
       console.error('Error fetching CV:', error);
@@ -216,7 +221,7 @@ export default function ApplicantDetailsPage() {
             disableElevation
             onClick={() => {
               getPdf();
-              window.open('localhost:5000/applicant/' + applicant_id + '/cv');
+              window.open('localhost:5000/applicant/' + applicant_id + '&' + vacancy_id + '/cv');
             }}
           >
             CV
