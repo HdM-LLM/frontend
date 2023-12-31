@@ -65,6 +65,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         variant="outlined"
         fullWidth
         multiline
+        disabled
         rows={2} // Adjust the number of rows as needed
         value={adjustPromptPart1}
         sx={{ mt: 2 }}
@@ -84,7 +85,13 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         sx={{ mt: 2 }}
       />
 
-      <Button variant="contained" color="primary" onClick={handleGenerateVacancy} sx={{ mt: 2 }}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleGenerateVacancy}
+        sx={{ mt: 2 }}
+        disableElevation
+      >
         Generate Vacancy
       </Button>
 

@@ -47,7 +47,7 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           fullWidth
           required
         />
-        {/* TODO: This should be a dropdown and the available departments should be fetched from backend */}
+        {/* TODO: This should be a dropdown and the available departments should be fetched from backend (Departments should be switched to ENUM in backend and db)*/}
         <TextField
           label="Department/Responsibility Area"
           name="department"
@@ -83,6 +83,7 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           required
         />
         {/* TODO: Would it be possible to add a skill level selection after entering a language? */}
+        {/* TODO: Spoken language or programming language? */}
         <TextField
           label="Language Requirements"
           name="languageRequirements"

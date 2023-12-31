@@ -1,9 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { APP_BAR_HEIGHT } from '../constants';
 
 export default function InquiriesPage() {
   return (
@@ -11,17 +11,19 @@ export default function InquiriesPage() {
       component="main"
       sx={{
         flex: 1,
-        height: '100vh',
-        overflow: 'auto',
+        height: 'calc(100vh - APP_BAR_HEIGHT)',
+        marginTop: APP_BAR_HEIGHT,
+        marginLeft: 3,
+        marginRight: 3,
       }}
     >
-      <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
+      <Stack sx={{ marginTop: 10, pb: 2 }} direction="column">
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
           Inquiries
         </Typography>
       </Stack>
 
-      <Container maxWidth="xl" sx={{ mt: 1 }}>
+      <Box sx={{ marginTop: 2, pb: 2 }}>
         <Box
           sx={{
             width: '100%',
@@ -57,7 +59,7 @@ export default function InquiriesPage() {
         >
           <Typography>Insert Mockup Data here</Typography>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 }

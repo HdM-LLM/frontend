@@ -10,11 +10,10 @@ import {
   DialogContent,
   IconButton,
   Grid,
+  InputAdornment,
 } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { GridColDef, GridCellParams } from '@mui/x-data-grid';
 import CategorySelector from './VacancyCategorySelection';
 import ColoredChip from './CategoryChip';
 import { Category } from '../types/category';
@@ -26,25 +25,13 @@ type VacancyCategoriesProps = {
   categories: Category[]; // Add categories prop
 };
 
-const columns: GridColDef[] = [
-  {
-    field: 'chip',
-    headerName: 'Chip',
-    width: 80,
-    renderCell: (params: GridCellParams) => <ColoredChip label={params.value as string} />,
-  },
-  { field: 'name', headerName: 'Name', flex: 1 },
-];
-
 const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
   onNext,
   onSelectedCategoriesChange,
   categories: parentCategories, // Use categories prop from parent
 }) => {
   const [categories, setCategories] = useState<Category[]>(parentCategories);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const [selectedCategoriesForRemoval, setSelectedCategoriesForRemoval] = useState<string[]>([]);
 
   useEffect(() => {
     setCategories(parentCategories);
@@ -176,7 +163,6 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
               disableElevation
               onClick={handleOpenDialog}
               size="small"
-              sx={{ textTransform: 'none' }}
             >
               Select Category
             </Button>
@@ -243,14 +229,19 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
           ))}
           <Box display="flex" alignItems="center">
             <Typography variant="h6" sx={{ fontSize: 18, marginRight: 2 }}>
-              {categories.length === 0 ? 'Please select some categories.' : categories.length}{' '}
-              Category Total Weight:{' '}
-              {categories.reduce((total, category) => total + (category.weight || 0), 0).toFixed(0)}
-              %
+              {categories.length === 0
+                ? 'No categories selected.'
+                : 'Total Weight: ' +
+                  categories
+                    .reduce((total, category) => total + (category.weight || 0), 0)
+                    .toFixed(0) +
+                  '%'}
             </Typography>
-            <Button variant="outlined" color="primary" onClick={handleAutoWeight} size="small">
-              Auto Weight
-            </Button>
+            {categories.length === 0 ? null : (
+              <Button variant="outlined" color="primary" onClick={handleAutoWeight} size="small">
+                Auto Weight
+              </Button>
+            )}
           </Box>
         </Box>
         <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="md">

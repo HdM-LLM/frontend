@@ -11,7 +11,6 @@ import {
   DialogContent,
   DialogActions,
   Typography,
-  IconButton,
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -35,8 +34,8 @@ const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', flex: 1 },
   {
     field: 'chip',
-    headerName: 'Chip',
-    width: 180,
+    headerName: 'Tag',
+    width: 300,
     renderCell: (params: GridCellParams) => <ColoredChip label={(params.value as string) || ''} />,
   },
 ];
@@ -193,14 +192,6 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
         />
-        <Button
-          variant="text"
-          color="primary"
-          onClick={handleCreateNewCategoryClick}
-          startIcon={<AddCircleIcon />}
-        >
-          New Category
-        </Button>
       </Box>
       <div style={{ flex: 1, marginBottom: '8px' }}>
         <DataGrid
@@ -221,11 +212,22 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
         />
       </div>
       <Box display="flex" justifyContent="space-between">
-        <Button variant="outlined" color="secondary" onClick={handleCreateNewCategoryClick}>
-          Create a new category
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleCreateNewCategoryClick}
+          disableElevation
+          startIcon={<AddCircleIcon />}
+        >
+          New Category
         </Button>
 
-        <Button variant="contained" color="secondary" onClick={handleDoneButtonClick}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleDoneButtonClick}
+          disableElevation
+        >
           Done
         </Button>
       </Box>
