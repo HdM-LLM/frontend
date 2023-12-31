@@ -70,6 +70,21 @@ export default function ApplicantDetailsPage() {
     setMeanApplicantRating(meanRating);
   }, [applicantRatings]);
 
+  // Function to get pdf from backend
+  const getCvAsPdf = () => {
+    const api = API.getAPI();
+    if (!applicant_id) {
+      console.error('Error fetching CV: No applicant ID provided');
+      return '';
+    }
+    if (!vacancy_id) {
+      console.error('Error fetching CV: No vacancy ID provided');
+      return '';
+    }
+
+    return api.fetchCvURL(applicant_id, vacancy_id);
+  };
+
   const linearProgressValue = (meanApplicantRating / maxProgressBarValue) * 100;
 
   return (
@@ -96,6 +111,7 @@ export default function ApplicantDetailsPage() {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          maxWidth: '100%',
         }}
       >
         <Avatar
@@ -108,14 +124,15 @@ export default function ApplicantDetailsPage() {
             color: '#4d4d4d',
             marginLeft: '1vw',
             fontWeight: 'bold',
-            minWidth: '8vw',
+            width: '12vw',
+            paddingRight: '1vw',
           }}
         >
           {applicant && applicant.firstName + ' ' + applicant.lastName}
         </Typography>
         <Box
           sx={{
-            width: '100%',
+            width: '83%',
             flexDirection: 'row',
           }}
         >
@@ -132,7 +149,7 @@ export default function ApplicantDetailsPage() {
               sx={{
                 height: 10,
                 borderRadius: 5,
-                minWidth: '80%',
+                minWidth: '85%',
                 alignSelf: 'center',
               }}
             />
@@ -145,36 +162,62 @@ export default function ApplicantDetailsPage() {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ marginRight: '4vw' }}>
-          <Typography variant="h6" sx={{ marginLeft: 1 }}>
-            Attached Documents
-          </Typography>
-          {/** TODO: Add functionality to view pdf in browser */}
-          <Button
-            variant="contained"
-            startIcon={<AttachFileIcon />}
-            color="secondary"
-            disableElevation
-            sx={{ margin: 1 }}
-          >
-            CV
-          </Button>
+        <Box sx={{ maxWidth: '25%', width: '17%', marginRight: 3 }}>
+          <Stack direction="column" spacing={2}>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#cc7a7a',
+                '&:hover': {
+                  backgroundColor: '#966b6b',
+                },
+              }}
+              disableElevation
+            >
+              Reject
+            </Button>
+            <Button variant="contained" color="secondary" disableElevation>
+              Accept & Invite
+            </Button>
+          </Stack>
         </Box>
       </Box>
       {/** TODO: add receiving date */}
-      <Typography sx={{ color: 'grey', marginLeft: 3, marginBottom: '3vh' }}>
+      <Typography
+        variant="h6"
+        sx={{ marginBottom: '2vh', color: '#4d4d4d', marginLeft: 3, marginTop: '2vh' }}
+      >
         Application received: TODO
       </Typography>
       <Box
         sx={{
           marginLeft: 3,
           marginRight: 3,
-          display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
+          width: '80%',
         }}
       >
-        <Box>
+        <Box
+          sx={{
+            flexDirection: 'row',
+            width: '100%',
+          }}
+        >
           <ApplicantDetailsTable applicantRatings={applicantRatings} />
+        </Box>
+        <Box>
+          <Typography variant="h6">Attached Documents</Typography>
+          {/** TODO: Add functionality to view pdf in browser */}
+          <Button
+            variant="contained"
+            startIcon={<AttachFileIcon />}
+            color="secondary"
+            disableElevation
+            href={getCvAsPdf()}
+            target="_blank"
+          >
+            CV
+          </Button>
         </Box>
       </Box>
     </Box>
