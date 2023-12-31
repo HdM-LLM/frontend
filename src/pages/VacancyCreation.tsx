@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import { Typography, Button, Stack } from '@mui/material';
-import Alert from '@mui/material/Alert';
-import Container from '@mui/material/Container';
+import { Typography, Button, Stack, Box, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import VacancyJobInformations, {
-  VacancyJobInformationsProps,
+import VacancyJobInformation, {
+  VacancyJobInformationProps,
 } from '../components/VacancyJobInformation';
-import VacancyCategorySelectionPage from '../components/VacancyCategorys';
+import VacancyCategorySelectionPage from '../components/VacancyCategories';
 import { Category } from '../types/category';
 import VacancyGeneration from '../components/VacancyGeneration';
 import API from '../api/api';
+import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 
 export default function VacancyCreationPage() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [formData, setFormData] = useState<VacancyJobInformationsProps['formData']>({
+  const [formData, setFormData] = useState<VacancyJobInformationProps['formData']>({
     jobName: '',
     department: '',
     tasksAndResponsibilities: '',
@@ -85,16 +86,14 @@ export default function VacancyCreationPage() {
       const isBasicInfoComplete = basicInfoFields.every((field) => Boolean(formData[field]));
 
       if (!isBasicInfoComplete) {
-        console.log('Please fill out all required fields in Basic Information.');
-        setAlertMessage('Please fill out all required fields in Basic Information');
+        setAlertMessage('Please fill out all required fields to continue');
         return;
       }
 
       setBasicInfoCompleted(true);
     }
+    // User is on last page and clicks next
     if (page === 3) {
-      // Handle the case when the user is on the last page
-      // You can put the logic for saving the vacancy here
       handleSaveVacancy();
       return;
     }
@@ -115,13 +114,21 @@ export default function VacancyCreationPage() {
     <Box sx={{}}>
       <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2 }}>
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          Vacancy creation
+          New Vacancy
+        </Typography>
+        <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+          Step {page}/3:{' '}
+          {page === 1
+            ? 'Basic Information'
+            : page === 2
+            ? 'Category Selection'
+            : 'Vacancy Generation'}
         </Typography>
       </Box>
 
-      <Container maxWidth="xl" sx={{ mt: 1 }}>
+      <Box maxWidth="xl" sx={{ marginTop: '1vh', marginLeft: 3 }}>
         {page === 1 && (
-          <VacancyJobInformations
+          <VacancyJobInformation
             onNext={handleNext}
             formData={formData}
             setFormData={setFormData}
@@ -144,21 +151,29 @@ export default function VacancyCreationPage() {
             setGeneratedVacancy={setGeneratedVacancy}
             setAdjustPromptPart2={setAdjustPromptPart2}
             setOutput={setOutput}
-            onSaveVacancy={handleSaveVacancy} // Pass the function as a prop
+            onSaveVacancy={handleSaveVacancy}
           />
         )}
 
         {alertMessage && <Alert severity="error">{alertMessage}</Alert>}
 
         <Stack direction="row" justifyContent="space-between" mt={4}>
-          <Button variant="contained" onClick={handleBack}>
+          <Button
+            variant="contained"
+            onClick={handleBack}
+            sx={{ backgroundColor: '#cc7a7a' }}
+            disableElevation
+          >
+            {page === 1 ? <ClearRoundedIcon /> : <NavigateBeforeRoundedIcon />}
             {page > 1 ? 'Back' : 'Cancel'}
           </Button>
-          <Button variant="contained" color="secondary" onClick={handleNext}>
+          {/* TODO: Next button should be disabled when no category is selected in step 2 */}
+          <Button variant="contained" color="secondary" onClick={handleNext} disableElevation>
+            {page < 3 ? <NavigateNextRoundedIcon /> : <SaveRoundedIcon />}
             {page < 3 ? 'Next' : 'Save new vacancy'}
           </Button>
         </Stack>
-      </Container>
+      </Box>
     </Box>
   );
 }

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import { Category } from '../types/category';
-import { VacancyJobInformationsProps } from './VacancyJobInformation';
+import { VacancyJobInformationProps } from './VacancyJobInformation';
 import API from '../api/api';
 
 interface VacancyGenerationProps {
   selectedCategories: Category[];
-  basicInformation: VacancyJobInformationsProps['formData'];
+  basicInformation: VacancyJobInformationProps['formData'];
   generatedVacancy: string;
   adjustPromptPart2: string;
   output: string;
@@ -61,7 +61,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
   return (
     <Box>
       <TextField
-        label="Basic Prompt Informations (Locked)"
+        label="Basic Prompt Information (Locked)"
         variant="outlined"
         fullWidth
         multiline

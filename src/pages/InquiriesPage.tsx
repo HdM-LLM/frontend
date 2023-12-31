@@ -26,16 +26,17 @@ export default function InquiriesPage() {
           sx={{
             width: '100%',
             borderRadius: '10px',
-            bgcolor: '#f0f0f0',
+            bgcolor: '#f5f5f5',
             p: 2,
             mb: 2,
           }}
         >
           <Typography variant="h5">Create a new vacancy</Typography>
-          <Typography>Create manually a new vacancy</Typography>
+          <Typography>Create a new vacancy from scratch</Typography>
           <NavLink to="/vacancy/creation" style={{ textDecoration: 'none' }}>
             <Button
               variant="contained"
+              disableElevation
               color="secondary"
               sx={{ float: 'right', top: '-45px', width: '130px' }}
             >
@@ -49,12 +50,12 @@ export default function InquiriesPage() {
             width: '100%',
             height: '200px',
             borderRadius: '10px',
-            bgcolor: '#f0f0f0',
+            bgcolor: '#f5f5f5',
             p: 2,
             textAlign: 'center',
           }}
         >
-          <Typography>Inser Mockup Data here</Typography>
+          <Typography>Insert Mockup Data here</Typography>
         </Box>
       </Container>
     </Box>

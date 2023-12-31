@@ -167,16 +167,27 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
   return (
     <Box>
       <Stack spacing={2}>
-        <Typography sx={{ color: '#B3B3B3', fontSize: '0.8rem' }}>Category Selection</Typography>
-
         <Grid container spacing={0} alignItems="center">
           <Grid item>
-            <Button variant="contained" color="secondary" onClick={handleOpenDialog} size="small">
+            <Button
+              variant="contained"
+              color="secondary"
+              disableElevation
+              onClick={handleOpenDialog}
+              size="small"
+              sx={{ textTransform: 'none' }}
+            >
               Select Category
             </Button>
           </Grid>
         </Grid>
-        <Box border={1} borderRadius={4} padding={2}>
+        <Box
+          border={1}
+          borderRadius={4}
+          borderColor={'#f5f5f5'}
+          sx={{ backgroundColor: '#f5f5f5' }}
+          padding={2}
+        >
           {categories.map((category) => (
             <Box
               key={category.id}

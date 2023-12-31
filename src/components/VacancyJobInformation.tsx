@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography, TextField } from '@mui/material';
 
-export type VacancyJobInformationsProps = {
+export type VacancyJobInformationProps = {
   onNext: () => void;
   formData: {
     jobName: string;
@@ -26,11 +26,7 @@ export type VacancyJobInformationsProps = {
   >;
 };
 
-const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
-  onNext,
-  formData,
-  setFormData,
-}) => {
+const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData, setFormData }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -43,9 +39,6 @@ const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
     <Box>
       {/* Basic information form */}
       <Stack spacing={2}>
-        <Typography sx={{ color: '#B3B3B3' }}>
-          All fields marked with an asterisk (*) must be filled out
-        </Typography>
         <TextField
           label="Job Name"
           name="jobName"
@@ -54,6 +47,7 @@ const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
           fullWidth
           required
         />
+        {/* TODO: This should be a dropdown and the available departments should be fetched from backend */}
         <TextField
           label="Department/Responsibility Area"
           name="department"
@@ -79,6 +73,7 @@ const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
           fullWidth
           required
         />
+        {/* TODO: This should use radio buttons to make a selection */}
         <TextField
           label="Workplace and Working Hours"
           name="workplaceAndWorkingHours"
@@ -87,6 +82,7 @@ const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
           fullWidth
           required
         />
+        {/* TODO: Would it be possible to add a skill level selection after entering a language? */}
         <TextField
           label="Language Requirements"
           name="languageRequirements"
@@ -101,9 +97,12 @@ const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
           onChange={handleChange}
           fullWidth
         />
+        <Typography sx={{ color: '#B3B3B3' }}>
+          All fields marked with an asterisk (*) are required fields
+        </Typography>
       </Stack>
     </Box>
   );
 };
 
-export default VacancyJobInformations;
+export default VacancyJobInformation;
