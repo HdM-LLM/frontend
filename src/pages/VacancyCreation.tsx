@@ -158,20 +158,69 @@ export default function VacancyCreationPage() {
         {alertMessage && <Alert severity="error">{alertMessage}</Alert>}
 
         <Stack direction="row" justifyContent="space-between" mt={4}>
-          <Button
-            variant="contained"
-            onClick={handleBack}
-            sx={{ backgroundColor: '#cc7a7a' }}
-            disableElevation
-          >
-            {page === 1 ? <ClearRoundedIcon /> : <NavigateBeforeRoundedIcon />}
-            {page > 1 ? 'Back' : 'Cancel'}
-          </Button>
-          {/* TODO: Next button should be disabled when no category is selected in step 2 */}
-          <Button variant="contained" color="secondary" onClick={handleNext} disableElevation>
-            {page < 3 ? <NavigateNextRoundedIcon /> : <SaveRoundedIcon />}
-            {page < 3 ? 'Next' : 'Save new vacancy'}
-          </Button>
+          {page === 1 && (
+            <Button
+              variant="contained"
+              disableElevation
+              onClick={handleBack}
+              startIcon={<ClearRoundedIcon />}
+              sx={{ textTransform: 'none', backgroundColor: '#cc7a7a' }}
+            >
+              Cancel
+            </Button>
+          )}
+          {page > 1 && (
+            <Button
+              variant="contained"
+              color="secondary"
+              disableElevation
+              onClick={handleBack}
+              startIcon={<NavigateBeforeRoundedIcon />}
+              sx={{ textTransform: 'none' }}
+            >
+              Back
+            </Button>
+          )}
+          {page < 3 && (
+            <Button
+              variant="contained"
+              color="secondary"
+              disableElevation
+              onClick={handleNext}
+              endIcon={<NavigateNextRoundedIcon />}
+              sx={{ textTransform: 'none' }}
+            >
+              Next
+            </Button>
+          )}
+          {page === 3 && (
+            <>
+              <Button
+                variant="contained"
+                color="secondary"
+                disableElevation
+                onClick={() => {
+                  setGeneratedVacancy('');
+                  setAdjustPromptPart2('');
+                  setOutput('');
+                }}
+                startIcon={<ClearRoundedIcon />}
+                sx={{ textTransform: 'none' }}
+              >
+                Clear
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                disableElevation
+                onClick={handleSaveVacancy}
+                endIcon={<SaveRoundedIcon />}
+                sx={{ textTransform: 'none' }}
+              >
+                Save
+              </Button>
+            </>
+          )}
         </Stack>
       </Box>
     </Box>

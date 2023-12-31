@@ -18,8 +18,9 @@ import { GridColDef, GridCellParams } from '@mui/x-data-grid';
 import CategorySelector from './VacancyCategorySelection';
 import ColoredChip from './CategoryChip';
 import { Category } from '../types/category';
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 
-type VacancyCategorysProps = {
+type VacancyCategoriesProps = {
   onNext: (selectedCategories: Category[]) => void;
   onSelectedCategoriesChange: (categories: Category[]) => void;
   categories: Category[]; // Add categories prop
@@ -35,7 +36,7 @@ const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', flex: 1 },
 ];
 
-const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
+const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
   onNext,
   onSelectedCategoriesChange,
   categories: parentCategories, // Use categories prop from parent
@@ -201,14 +202,14 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
               justifyContent="space-between"
               fontSize="0.8rem"
             >
-              <Grid container key={category.id} alignItems="center" spacing={1}>
+              <Grid container key={category.id} alignItems="center" spacing={3}>
                 <Grid item>
                   <IconButton
                     onClick={() => handleDeleteCategory(category.id)}
                     color="primary"
                     size="small"
                   >
-                    X
+                    <HighlightOffRoundedIcon />
                   </IconButton>
                 </Grid>
                 <Grid item>
@@ -216,7 +217,9 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
                     type="number"
                     label="Weight"
                     value={category.weight || ''}
-                    onChange={(e) => handleWeightChange(category.id, +e.target.value)}
+                    onChange={(weightValue) =>
+                      handleWeightChange(category.id, +weightValue.target.value)
+                    }
                     style={{ width: '105px' }}
                     InputProps={{
                       endAdornment: <InputAdornment position="end">%</InputAdornment>,
@@ -239,9 +242,11 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
             </Box>
           ))}
           <Box display="flex" alignItems="center">
-            <Typography variant="h6" fontSize="0.9rem" marginRight={2}>
-              Total Weight:{' '}
-              {categories.reduce((total, cat) => total + (cat.weight || 0), 0).toFixed(2)}%
+            <Typography variant="h6" sx={{ fontSize: 18, marginRight: 2 }}>
+              {categories.length === 0 ? 'Please select some categories.' : categories.length}{' '}
+              Category Total Weight:{' '}
+              {categories.reduce((total, category) => total + (category.weight || 0), 0).toFixed(0)}
+              %
             </Typography>
             <Button variant="outlined" color="primary" onClick={handleAutoWeight} size="small">
               Auto Weight
@@ -263,4 +268,4 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
   );
 };
 
-export default VacancyCategorys;
+export default VacancyCategories;
