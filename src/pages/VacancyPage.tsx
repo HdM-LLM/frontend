@@ -84,7 +84,7 @@ export default function VacancyPage() {
           }}
         >
           {currentVacancies.map((vacancy) => (
-            <NavLink to={`/vacancy/${vacancy.id}`} style={linkStyle} key={vacancy.id}>
+            <NavLink to={`/vacancies/${vacancy.id}`} style={linkStyle} key={vacancy.id}>
               <Grid item>
                 <VacancyCard
                   vacancy={vacancy}

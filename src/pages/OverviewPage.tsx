@@ -1,14 +1,11 @@
-
-import Container from "@mui/material/Container";
-import { Box, Typography, Stack } from "@mui/material";
-import CustomizedVacancyTables from "../components/CustomizedVacancyTable";
-import { APP_BAR_HEIGHT } from "../constants";
-import API from "../api/api";
-import React, { useEffect, useState } from 'react';
-
+import { Box, Typography, Stack } from '@mui/material';
+import VacancyTable from '../components/VacancyTable';
+import { APP_BAR_HEIGHT } from '../constants';
+import API from '../api/api';
+import React, { useState } from 'react';
 
 export default function OverviewPage() {
-  const [applicants, setApplicants] = useState<any[]>([]); 
+  const [applicants, setApplicants] = useState<any[]>([]);
   const receivingDate = '1st December 2023'; // Define receivingDate
 
   React.useEffect(() => {
@@ -18,7 +15,7 @@ export default function OverviewPage() {
         const allApplicantsData = await api.fetchApplicants();
         setApplicants(allApplicantsData);
       } catch (error) {
-        console.error("Error fetching all applicants:", error);
+        console.error('Error fetching all applicants:', error);
       }
     };
 
@@ -35,7 +32,7 @@ export default function OverviewPage() {
     >
       <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-         Applicants overview
+          Applicants overview
         </Typography>
       </Stack>
       <Box
@@ -47,10 +44,7 @@ export default function OverviewPage() {
         }}
       >
         <Box>
-          <CustomizedVacancyTables
-            applicants={applicants}
-            receivingDate={receivingDate}
-          />
+          <VacancyTable applicants={applicants} receivingDate={receivingDate} />
         </Box>
       </Box>
     </Box>

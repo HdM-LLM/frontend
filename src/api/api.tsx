@@ -6,6 +6,28 @@ export default class API {
   // Local Python backend
   URL = 'http://127.0.0.1:5000/';
 
+  //URLs
+  addPdfURL = () => `${this.URL}/upload`;
+  getApplicantsURL = () => `${this.URL}/applicants`;
+  getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
+
+  // Get applicants by vacancy ID or all applicants
+  fetchApplicantsURL = () => `${this.URL}/applicants/`;
+
+  // Get applicants by vacancy ID or all applicants
+  fetchApplicantURL = (applicantId: string) => `${this.URL}/applicants${`/${applicantId}`}`;
+
+  // Get all applicants by vacancy ID
+  fetchApplicantsByVacancyURL = (vacancyId: string) =>
+    `${this.URL}/applicantsVacancy${`/${vacancyId}`}`;
+
+  // Get applicant rating by applicant ID and vacancy ID
+  fetchApplicantRatingURL = (vacancyId: string, applicantId: string) =>
+    `${this.URL}/applicantsRating${`/${vacancyId}/${applicantId}`}`;
+
+  // Get category data by category ID
+  fetchCategoryDataURL = (categoryId: string) => `${this.URL}/category${`/${categoryId}`}`;
+
   static getAPI() {
     if (this.api == null) {
       this.api = new API();
@@ -16,25 +38,20 @@ export default class API {
   //Resume
   addPdfsURL = () => `${this.URL}/upload`;
 
-// Vacancy URLs
+  // Vacancy URLs
   vacanciesURL = () => `${this.URL}/vacancies`;
   generateVacancyURL = () => `${this.vacanciesURL()}/generateVacancy`;
   addVacancyURL = () => `${this.vacanciesURL()}/addVacancy`;
   getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
 
-  // Applicants URLs
-  fetchApplicantsURL = (vacancyId?: string) =>
-    `${this.URL}/applicants${vacancyId ? `/${vacancyId}` : ''}`;
-
   // Category URLs
   getCategoryGuidelinesURL = (categoryName: string) =>
-  `${this.URL}/getCategoryGuidelines/${categoryName}`;
+    `${this.URL}/getCategoryGuidelines/${categoryName}`;
   getChipForCategoryURL = (categoryName: string) =>
-  `${this.URL}/getChipForCategory/${categoryName}`;
+    `${this.URL}/getChipForCategory/${categoryName}`;
   addCategoryURL = () => `${this.URL}/addCategory`;
   allCategoriesURL = () => `${this.URL}/allCategories`;
 
-  
   // Common fetch method for handling advanced requests
   fetchAdvanced(url: string, init: RequestInit) {
     // If no init parameter is used, create empty init
@@ -55,17 +72,12 @@ export default class API {
     });
   }
 
-  
-  // Resume-related methods
+  // Cv-related methods
   addPdfs(pdf: File, vacancy: string) {
     const pdfs = new FormData();
     pdfs.append('cv', pdf);
     pdfs.append('vacancy', vacancy);
-
-    return this.fetchAdvanced(this.addPdfsURL(), {
-      method: 'POST',
-      body: pdfs,
-    });
+    return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
 
   // Vacancy-related methods
@@ -81,10 +93,14 @@ export default class API {
     return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
   }
 
-  generateVacancy(basicInformation: Record<string, any>, selectedCategories: any[], adjustPrompt: string) {
+  generateVacancy(
+    basicInformation: Record<string, any>,
+    selectedCategories: any[],
+    adjustPrompt: string
+  ) {
     const url = `${this.vacanciesURL()}/generateVacancy`;
     const body = JSON.stringify({ basicInformation, selectedCategories, adjustPrompt });
-  
+
     return this.fetchAdvanced(url, {
       method: 'POST',
       headers: {
@@ -111,7 +127,6 @@ export default class API {
     });
   }
 
-
   // Category-related methods
   getCategoryGuidelines(categoryName: string) {
     return this.fetchAdvanced(this.getCategoryGuidelinesURL(categoryName), {
@@ -124,19 +139,14 @@ export default class API {
       method: 'GET',
     });
   }
-  
+
   getAllCategories() {
     return this.fetchAdvanced(this.allCategoriesURL(), {
       method: 'GET',
     });
   }
-  
-  addCategory(category: {
-    Name: string;
-    Chip: string;
-    Guideline_0: string;
-    Guideline_1: string;
-  }) {
+
+  addCategory(category: { Name: string; Chip: string; Guideline_0: string; Guideline_1: string }) {
     return this.fetchAdvanced(this.addCategoryURL(), {
       method: 'POST',
       headers: {
@@ -146,5 +156,3 @@ export default class API {
     });
   }
 }
-
-

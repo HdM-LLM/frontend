@@ -1,14 +1,11 @@
-import { UUID } from 'crypto';
-
+import { BusinessObject } from './businessObject';
 // TODO: Change the type of the createdAt and updatedAt fields to Date once the database is set up
-export type Vacancy = {
-  id: UUID;
-  vacancyTitle: string;
+export type Vacancy = BusinessObject & {
+  title: string;
   department: string;
   fullTime: boolean;
   description: string;
   salary: number;
   company: string;
-  createdAt: string;
   updatedAt: string;
 };

@@ -50,7 +50,7 @@ export default function VacancyCard(props: VacancyCardProps) {
               component="div"
               sx={{ color: '#4d4d4d', fontWeight: 'bold', fontFamily: FONT_FAMILY }}
             >
-              {props.vacancy.vacancyTitle}
+              {props.vacancy.title}
             </Typography>
           </Grid>
           <Grid item>
@@ -68,7 +68,7 @@ export default function VacancyCard(props: VacancyCardProps) {
             : props.vacancy.description}
         </Typography>
         <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-          ${props.vacancy.salary}/year
+          Last updated: {props.vacancy.updatedAt}
         </Typography>
       </Card>
     </Box>

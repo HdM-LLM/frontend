@@ -8,9 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, LinearProgress, Button, Avatar } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { Applicant } from '../types/applicant';
-import { Skill } from '../types/skill';
+import { useEffect, useState } from 'react';
+import API from '../api/api';
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -44,15 +45,51 @@ export interface VacancyTableProps {
   receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
 }
 
-export default function CustomizedTables(props: VacancyTableProps) {
-  const maxProgressBarValue = 10;
-  const applicants = props.applicants;
-  const receivingDate = props.receivingDate;
+type ExtApplicant = Applicant & {
+  ratingScore: number;
+};
 
-  
+export default function VacancyTable(props: VacancyTableProps) {
+  const maxProgressBarValue = 10;
+  const { vacancy_id } = useParams();
+  const [applicants, setApplicants] = useState<ExtApplicant[]>([]);
+
   const linkStyle = {
     textDecoration: 'none',
   };
+
+  useEffect(() => {
+    const fetchRating = async () => {
+      try {
+        if (!props.applicants) {
+          console.error('Error fetching rating: No Applicants provided');
+          return;
+        }
+        if (!vacancy_id) {
+          console.error('Error fetching rating: No Vacancy ID provided');
+          return;
+        }
+
+        const api = API.getAPI();
+        let applicantList: ExtApplicant[] = [];
+        for (const applicant of props.applicants) {
+          const ratings = await api.fetchApplicantRatings(vacancy_id, applicant.id);
+          let extApplicant = applicant as ExtApplicant;
+          extApplicant.ratingScore = 0;
+          for (const rating of ratings) {
+            extApplicant.ratingScore += rating.score;
+          }
+          extApplicant.ratingScore = extApplicant.ratingScore / ratings.length;
+          applicantList.push(extApplicant);
+        }
+        setApplicants(applicantList);
+      } catch (error) {
+        console.error('Error fetching rating:', error);
+      }
+    };
+
+    fetchRating();
+  }, [props.applicants, vacancy_id]);
 
   return (
     <TableContainer component={Paper}>
@@ -63,9 +100,8 @@ export default function CustomizedTables(props: VacancyTableProps) {
       >
         <TableHead>
           <TableRow>
-            <StyledTableCell sx={{ paddingRight: 15 }}>Applicant</StyledTableCell>
+            <StyledTableCell sx={{ paddingRight: 10 }}>Applicant</StyledTableCell>
             <StyledTableCell sx={{ paddingRight: 15 }}>Rating</StyledTableCell>
-            <StyledTableCell>Skills</StyledTableCell>
             <StyledTableCell>Application received</StyledTableCell>
             <StyledTableCell></StyledTableCell>
           </TableRow>
@@ -105,7 +141,7 @@ export default function CustomizedTables(props: VacancyTableProps) {
                 >
                   <LinearProgress
                     variant="determinate"
-                    value={(applicant.rating / maxProgressBarValue) * 100}
+                    value={(applicant.ratingScore / maxProgressBarValue) * 100}
                     color="secondary"
                     sx={{
                       height: 5,
@@ -114,14 +150,14 @@ export default function CustomizedTables(props: VacancyTableProps) {
                       marginRight: 2,
                     }}
                   ></LinearProgress>
-                  {applicant.rating}
+                  {applicant.ratingScore}/10
                 </Box>
               </StyledTableCell>
-              <StyledTableCell>{applicant.skills.map((skill) => skill.category)}</StyledTableCell>
-              <StyledTableCell>{receivingDate}</StyledTableCell>
+              {/** TODO: backend currently does not serve this information */}
+              <StyledTableCell>TODO</StyledTableCell>
               <StyledTableCell align="center">
                 <NavLink
-                  to={'/applicantDetails/' + applicant.id}
+                  to={'/vacancies/' + vacancy_id + '/applicant/' + applicant.id}
                   style={linkStyle}
                   key={applicant.id}
                 >

@@ -1,8 +1,7 @@
-import { UUID } from 'crypto';
+import { BusinessObject } from './businessObject';
 import { Skill } from './skill';
 
-export type Applicant = {
-  id: UUID;
+export type Applicant = BusinessObject & {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -12,6 +11,5 @@ export type Applicant = {
   email: string;
   phoneNumber: string;
   skills: Skill[];
-  rating: number;
   img: string;
 };

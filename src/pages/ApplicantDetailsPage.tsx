@@ -3,24 +3,74 @@ import { Avatar, Box, Button, LinearProgress, Stack, Typography } from '@mui/mat
 import { APP_BAR_HEIGHT } from '../constants';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { Applicant } from '../types/applicant';
-import CustomizedTables from '../components/CustomizedTable';
-import { BACKEND_URL } from '../constants';
+import ApplicantDetailsTable from '../components/ApplicantDetailsTable';
+import API from '../api/api';
+import { useParams } from 'react-router-dom';
+import { Rating } from '../types/rating';
 
-export interface ApplicantDetailsPageProps {
-  receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
-  applicant: Applicant;
-}
-
-export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
-  const [applicantRating, setApplicantRating] = useState(2);
-
+export default function ApplicantDetailsPage() {
+  const [applicantRatings, setApplicantRatings] = useState<Rating[]>([]);
+  const [applicant, setApplicant] = useState<Applicant | null>(null);
+  const [meanApplicantRating, setMeanApplicantRating] = useState<number>(0);
   const maxProgressBarValue = 10;
-
-  const linearProgressValue = (props.applicant.rating / maxProgressBarValue) * 100;
+  const { vacancy_id, applicant_id } = useParams();
 
   useEffect(() => {
-    setApplicantRating(props.applicant.rating);
-  }, [props.applicant.rating]);
+    const fetchApplicant = async () => {
+      try {
+        const api = API.getAPI();
+        // if ID is provided, fetch applicant by ID
+        if (applicant_id) {
+          const applicantObject = await api.fetchApplicant(applicant_id);
+          // null check to prevent errors during rendering
+          if (!applicantObject) {
+            console.error('Error fetching applicant: No applicant found');
+            setApplicant(null);
+          }
+          setApplicant(applicantObject);
+          return;
+        }
+        // else show error
+        // TODO: Show error message in UI; create error message component
+        console.error('Error fetching applicant: No ID provided');
+      } catch (error) {
+        console.error('Error fetching applicant:', error);
+      }
+    };
+
+    fetchApplicant();
+  }, [applicant_id]);
+
+  useEffect(() => {
+    const fetchRating = async () => {
+      try {
+        if (!applicant_id) {
+          console.error('Error fetching rating: No Applicant ID provided');
+          return;
+        }
+        if (!vacancy_id) {
+          console.error('Error fetching rating: No Vacancy ID provided');
+          return;
+        }
+
+        const api = API.getAPI();
+        const rating = await api.fetchApplicantRatings(vacancy_id, applicant_id);
+        setApplicantRatings(rating);
+      } catch (error) {
+        console.error('Error fetching rating:', error);
+      }
+    };
+
+    fetchRating();
+  }, [applicant_id, vacancy_id]);
+
+  useEffect(() => {
+    // Set mean rating
+    const meanRating = applicantRatings.reduce((a, b) => a + b.score, 0) / applicantRatings.length;
+    setMeanApplicantRating(meanRating);
+  }, [applicantRatings]);
+
+  const linearProgressValue = (meanApplicantRating / maxProgressBarValue) * 100;
 
   return (
     <Box
@@ -48,9 +98,8 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
           alignItems: 'center',
         }}
       >
-        {/** TODO: Replace with backend url that serves the profile picture */}
         <Avatar
-          src={'https://thispersondoesnotexist.com/'}
+          src={`data:image/png;base64,${applicant && applicant.img}`}
           sx={{ width: 100, height: 100, border: 5, borderColor: '#B4CD93' }}
         ></Avatar>
         <Typography
@@ -62,7 +111,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
             minWidth: '8vw',
           }}
         >
-          {props.applicant.firstName + ' ' + props.applicant.lastName}
+          {applicant && applicant.firstName + ' ' + applicant.lastName}
         </Typography>
         <Box
           sx={{
@@ -92,7 +141,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
               color="text.secondary"
               sx={{ paddingLeft: '1vw', fontSize: 30 }}
             >
-              {applicantRating + '/10'}
+              {meanApplicantRating + '/10'}
             </Typography>
           </Box>
         </Box>
@@ -112,8 +161,9 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
           </Button>
         </Box>
       </Box>
+      {/** TODO: add receiving date */}
       <Typography sx={{ color: 'grey', marginLeft: 3, marginBottom: '3vh' }}>
-        Application received: {props.receivingDate}
+        Application received: TODO
       </Typography>
       <Box
         sx={{
@@ -124,7 +174,7 @@ export default function ApplicantDetailsPage(props: ApplicantDetailsPageProps) {
         }}
       >
         <Box>
-          <CustomizedTables />
+          <ApplicantDetailsTable applicantRatings={applicantRatings} />
         </Box>
       </Box>
     </Box>
@@ -142,8 +192,8 @@ const defaultApplicant: Applicant = {
   email: 'john.doe@example.com',
   phoneNumber: '1234 567890',
   skills: [],
-  rating: 5.5,
-  img: "",
+  img: '',
+  dateCreated: '20.08.2023',
 };
 
 ApplicantDetailsPage.defaultProps = {
