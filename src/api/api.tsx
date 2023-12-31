@@ -80,16 +80,29 @@ export default class API {
     return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
 
+  // Applicant-related methods
+  fetchApplicants() {
+    return this.fetchAdvanced(this.fetchApplicantsURL(), {});
+  }
+
+  fetchApplicant(applicantId: string) {
+    return this.fetchAdvanced(this.fetchApplicantURL(applicantId), {});
+  }
+
+  fetchApplicantsByVacancyId(vacancyId: string) {
+    return this.fetchAdvanced(this.fetchApplicantsByVacancyURL(vacancyId), {});
+  }
+
+  fetchApplicantRatings(vacancyId: string, applicantId: string) {
+    return this.fetchAdvanced(this.fetchApplicantRatingURL(vacancyId, applicantId), {});
+  }
+
   // Vacancy-related methods
   fetchVacancies() {
     return this.fetchAdvanced(this.vacanciesURL(), {});
   }
 
-  fetchApplicants(vacancyId?: string) {
-    return this.fetchAdvanced(this.fetchApplicantsURL(vacancyId), {});
-  }
-
-  getVacancy(vacancyId: string) {
+  fetchVacancy(vacancyId: string) {
     return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
   }
 
@@ -154,5 +167,10 @@ export default class API {
       },
       body: JSON.stringify(category),
     });
+  }
+
+  // Fetch category data by category ID
+  fetchCategoryData(categoryId: string) {
+    return this.fetchAdvanced(this.fetchCategoryDataURL(categoryId), {});
   }
 }

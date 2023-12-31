@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Stack, Typography, TextField, Button } from '@mui/material';
+import { Box, TextField, Button } from '@mui/material';
 import { Category } from '../types/category';
-import VacancyJobInformations, { VacancyJobInformationsProps } from '../components/VacancyJobInformations';
+import { VacancyJobInformationsProps } from './VacancyJobInformation';
 import API from '../api/api';
 
 interface VacancyGenerationProps {
@@ -51,14 +51,12 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
   };
 
   const [adjustPromptPart1, setAdjustPromptPart1] = useState(
-    `Basic Information: ${Object.values(basicInformation).filter(Boolean).join(', ')} - Selected Categories: ${selectedCategories.map((category) => category.name).join(', ')}`
+    `Basic Information: ${Object.values(basicInformation)
+      .filter(Boolean)
+      .join(', ')} - Selected Categories: ${selectedCategories
+      .map((category) => category.name)
+      .join(', ')}`
   );
-  
-
-
-
-
-
 
   return (
     <Box>
@@ -74,7 +72,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
           readOnly: true,
         }}
       />
-  
+
       <TextField
         label="Adjust Prompt (Editable)"
         variant="outlined"
@@ -85,16 +83,16 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         onChange={(e) => setAdjustPromptPart2(e.target.value)}
         sx={{ mt: 2 }}
       />
-  
+
       <Button variant="contained" color="primary" onClick={handleGenerateVacancy} sx={{ mt: 2 }}>
         Generate Vacancy
       </Button>
-  
+
       <Box sx={{ mt: 2 }}>
         {/* Remove this Typography block */}
         {/* <Typography variant="h4">Generated Vacancy</Typography> */}
         {/* <Typography>{generatedVacancy}</Typography> */}
-  
+
         <TextField
           label="Output"
           variant="outlined"

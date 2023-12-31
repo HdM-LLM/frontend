@@ -4,7 +4,9 @@ import { Typography, Button, Stack } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import VacancyJobInformations, { VacancyJobInformationsProps } from '../components/VacancyJobInformations';
+import VacancyJobInformations, {
+  VacancyJobInformationsProps,
+} from '../components/VacancyJobInformation';
 import VacancyCategorySelectionPage from '../components/VacancyCategorys';
 import { Category } from '../types/category';
 import VacancyGeneration from '../components/VacancyGeneration';
@@ -30,7 +32,7 @@ export default function VacancyCreationPage() {
   const handleCategorySelectionChange = (selectedCategories: Category[]) => {
     setCategories(selectedCategories);
   };
-  
+
   const handleSaveVacancy = () => {
     // Check if there is any content in the output (either generated or custom)
     if (output.trim()) {
@@ -43,11 +45,11 @@ export default function VacancyCreationPage() {
         .then((response) => {
           // Handle the response as needed
           console.log('Vacancy saved successfully:', response);
-  
+
           // You can clear the generatedVacancy and adjustPromptPart2 if needed
           setGeneratedVacancy('');
           setAdjustPromptPart2('');
-  
+
           // Set the output after saving if needed
           setOutput('Vacancy saved successfully');
         })
@@ -61,7 +63,6 @@ export default function VacancyCreationPage() {
       setOutput('No content to save. Enter some text first.');
     }
   };
-
 
   const [basicInfoCompleted, setBasicInfoCompleted] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
@@ -119,27 +120,33 @@ export default function VacancyCreationPage() {
       </Box>
 
       <Container maxWidth="xl" sx={{ mt: 1 }}>
-        {page === 1 && <VacancyJobInformations onNext={handleNext} formData={formData} setFormData={setFormData} />}
+        {page === 1 && (
+          <VacancyJobInformations
+            onNext={handleNext}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        )}
         {page === 2 && (
           <VacancyCategorySelectionPage
-          onNext={handleNext}
-          onSelectedCategoriesChange={(categories) => handleCategorySelectionChange(categories)}
-          categories={categories}
-        />
+            onNext={handleNext}
+            onSelectedCategoriesChange={(categories) => handleCategorySelectionChange(categories)}
+            categories={categories}
+          />
         )}
         {page === 3 && (
-        <VacancyGeneration
-          selectedCategories={categories}
-          basicInformation={formData}
-          generatedVacancy={generatedVacancy}
-          adjustPromptPart2={adjustPromptPart2}
-          output={output}
-          setGeneratedVacancy={setGeneratedVacancy}
-          setAdjustPromptPart2={setAdjustPromptPart2}
-          setOutput={setOutput}
-          onSaveVacancy={handleSaveVacancy} // Pass the function as a prop
-        />
-      )}
+          <VacancyGeneration
+            selectedCategories={categories}
+            basicInformation={formData}
+            generatedVacancy={generatedVacancy}
+            adjustPromptPart2={adjustPromptPart2}
+            output={output}
+            setGeneratedVacancy={setGeneratedVacancy}
+            setAdjustPromptPart2={setAdjustPromptPart2}
+            setOutput={setOutput}
+            onSaveVacancy={handleSaveVacancy} // Pass the function as a prop
+          />
+        )}
 
         {alertMessage && <Alert severity="error">{alertMessage}</Alert>}
 

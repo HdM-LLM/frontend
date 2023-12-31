@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { Grid, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 export default function InquiriesPage() {
@@ -17,7 +17,7 @@ export default function InquiriesPage() {
     >
       <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-         Inquiries
+          Inquiries
         </Typography>
       </Stack>
 
@@ -34,7 +34,11 @@ export default function InquiriesPage() {
           <Typography variant="h5">Create a new vacancy</Typography>
           <Typography>Create manually a new vacancy</Typography>
           <NavLink to="/vacancy/creation" style={{ textDecoration: 'none' }}>
-            <Button variant="contained" color="secondary" sx={{ float: 'right', top: '-45px', width: '130px' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              sx={{ float: 'right', top: '-45px', width: '130px' }}
+            >
               Create
             </Button>
           </NavLink>

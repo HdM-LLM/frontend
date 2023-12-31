@@ -14,16 +14,15 @@ import {
 import InputAdornment from '@mui/material/InputAdornment';
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
+import { GridColDef, GridCellParams } from '@mui/x-data-grid';
 import CategorySelector from './VacancyCategorySelection';
 import ColoredChip from './CategoryChip';
 import { Category } from '../types/category';
 
-
 type VacancyCategorysProps = {
   onNext: (selectedCategories: Category[]) => void;
   onSelectedCategoriesChange: (categories: Category[]) => void;
-  categories: Category[];  // Add categories prop
+  categories: Category[]; // Add categories prop
 };
 
 const columns: GridColDef[] = [
@@ -36,11 +35,10 @@ const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', flex: 1 },
 ];
 
-
 const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
   onNext,
   onSelectedCategoriesChange,
-  categories: parentCategories,  // Use categories prop from parent
+  categories: parentCategories, // Use categories prop from parent
 }) => {
   const [categories, setCategories] = useState<Category[]>(parentCategories);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -51,19 +49,19 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
     setCategories(parentCategories);
   }, [parentCategories]);
 
-
-
   const handleDeleteCategory = (categoryId: string) => {
     const updatedCategories = categories.filter((cat) => cat.id !== categoryId);
     setCategories(updatedCategories);
-    
+
     // Notify the parent component about the changes
-    onSelectedCategoriesChange(updatedCategories.map((category) => ({
-      name: category.name,
-      id: category.id,
-      weight: category.weight || 0,
-      chip: category.chip, 
-    })));
+    onSelectedCategoriesChange(
+      updatedCategories.map((category) => ({
+        name: category.name,
+        id: category.id,
+        weight: category.weight || 0,
+        chip: category.chip,
+      }))
+    );
   };
 
   const handleWeightChange = (categoryId: string, value: number) => {
@@ -71,13 +69,15 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
       cat.id === categoryId ? { ...cat, weight: value } : cat
     );
     setCategories(updatedCategories);
-  
-    onSelectedCategoriesChange(updatedCategories.map((category) => ({
-      name: category.name,
-      id: category.id,
-      weight: category.weight || 0,
-      chip: category.chip, 
-    })));
+
+    onSelectedCategoriesChange(
+      updatedCategories.map((category) => ({
+        name: category.name,
+        id: category.id,
+        weight: category.weight || 0,
+        chip: category.chip,
+      }))
+    );
   };
 
   const handleToggleLock = (categoryId: string) => {
@@ -109,56 +109,60 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
     }
   };
 
-
   const handleAutoWeight = () => {
     const lockedCategories = categories.filter((cat) => cat.locked);
     const unlockedCategories = categories.filter((cat) => !cat.locked);
-  
+
     const totalLockedWeight = lockedCategories.reduce((total, cat) => total + (cat.weight || 0), 0);
     const totalUnlockedCategories = unlockedCategories.length;
-  
+
     if (totalUnlockedCategories > 0) {
       const remainingWeight = 100 - totalLockedWeight;
-  
+
       // Calculate equal weight without adjusting
       const equalWeight = +(remainingWeight / totalUnlockedCategories).toFixed(2);
-  
+
       const updatedCategories = categories.map((cat, index) => {
         if (!cat.locked && cat.weight !== undefined && cat.weight !== null) {
-          const adjustedWeight = index === 0 ? +(equalWeight + remainingWeight % totalUnlockedCategories).toFixed(2) : equalWeight;
+          const adjustedWeight =
+            index === 0
+              ? +(equalWeight + (remainingWeight % totalUnlockedCategories)).toFixed(2)
+              : equalWeight;
           return { ...cat, weight: adjustedWeight };
         }
         return cat;
       });
-  
+
       // Calculate the adjustment based on the difference between the target total weight and the sum of the calculated weights
-      const adjustment = +(100 - updatedCategories.reduce((total, cat) => total + (cat.weight || 0), 0)).toFixed(2);
-  
+      const adjustment = +(
+        100 - updatedCategories.reduce((total, cat) => total + (cat.weight || 0), 0)
+      ).toFixed(2);
+
       if (adjustment !== 0) {
         // Adjust the first unlocked category to make the total exactly 100%
         const firstUnlockedCategory = updatedCategories.find((cat) => !cat.locked);
-  
+
         if (firstUnlockedCategory) {
-          firstUnlockedCategory.weight = +((firstUnlockedCategory.weight || 0) + adjustment).toFixed(2);
+          firstUnlockedCategory.weight = +(
+            (firstUnlockedCategory.weight || 0) + adjustment
+          ).toFixed(2);
         }
       }
-  
+
       // Update the state with the calculated weights
       setCategories(updatedCategories);
-  
+
       // Notify the parent component about the changes
-      onSelectedCategoriesChange(updatedCategories.map((category) => ({
-        name: category.name,
-        id: category.id,
-        weight: category.weight || 0,
-        chip: category.chip, 
-      })));
+      onSelectedCategoriesChange(
+        updatedCategories.map((category) => ({
+          name: category.name,
+          id: category.id,
+          weight: category.weight || 0,
+          chip: category.chip,
+        }))
+      );
     }
   };
-  
-  
-
-  
 
   return (
     <Box>
@@ -188,7 +192,11 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
             >
               <Grid container key={category.id} alignItems="center" spacing={1}>
                 <Grid item>
-                  <IconButton onClick={() => handleDeleteCategory(category.id)} color="primary" size="small">
+                  <IconButton
+                    onClick={() => handleDeleteCategory(category.id)}
+                    color="primary"
+                    size="small"
+                  >
                     X
                   </IconButton>
                 </Grid>
@@ -216,18 +224,18 @@ const VacancyCategorys: React.FC<VacancyCategorysProps> = ({
                 <Grid item>
                   <ColoredChip label={category.chip} size="small" />
                 </Grid>
-
               </Grid>
             </Box>
           ))}
-        <Box display="flex" alignItems="center">
-          <Typography variant="h6" fontSize="0.9rem" marginRight={2}>
-            Total Weight: {categories.reduce((total, cat) => total + (cat.weight || 0), 0).toFixed(2)}%
-          </Typography>
-          <Button variant="outlined" color="primary" onClick={handleAutoWeight} size="small">
-            Auto Weight
-          </Button>
-        </Box>
+          <Box display="flex" alignItems="center">
+            <Typography variant="h6" fontSize="0.9rem" marginRight={2}>
+              Total Weight:{' '}
+              {categories.reduce((total, cat) => total + (cat.weight || 0), 0).toFixed(2)}%
+            </Typography>
+            <Button variant="outlined" color="primary" onClick={handleAutoWeight} size="small">
+              Auto Weight
+            </Button>
+          </Box>
         </Box>
         <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="md">
           <DialogTitle>Category Selection</DialogTitle>

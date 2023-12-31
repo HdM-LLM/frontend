@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Stack, Typography, Button, TextField } from '@mui/material';
-
+import React from 'react';
+import { Box, Stack, Typography, TextField } from '@mui/material';
 
 export type VacancyJobInformationsProps = {
   onNext: () => void;
@@ -27,9 +26,11 @@ export type VacancyJobInformationsProps = {
   >;
 };
 
-
-
-const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({ onNext, formData, setFormData }) => {
+const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({
+  onNext,
+  formData,
+  setFormData,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -42,7 +43,9 @@ const VacancyJobInformations: React.FC<VacancyJobInformationsProps> = ({ onNext,
     <Box>
       {/* Basic information form */}
       <Stack spacing={2}>
-        <Typography sx={{ color: '#B3B3B3' }}>All fields marked with an asterisk (*) must be filled out</Typography>
+        <Typography sx={{ color: '#B3B3B3' }}>
+          All fields marked with an asterisk (*) must be filled out
+        </Typography>
         <TextField
           label="Job Name"
           name="jobName"
