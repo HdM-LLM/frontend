@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Stack, Typography, TextField } from '@mui/material';
+import { Box, Stack, Typography, TextField, Select, MenuItem, FormControl, InputLabel} from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
 
 export type VacancyJobInformationProps = {
   onNext: () => void;
@@ -35,6 +36,13 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
     }));
   };
 
+  const handleDepartmentChange = (event: SelectChangeEvent<string>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      department: event.target.value as string,
+    }));
+  };
+
   return (
     <Box>
       {/* Basic information form */}
@@ -47,15 +55,24 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           fullWidth
           required
         />
-        {/* TODO: This should be a dropdown and the available departments should be fetched from backend (Departments should be switched to ENUM in backend and db)*/}
-        <TextField
-          label="Department/Responsibility Area"
-          name="department"
-          value={formData.department}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
+         <FormControl fullWidth>
+          <InputLabel id="department-label">Department</InputLabel>
+          <Select
+            labelId="department-label"
+            id="department"
+            name="department"
+            label="Department"
+            value={formData.department}
+            onChange={handleDepartmentChange}
+          >
+            
+            {/* TODO:  Replace with actual department options fetched from backend (Departments should be switched to ENUM in backend and db)*/}
+            <MenuItem value="department1">Department 1</MenuItem>
+            <MenuItem value="department2">Department 2</MenuItem>
+          </Select>
+        </FormControl>
+      
+
         <TextField
           label="Tasks and Responsibilities"
           name="tasksAndResponsibilities"

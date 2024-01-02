@@ -34,6 +34,14 @@ export default function VacancyCreationPage() {
     setCategories(selectedCategories);
   };
 
+  // New state variable for disabling the "Next" button on page 2
+  const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
+
+  // Callback function to update the total weight and enable/disable "Next" button for page 2
+  const handleTotalWeightChange = (totalWeight: number) => {
+    setNextButtonDisabled(totalWeight !== 100);
+  };
+
   const handleSaveVacancy = () => {
     // Check if there is any content in the output (either generated or custom)
     if (output.trim()) {
@@ -135,11 +143,16 @@ export default function VacancyCreationPage() {
           />
         )}
         {page === 2 && (
-          <VacancyCategorySelectionPage
-            onNext={handleNext}
-            onSelectedCategoriesChange={(categories) => handleCategorySelectionChange(categories)}
-            categories={categories}
-          />
+           <VacancyCategorySelectionPage
+           onNext={handleNext}
+           onSelectedCategoriesChange={(categories) => {
+             handleCategorySelectionChange(categories);
+             handleTotalWeightChange(
+               categories.reduce((total, category) => total + (category.weight || 0), 0)
+             );
+           }}
+           categories={categories}
+         />
         )}
         {page === 3 && (
           <VacancyGeneration
@@ -181,7 +194,7 @@ export default function VacancyCreationPage() {
               Back
             </Button>
           )}
-          {page < 3 && (
+          {page === 1 && (
             <Button
               variant="contained"
               color="secondary"
@@ -189,6 +202,20 @@ export default function VacancyCreationPage() {
               onClick={handleNext}
               endIcon={<NavigateNextRoundedIcon />}
               sx={{ textTransform: 'none' }}
+
+            >
+              Next
+            </Button>
+          )}
+          {page === 2 && (
+            <Button
+              variant="contained"
+              color="secondary"
+              disableElevation
+              onClick={handleNext}
+              endIcon={<NavigateNextRoundedIcon />}
+              sx={{ textTransform: 'none' }}
+              disabled={nextButtonDisabled} 
             >
               Next
             </Button>

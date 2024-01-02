@@ -96,10 +96,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
       </Button>
 
       <Box sx={{ mt: 2 }}>
-        {/* Remove this Typography block */}
-        {/* <Typography variant="h4">Generated Vacancy</Typography> */}
-        {/* <Typography>{generatedVacancy}</Typography> */}
-
         <TextField
           label="Output"
           variant="outlined"

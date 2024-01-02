@@ -6,7 +6,7 @@ import UploadPage from './pages/UploadPage';
 import InquiriesPage from './pages/InquiriesPage';
 import VacancyPage from './pages/VacancyPage';
 import SettingsPage from './pages/SettingsPage';
-import VacancyCreationPage from './pages/VacancyCreation';
+import VacancyCreationPage from './pages/VacancyCreationPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import AppBar from './components/AppBar';
