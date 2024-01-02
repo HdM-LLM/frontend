@@ -1,7 +1,9 @@
-import { BusinessObject } from './businessObject';
+import { UUID } from 'crypto';
 
-export type Category = BusinessObject & {
+export type Category = {
+  id: UUID;
   name: string;
-  guideline0: string;
-  guideline10: string;
+  chip: string;
+  weight?: number;
+  locked?: boolean;
 };

@@ -6,6 +6,7 @@ import UploadPage from './pages/UploadPage';
 import InquiriesPage from './pages/InquiriesPage';
 import VacancyPage from './pages/VacancyPage';
 import SettingsPage from './pages/SettingsPage';
+import VacancyCreationPage from './pages/VacancyCreationPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import AppBar from './components/AppBar';
@@ -34,6 +35,7 @@ export default function App() {
 
             <Route path="/vacancies" element={<VacancyPage />} />
             <Route path="/inquiries" element={<InquiriesPage />} />
+            <Route path="/vacancy/creation" element={<VacancyCreationPage />} />
             <Route path="/applicants" element={<ApplicantsPage />} />
             <Route path="/applicants/overview" element={<OverviewPage />} />
             <Route path="/applicants/upload" element={<UploadPage />} />

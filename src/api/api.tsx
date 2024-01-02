@@ -11,12 +11,6 @@ export default class API {
   getApplicantsURL = () => `${this.URL}/applicants`;
   getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
 
-  // Vacancy
-  vacanciesURL = () => `${this.URL}/vacancies`;
-
-  // Get Vacancy
-  getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
-
   // Get applicants by vacancy ID or all applicants
   fetchApplicantsURL = () => `${this.URL}/applicants`;
 
@@ -45,16 +39,34 @@ export default class API {
     return this.api;
   }
 
+  //Resume
+  addPdfsURL = () => `${this.URL}/upload`;
+
+  // Vacancy URLs
+  vacanciesURL = () => `${this.URL}/vacancies`;
+  generateVacancyURL = () => `${this.vacanciesURL()}/generateVacancy`;
+  addVacancyURL = () => `${this.vacanciesURL()}/addVacancy`;
+  getVacancyURL = (vacancyId: string) => `${this.vacanciesURL()}/${vacancyId}`;
+
+  // Category URLs
+  getCategoryGuidelinesURL = (categoryName: string) =>
+    `${this.URL}/getCategoryGuidelines/${categoryName}`;
+  getChipForCategoryURL = (categoryName: string) =>
+    `${this.URL}/getChipForCategory/${categoryName}`;
+  addCategoryURL = () => `${this.URL}/addCategory`;
+  allCategoriesURL = () => `${this.URL}/allCategories`;
+
+  // Common fetch method for handling advanced requests
   fetchAdvanced(url: string, init: RequestInit) {
     // If no init parameter is used, create empty init
     if (typeof init === 'undefined') {
       init = { headers: {} };
     }
-
     // If no headers parameter is used, create empty header
     if (typeof init.headers === 'undefined') {
       init['headers'] = {};
     }
+
     return fetch(url, init).then((res) => {
       // The Promise returned from fetch() won’t reject on HTTP error status even if the response is an HTTP 404 or 500.
       if (!res.ok) {
@@ -71,34 +83,93 @@ export default class API {
     return this.fetchAdvanced(this.addPdfURL(), { method: 'POST', body: pdfs });
   }
 
-  // Fetch vacancies
-  fetchVacancies() {
-    return this.fetchAdvanced(this.vacanciesURL(), {});
-  }
-
-  // Get vacancy by ID
-  fetchVacancy(vacancyId: string) {
-    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
-  }
-
-  // Fetch all applicants
+  // Applicant-related methods
   fetchApplicants() {
     return this.fetchAdvanced(this.fetchApplicantsURL(), {});
   }
 
-  // Fetch one applicant by ID
   fetchApplicant(applicantId: string) {
     return this.fetchAdvanced(this.fetchApplicantURL(applicantId), {});
   }
 
-  // Fetch all applicants by vacancy ID
   fetchApplicantsByVacancyId(vacancyId: string) {
     return this.fetchAdvanced(this.fetchApplicantsByVacancyURL(vacancyId), {});
   }
 
-  // Fetch applicant ratings by applicant ID and vacancy ID
   fetchApplicantRatings(vacancyId: string, applicantId: string) {
     return this.fetchAdvanced(this.fetchApplicantRatingURL(vacancyId, applicantId), {});
+  }
+
+  // Vacancy-related methods
+  fetchVacancies() {
+    return this.fetchAdvanced(this.vacanciesURL(), {});
+  }
+
+  fetchVacancy(vacancyId: string) {
+    return this.fetchAdvanced(this.getVacancyURL(vacancyId), {});
+  }
+
+  generateVacancy(
+    basicInformation: Record<string, any>,
+    selectedCategories: any[],
+    adjustPrompt: string
+  ) {
+    const url = `${this.vacanciesURL()}/generateVacancy`;
+    const body = JSON.stringify({ basicInformation, selectedCategories, adjustPrompt });
+
+    return this.fetchAdvanced(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    });
+  }
+
+  addVacancy(data: {
+    basicInformation: Record<string, any>;
+    selectedCategories: any[];
+    generatedVacancy: string;
+  }) {
+    const url = this.addVacancyURL();
+    const body = JSON.stringify(data);
+
+    return this.fetchAdvanced(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    });
+  }
+
+  // Category-related methods
+  getCategoryGuidelines(categoryName: string) {
+    return this.fetchAdvanced(this.getCategoryGuidelinesURL(categoryName), {
+      method: 'GET',
+    });
+  }
+
+  getChipForCategory(categoryName: string) {
+    return this.fetchAdvanced(this.getChipForCategoryURL(categoryName), {
+      method: 'GET',
+    });
+  }
+
+  getAllCategories() {
+    return this.fetchAdvanced(this.allCategoriesURL(), {
+      method: 'GET',
+    });
+  }
+
+  addCategory(category: { Name: string; Chip: string; Guideline_0: string; Guideline_1: string }) {
+    return this.fetchAdvanced(this.addCategoryURL(), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(category),
+    });
   }
 
   // Fetch category data by category ID
