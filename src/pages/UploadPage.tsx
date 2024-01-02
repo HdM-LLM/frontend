@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
@@ -12,15 +11,18 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { DropZone } from '../components/DropZone';
+import { useEffect, useState } from 'react';
+import { APP_BAR_HEIGHT } from '../constants';
+import { Typography } from '@mui/material';
 
 export default function UploadPage() {
-  const [cv, setCV] = React.useState<File | null>(null);
-  const [vacancies, setVacancies] = React.useState<Vacancy[]>([]);
-  const [selectedVacancy, setSelectedVacancy] = React.useState<string>('');
-  const [alert, setAlert] = React.useState<boolean>(false);
-  const [success, setSuccess] = React.useState<boolean>(false);
+  const [cv, setCv] = useState<File | null>(null);
+  const [vacancies, setVacancies] = useState<Vacancy[]>([]);
+  const [selectedVacancy, setSelectedVacancy] = useState<string>('');
+  const [alert, setAlert] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchVacancies = async () => {
       try {
         const api = API.getAPI();
@@ -35,7 +37,7 @@ export default function UploadPage() {
   }, []);
 
   const setFile = (file: File) => {
-    setCV(file);
+    setCv(file);
   };
 
   const sendFiles = async () => {
@@ -65,9 +67,25 @@ export default function UploadPage() {
   const isSendButtonDisabled = !cv || selectedVacancy === '';
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
-      <h1>File Upload</h1>
-      <h4>Vacancy</h4>
+    <Box
+      sx={{
+        flex: 1,
+        height: 'calc(100vh - APP_BAR_HEIGHT)',
+        marginTop: APP_BAR_HEIGHT,
+        flexDirection: 'column',
+        marginLeft: 3,
+      }}
+    >
+      <Typography
+        variant="h4"
+        fontWeight={'bold'}
+        sx={{ color: '#4d4d4d', marginTop: 10, marginBottom: 3 }}
+      >
+        Upload your application
+      </Typography>
+      <Typography variant="h6" sx={{ color: '#4d4d4d', marginBottom: 2 }}>
+        Select the vacancy you are applying for
+      </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
         <FormControl sx={{ width: 300 }} size="small">
           <InputLabel id="vacancy-label">Vacancy</InputLabel>
@@ -86,7 +104,9 @@ export default function UploadPage() {
           </Select>
         </FormControl>
       </Box>
-      <h4>CV</h4>
+      <Typography variant="h6" sx={{ color: '#4d4d4d', marginBottom: 2 }}>
+        Upload your CV
+      </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
         <DropZone setFile={setFile} />
       </Box>
@@ -110,6 +130,6 @@ export default function UploadPage() {
         <></>
       )}
       {success ? <Alert severity="success">🎉 Files sent successfully!</Alert> : <></>}
-    </Container>
+    </Box>
   );
 }
