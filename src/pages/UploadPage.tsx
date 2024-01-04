@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,6 +19,7 @@ export default function UploadPage() {
   const [cv, setCv] = useState<File | null>(null);
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
   const [selectedVacancy, setSelectedVacancy] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alert, setAlert] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
@@ -48,14 +49,25 @@ export default function UploadPage() {
       }, 3000);
     } else {
       try {
-        await API.getAPI().addPdfs(cv, selectedVacancy);
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 3000);
-      } catch (error) {
+        setIsLoading(true);
+        await API.getAPI()
+          .addPdfs(cv, selectedVacancy)
+          .then(() => {
+            setSuccess(true);
+            setTimeout(() => {
+              setSuccess(false);
+            }, 3000);
+            setIsLoading(false);
+          });
+      } catch (error: any) {
         // Handle error if the API call fails
         console.error('Error sending files:', error);
+        errorMessage = error.message;
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
+        setIsLoading(false);
       }
     }
   };
@@ -63,6 +75,8 @@ export default function UploadPage() {
   const handleSelectChange = (event: SelectChangeEvent<string>) => {
     setSelectedVacancy(event.target.value);
   };
+
+  let errorMessage = 'Oops, something went wrong... Try again later.';
 
   const isSendButtonDisabled = !cv || selectedVacancy === '';
 
@@ -111,7 +125,7 @@ export default function UploadPage() {
         <DropZone setFile={setFile} />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30 }}>
-        <Button
+        <LoadingButton
           size="medium"
           color="secondary"
           variant="contained"
@@ -119,17 +133,14 @@ export default function UploadPage() {
           sx={{ width: '100px' }}
           onClick={sendFiles}
           disabled={isSendButtonDisabled} // Disable the button conditionally
+          loading={isLoading}
           disableElevation
         >
           Send
-        </Button>
+        </LoadingButton>
       </Box>
-      {alert ? (
-        <Alert severity="error">Oops, something went wrong... Try again later.</Alert>
-      ) : (
-        <></>
-      )}
-      {success ? <Alert severity="success">🎉 Files sent successfully!</Alert> : <></>}
+      {alert ? <Alert severity="error">{errorMessage}</Alert> : <></>}
+      {success ? <Alert severity="success">🎉 File sent successfully!</Alert> : <></>}
     </Box>
   );
 }
