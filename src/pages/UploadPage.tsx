@@ -52,8 +52,7 @@ export default function UploadPage() {
         setIsLoading(true);
         await API.getAPI()
           .addPdfs(cv, selectedVacancy)
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             setSuccess(true);
             setTimeout(() => {
               setSuccess(false);
@@ -141,7 +140,7 @@ export default function UploadPage() {
         </LoadingButton>
       </Box>
       {alert ? <Alert severity="error">{errorMessage}</Alert> : <></>}
-      {success ? <Alert severity="success">🎉 Files sent successfully!</Alert> : <></>}
+      {success ? <Alert severity="success">🎉 File sent successfully!</Alert> : <></>}
     </Box>
   );
 }
