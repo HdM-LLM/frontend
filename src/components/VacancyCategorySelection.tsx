@@ -76,6 +76,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   useEffect(() => {
     fetchCategories();
   }, []);
+  
   const handleAddNewCategory = async () => {
     try {
       // Reset state
@@ -97,34 +98,49 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
 
       // Set success status for the step
       setGuidelineCalculated(true);
-
-      // Combine information for the final category
-      const finalCategory: ExpectedCategoryType = {
-        Name: newCategoryName,
-        Chip: addedChip,
-        Guideline_0: guideline_0,
-        Guideline_1: guideline_10,
-      };
-
-      // Step 3: Add the final category to the backend
-      const addCategoryResponse = await API.getAPI().addCategory(finalCategory);
-
-      // Set success status for the step
-      setCategoryAdded(true);
-
-      // Stop loading
-      setLoading(false);
-
-      // Update categories
-      fetchCategories();
-
-      // Close the "Create a new category" dialog
-      setIsNewCategoryDialogOpen(false);
     } catch (error) {
       console.error('Error adding a new category:', error);
       setLoading(false);
+      return;
     }
   };
+
+  // useEffect to handle the construction of finalCategory after guideline state updates
+  useEffect(() => {
+    const handleFinalCategory = async () => {
+      // Ensure that guideline states are updated before proceeding
+      if (guidelineCalculated) {
+        // Combine information for the final category
+        const finalCategory: ExpectedCategoryType = {
+          Name: newCategoryName,
+          Chip: addedChip,
+          Guideline_0: guideline_0,
+          Guideline_1: guideline_10,
+        };
+
+        console.log(finalCategory);
+
+        try {
+          // Step 3: Add the final category to the backend
+          const addCategoryResponse = await API.getAPI().addCategory(finalCategory);
+
+          // Set success status for the step
+          setCategoryAdded(true);
+
+          // Update categories
+          fetchCategories();
+
+          // Close the "Create a new category" dialog
+          setIsNewCategoryDialogOpen(false);
+        } catch (error) {
+          console.error('Error adding a new category:', error);
+          setLoading(false);
+        }
+      }
+    };
+
+    handleFinalCategory();
+  }, [guidelineCalculated, guideline_0, guideline_10, addedChip, newCategoryName]);
 
   const handleDoneButtonClick = () => {
     const newSelectedCategories = selectedRows
