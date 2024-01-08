@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import { Box, TextField, Button, Backdrop, Typography } from '@mui/material';
 import { Category } from '../types/category';
 import { VacancyJobInformationProps } from './VacancyJobInformation';
 import API from '../api/api';
+import LinearProgress from '@mui/material/LinearProgress';
 
 interface VacancyGenerationProps {
   selectedCategories: Category[];
@@ -27,8 +29,11 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
   setOutput,
   onSaveVacancy,
 }) => {
+  const [open, setOpen] = React.useState(false);
+
   const handleGenerateVacancy = () => {
     const adjustedPrompt = `${adjustPromptPart2}`;
+    setOpen(true);
 
     API.getAPI()
       .generateVacancy(basicInformation, selectedCategories, adjustedPrompt)
@@ -38,10 +43,12 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
 
         // Set the output after the API call is complete
         setOutput(response.generatedVacancy);
+        setOpen(false);
       })
       .catch((error) => {
         // Handle errors if needed
         console.error('Error generating vacancy:', error);
+        setOpen(false);
       });
   };
 
@@ -73,7 +80,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
           readOnly: true,
         }}
       />
-
       <TextField
         label="Adjust Prompt (Editable)"
         variant="outlined"
@@ -84,7 +90,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         onChange={(e) => setAdjustPromptPart2(e.target.value)}
         sx={{ mt: 2 }}
       />
-
       <Button
         variant="contained"
         color="primary"
@@ -94,7 +99,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
       >
         Generate Vacancy
       </Button>
-
       <Box sx={{ mt: 2 }}>
         <TextField
           label="Output"
@@ -107,6 +111,34 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
           sx={{ mt: 2 }}
         />
       </Box>
+      <Backdrop
+        sx={{
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={open}
+      >
+        <Paper
+          square={false}
+          elevation={1}
+          sx={{
+            width: '60%',
+            height: '5%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <Typography sx={{ mr: 2, ml: 2 }}>Loading...</Typography>
+          <LinearProgress
+            sx={{
+              width: '100%',
+              mr: 2,
+            }}
+            color="secondary"
+          />
+        </Paper>
+      </Backdrop>
     </Box>
   );
 };
