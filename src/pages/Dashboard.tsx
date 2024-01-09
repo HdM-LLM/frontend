@@ -1,7 +1,8 @@
-import * as React from "react";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
+import * as React from 'react';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import ErrorDialog from '../components/ErrorDialog';
 
 export default function Dashboard() {
   return (
@@ -12,8 +13,8 @@ export default function Dashboard() {
           <Paper
             sx={{
               p: 2,
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               height: 240,
             }}
           ></Paper>
@@ -23,19 +24,18 @@ export default function Dashboard() {
           <Paper
             sx={{
               p: 2,
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               height: 240,
             }}
           ></Paper>
         </Grid>
         {/* Recent Applicants */}
         <Grid item xs={12}>
-          <Paper
-            sx={{ p: 2, display: "flex", flexDirection: "column" }}
-          ></Paper>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}></Paper>
         </Grid>
       </Grid>
+      <ErrorDialog errorCode={404} errorMessage="Page not found." />
     </Container>
   );
 }

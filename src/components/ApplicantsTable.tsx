@@ -58,6 +58,7 @@ export default function ApplicantsTable(props: ApplicantsTableProps) {
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{ paddingRight: 10 }}>Name</StyledTableCell>
+            {/** TODO: Change this to application date? Would be easier to display */}
             <StyledTableCell sx={{ paddingRight: 15 }}>Applied for</StyledTableCell>
             <StyledTableCell align="center">Contact</StyledTableCell>
             <StyledTableCell></StyledTableCell>
