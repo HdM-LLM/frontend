@@ -6,11 +6,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Box, Button, Avatar, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { Button, Typography } from '@mui/material';
 import { Inquiry } from '../types/inquiry';
-import { Employee } from '../types/employee';
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {

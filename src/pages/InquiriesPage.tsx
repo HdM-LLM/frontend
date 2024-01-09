@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import { APP_BAR_HEIGHT } from '../constants';
 import InquiriesTable from '../components/InquiriesTable';
 import { inquiries } from '../mock-data/inquiries';
-import { employees } from '../mock-data/employees';
 
 export default function InquiriesPage() {
   return (
