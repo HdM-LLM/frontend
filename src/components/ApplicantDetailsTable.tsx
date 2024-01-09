@@ -82,13 +82,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
     setRatings(ratingList);
   }, [categories, props.applicantRatings]);
 
-  // Remove first two characters before each quote
-  ratings.forEach((rating) => {
-    if (rating.quote) {
-      rating.quote = rating.quote.substring(1);
-    }
-  });
-
   const maxProgressBarValue = 10;
 
   return (
