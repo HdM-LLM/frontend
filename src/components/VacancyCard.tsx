@@ -11,12 +11,13 @@ export interface VacancyCardProps {
   marginBottom: number;
 }
 
-enum Departments {
+export enum Departments {
   HR = 'HR',
   IT = 'IT',
   Sales = 'Sales',
   Marketing = 'Marketing',
   Finance = 'Finance',
+  Legal = 'Legal',
   Other = 'Other',
 }
 
@@ -25,15 +26,17 @@ export default function VacancyCard(props: VacancyCardProps) {
   const getDepartmentChipColor = (department: string) => {
     switch (department) {
       case Departments.HR:
-        return '#EDDEDE';
+        return '#eee1fa';
       case Departments.IT:
         return '#DEEDE5';
       case Departments.Sales:
-        return '#DEDFED';
+        return '#cfd6fa';
       case Departments.Marketing:
         return '#FDF8CE';
       case Departments.Finance:
-        return '#F2DCF1';
+        return '#fae1e1';
+      case Departments.Legal:
+        return '#f0e8c2';
       case Departments.Other:
         return '#E7DCF2';
       default:
@@ -45,15 +48,17 @@ export default function VacancyCard(props: VacancyCardProps) {
   const getDepartmentChipTextColor = (department: string) => {
     switch (department) {
       case Departments.HR:
-        return '#7A4242';
+        return '#553b6e';
       case Departments.IT:
         return '#427A5B';
       case Departments.Sales:
-        return '#42527A';
+        return '#3b446e';
       case Departments.Marketing:
         return '#938406';
       case Departments.Finance:
-        return '#3498DB';
+        return '#8c5a5a';
+      case Departments.Legal:
+        return '#695f30';
       case Departments.Other:
         return '#68427A';
       default:

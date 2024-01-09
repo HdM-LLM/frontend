@@ -6,8 +6,10 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Button, Typography } from '@mui/material';
+import { Button, Chip, Typography } from '@mui/material';
 import { Inquiry } from '../types/inquiry';
+import { FONT_FAMILY } from '../constants';
+import { Departments } from './VacancyCard';
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,6 +43,50 @@ export interface InquiriesTableProps {
 }
 
 export default function InquiriesTable(props: InquiriesTableProps) {
+  // Get chip color based on department that is fed in
+  const getDepartmentChipColor = (department: string) => {
+    switch (department) {
+      case Departments.HR:
+        return '#eee1fa';
+      case Departments.IT:
+        return '#DEEDE5';
+      case Departments.Sales:
+        return '#cfd6fa';
+      case Departments.Marketing:
+        return '#FDF8CE';
+      case Departments.Finance:
+        return '#fae1e1';
+      case Departments.Legal:
+        return '#f0e8c2';
+      case Departments.Other:
+        return '#E7DCF2';
+      default:
+        return '#F2F2F2'; // Grey as default
+    }
+  };
+
+  // Get chip text color based on department that is fed in
+  const getDepartmentChipTextColor = (department: string) => {
+    switch (department) {
+      case Departments.HR:
+        return '#553b6e';
+      case Departments.IT:
+        return '#427A5B';
+      case Departments.Sales:
+        return '#3b446e';
+      case Departments.Marketing:
+        return '#938406';
+      case Departments.Finance:
+        return '#8c5a5a';
+      case Departments.Legal:
+        return '#695f30';
+      case Departments.Other:
+        return '#68427A';
+      default:
+        return '#4d4d4d'; // Grey as default
+    }
+  };
+
   return (
     <TableContainer>
       <Table
@@ -66,7 +112,18 @@ export default function InquiriesTable(props: InquiriesTableProps) {
               <StyledTableCell>
                 {inquiry.requester.firstName} {inquiry.requester.lastName}
               </StyledTableCell>
-              <StyledTableCell>{inquiry.requester.department}</StyledTableCell>
+              <StyledTableCell>
+                <Chip
+                  label={inquiry.requester.department + ' Department'}
+                  sx={{
+                    fontFamily: FONT_FAMILY,
+                    fontWeight: 'bold',
+                    color: getDepartmentChipTextColor(inquiry.requester.department),
+                    backgroundColor: getDepartmentChipColor(inquiry.requester.department),
+                    borderRadius: 2,
+                  }}
+                ></Chip>
+              </StyledTableCell>
               <StyledTableCell>{inquiry.publishOn.toLocaleDateString()}</StyledTableCell>
               <StyledTableCell>
                 <Button variant="contained" disableElevation color="secondary">
