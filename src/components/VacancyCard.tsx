@@ -122,7 +122,7 @@ export default function VacancyCard(props: VacancyCardProps) {
               />
               <Grid item sx={{ paddingBottom: '1vh' }}>
                 <Chip
-                  label={props.vacancy.fullTime ? 'Full Time' : 'Part Time'}
+                  label={props.vacancy.working_time ? 'Full Time' : 'Part Time'}
                   sx={{ fontFamily: FONT_FAMILY, borderRadius: 2 }}
                 />
               </Grid>

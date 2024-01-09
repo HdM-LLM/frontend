@@ -17,13 +17,11 @@ export default function VacancyCreationPage() {
   const [page, setPage] = useState<number>(1);
   const [categories, setCategories] = useState<Category[]>([]);
   const [formData, setFormData] = useState<VacancyJobInformationProps['formData']>({
-    jobName: '',
+    title: '',
     department: '',
     tasksAndResponsibilities: '',
-    requiredSkills: '',
-    workplaceAndWorkingHours: '',
-    languageRequirements: '',
-    additionalInformation: '',
+    workingHours: '',
+    description: '',
   });
 
   const [generatedVacancy, setGeneratedVacancy] = useState('');
@@ -85,11 +83,11 @@ export default function VacancyCreationPage() {
   const handleNext = () => {
     if (page === 1) {
       const basicInfoFields = [
-        'jobName',
+        'title',
         'department',
         'tasksAndResponsibilities',
-        'requiredSkills',
-        'workplaceAndWorkingHours',
+        'workingHours',
+        'description',
       ];
       const isBasicInfoComplete = basicInfoFields.every((field) => Boolean(formData[field]));
 
@@ -143,16 +141,16 @@ export default function VacancyCreationPage() {
           />
         )}
         {page === 2 && (
-           <VacancyCategorySelectionPage
-           onNext={handleNext}
-           onSelectedCategoriesChange={(categories) => {
-             handleCategorySelectionChange(categories);
-             handleTotalWeightChange(
-               categories.reduce((total, category) => total + (category.weight || 0), 0)
-             );
-           }}
-           categories={categories}
-         />
+          <VacancyCategorySelectionPage
+            onNext={handleNext}
+            onSelectedCategoriesChange={(categories) => {
+              handleCategorySelectionChange(categories);
+              handleTotalWeightChange(
+                categories.reduce((total, category) => total + (category.weight || 0), 0)
+              );
+            }}
+            categories={categories}
+          />
         )}
         {page === 3 && (
           <VacancyGeneration
@@ -202,7 +200,6 @@ export default function VacancyCreationPage() {
               onClick={handleNext}
               endIcon={<NavigateNextRoundedIcon />}
               sx={{ textTransform: 'none' }}
-
             >
               Next
             </Button>
@@ -215,7 +212,7 @@ export default function VacancyCreationPage() {
               onClick={handleNext}
               endIcon={<NavigateNextRoundedIcon />}
               sx={{ textTransform: 'none' }}
-              disabled={nextButtonDisabled} 
+              disabled={nextButtonDisabled}
             >
               Next
             </Button>
