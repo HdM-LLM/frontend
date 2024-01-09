@@ -119,8 +119,8 @@ export default function VacancyCreationPage() {
   };
 
   return (
-    <Box sx={{}}>
-      <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2 }}>
+    <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2 }}>
+      <Box>
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
           New Vacancy
         </Typography>
@@ -134,7 +134,7 @@ export default function VacancyCreationPage() {
         </Typography>
       </Box>
 
-      <Box maxWidth="xl" sx={{ marginTop: '1vh', marginLeft: 3 }}>
+      <Box maxWidth="xl" sx={{ marginTop: '1vh' }}>
         {page === 1 && (
           <VacancyJobInformation
             onNext={handleNext}
@@ -143,16 +143,16 @@ export default function VacancyCreationPage() {
           />
         )}
         {page === 2 && (
-           <VacancyCategorySelectionPage
-           onNext={handleNext}
-           onSelectedCategoriesChange={(categories) => {
-             handleCategorySelectionChange(categories);
-             handleTotalWeightChange(
-               categories.reduce((total, category) => total + (category.weight || 0), 0)
-             );
-           }}
-           categories={categories}
-         />
+          <VacancyCategorySelectionPage
+            onNext={handleNext}
+            onSelectedCategoriesChange={(categories) => {
+              handleCategorySelectionChange(categories);
+              handleTotalWeightChange(
+                categories.reduce((total, category) => total + (category.weight || 0), 0)
+              );
+            }}
+            categories={categories}
+          />
         )}
         {page === 3 && (
           <VacancyGeneration
@@ -202,7 +202,6 @@ export default function VacancyCreationPage() {
               onClick={handleNext}
               endIcon={<NavigateNextRoundedIcon />}
               sx={{ textTransform: 'none' }}
-
             >
               Next
             </Button>
@@ -215,7 +214,7 @@ export default function VacancyCreationPage() {
               onClick={handleNext}
               endIcon={<NavigateNextRoundedIcon />}
               sx={{ textTransform: 'none' }}
-              disabled={nextButtonDisabled} 
+              disabled={nextButtonDisabled}
             >
               Next
             </Button>
