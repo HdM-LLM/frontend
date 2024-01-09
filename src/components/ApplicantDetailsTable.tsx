@@ -102,7 +102,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
             <StyledTableCell>Justification</StyledTableCell>
             <StyledTableCell>Quote</StyledTableCell>
             <StyledTableCell>Weight</StyledTableCell>
-            <StyledTableCell>Adjust Rating</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -140,13 +139,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
               </StyledTableCell>
               {/** TODO: This is currently not provided by the backend */}
               <StyledTableCell align="center">TODO %</StyledTableCell>
-              <StyledTableCell align="center">
-                <TextField
-                  id="outlined-rating-adjustment"
-                  type="number"
-                  defaultValue={rating.score}
-                />
-              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
