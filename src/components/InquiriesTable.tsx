@@ -114,7 +114,7 @@ export default function InquiriesTable(props: InquiriesTableProps) {
               </StyledTableCell>
               <StyledTableCell>
                 <Chip
-                  label={inquiry.requester.department + ' Department'}
+                  label={inquiry.requester.department}
                   sx={{
                     fontFamily: FONT_FAMILY,
                     fontWeight: 'bold',

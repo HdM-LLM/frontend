@@ -154,6 +154,9 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
 
   return (
     <Box>
+      <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
+        Please select the skills required for the vacancy.
+      </Typography>
       <Stack spacing={2}>
         <Grid container spacing={0} alignItems="center">
           <Grid item>
@@ -164,7 +167,7 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
               onClick={handleOpenDialog}
               size="small"
             >
-              Select Category
+              Select Skills
             </Button>
           </Grid>
         </Grid>
@@ -230,7 +233,7 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
           <Box display="flex" alignItems="center">
             <Typography variant="h6" sx={{ fontSize: 18, marginRight: 2 }}>
               {categories.length === 0
-                ? 'No categories selected.'
+                ? 'No skills selected.'
                 : 'Total Weight: ' +
                   categories
                     .reduce((total, category) => total + (category.weight || 0), 0)
@@ -245,7 +248,7 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
           </Box>
         </Box>
         <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth maxWidth="md">
-          <DialogTitle>Category Selection</DialogTitle>
+          <DialogTitle>Skill Selection</DialogTitle>
           <DialogContent>
             <CategorySelector
               selectedCategories={categories}

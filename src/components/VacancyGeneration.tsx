@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
-import { Box, TextField, Button, Backdrop, Typography } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  Backdrop,
+  Typography,
+  Stack,
+  Chip,
+  IconButton,
+} from '@mui/material';
 import { Category } from '../types/category';
 import { VacancyJobInformationProps } from './VacancyJobInformation';
 import API from '../api/api';
 import LinearProgress from '@mui/material/LinearProgress';
+import SmartToyRoundedIcon from '@mui/icons-material/SmartToyRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 interface VacancyGenerationProps {
   selectedCategories: Category[];
@@ -67,21 +78,50 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
 
   return (
     <Box>
+      <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
+        Please review the generated vacancy and make any adjustments as needed.
+      </Typography>
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{ marginRight: '10vw' }}>
+          <Typography variant="h6" sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+            Basic Information
+          </Typography>
+          <Typography
+            sx={{
+              marginTop: '1vh',
+              color: '#4d4d4d',
+            }}
+          >
+            Job Name: {basicInformation.jobName}
+          </Typography>
+          <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+            Department: {basicInformation.department}
+          </Typography>
+          <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+            Tasks and Responsibilities: {basicInformation.tasksAndResponsibilities}
+          </Typography>
+          <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+            Full-Time: {basicInformation.workplaceAndWorkingHours ? 'Yes' : 'No'}
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="h6" sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+            Selected Skills
+          </Typography>
+          {selectedCategories.map((category) => (
+            <Chip
+              label={category.name}
+              key={category.id}
+              sx={{ color: '#4d4d4d', mr: 1, borderRadius: 2 }}
+            />
+          ))}
+        </Box>
+      </Box>
+      <Typography variant="h6" sx={{ marginTop: '2vh', color: '#4d4d4d' }}>
+        Prompt Adjustments
+      </Typography>
       <TextField
-        label="Basic Prompt Information (Locked)"
-        variant="outlined"
-        fullWidth
-        multiline
-        disabled
-        rows={2}
-        value={adjustPromptPart1}
-        sx={{ mt: 2 }}
-        InputProps={{
-          readOnly: true,
-        }}
-      />
-      <TextField
-        label="Adjust Prompt (Editable)"
+        label="Make any adjustments to the prompt here. For example, you can shift the focus of the prompt to a specific skill or department."
         variant="outlined"
         fullWidth
         multiline
@@ -89,6 +129,20 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         value={adjustPromptPart2}
         onChange={(e) => setAdjustPromptPart2(e.target.value)}
         sx={{ mt: 2 }}
+        InputProps={{
+          endAdornment: (
+            <IconButton
+              onClick={() => {
+                setAdjustPromptPart2('');
+              }}
+              color="primary"
+              size="small"
+              sx={{ position: 'absolute', right: 10, top: 7 }}
+            >
+              <CloseRoundedIcon />
+            </IconButton>
+          ),
+        }}
       />
       <Button
         variant="contained"
@@ -96,12 +150,16 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         onClick={handleGenerateVacancy}
         sx={{ mt: 2 }}
         disableElevation
+        startIcon={<SmartToyRoundedIcon />}
       >
-        Generate Vacancy
+        (Re-)Generate Vacancy
       </Button>
-      <Box sx={{ mt: 2 }}>
+      <Box sx={{ mt: '2vh' }}>
+        <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+          Generated Vacancy
+        </Typography>
         <TextField
-          label="Output"
+          label="Generated Vacancy will appear here."
           variant="outlined"
           fullWidth
           multiline
@@ -109,6 +167,21 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
           value={output}
           onChange={(e) => setOutput(e.target.value)}
           sx={{ mt: 2 }}
+          InputProps={{
+            endAdornment: (
+              <IconButton
+                onClick={() => {
+                  setGeneratedVacancy('');
+                  setOutput('');
+                }}
+                color="primary"
+                size="small"
+                sx={{ position: 'absolute', right: 10, top: 7 }}
+              >
+                <CloseRoundedIcon />
+              </IconButton>
+            ),
+          }}
         />
       </Box>
       <Backdrop
@@ -129,7 +202,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
             justifyContent: 'flex-start',
           }}
         >
-          <Typography sx={{ mr: 2, ml: 2 }}>Loading...</Typography>
+          <Typography sx={{ mr: 2, ml: 2 }}>Generating vacancy, please wait...</Typography>
           <LinearProgress
             sx={{
               width: '100%',

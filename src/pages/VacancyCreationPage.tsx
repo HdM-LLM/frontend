@@ -122,14 +122,14 @@ export default function VacancyCreationPage() {
     <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2, marginRight: 3 }}>
       <Box>
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          New Vacancy
+          Generating a new vacancy
         </Typography>
-        <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+        <Typography variant="h5" sx={{ color: '#4d4d4d', marginTop: '1vh' }}>
           Step {page}/3:{' '}
           {page === 1
-            ? 'Basic Information'
+            ? 'Basic job information'
             : page === 2
-            ? 'Category Selection'
+            ? 'Skill Selection'
             : 'Vacancy Generation'}
         </Typography>
       </Box>
@@ -221,20 +221,6 @@ export default function VacancyCreationPage() {
           )}
           {page === 3 && (
             <>
-              <Button
-                variant="contained"
-                color="secondary"
-                disableElevation
-                onClick={() => {
-                  setGeneratedVacancy('');
-                  setAdjustPromptPart2('');
-                  setOutput('');
-                }}
-                startIcon={<ClearRoundedIcon />}
-                sx={{ textTransform: 'none' }}
-              >
-                Clear
-              </Button>
               <Button
                 variant="contained"
                 color="secondary"

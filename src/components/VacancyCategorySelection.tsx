@@ -76,7 +76,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   useEffect(() => {
     fetchCategories();
   }, []);
-  
+
   const handleAddNewCategory = async () => {
     try {
       // Reset state
@@ -235,7 +235,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           disableElevation
           startIcon={<AddCircleIcon />}
         >
-          New Category
+          New Skill
         </Button>
 
         <Button
@@ -250,10 +250,10 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
 
       {/* Dialog for creating a new category */}
       <Dialog open={isNewCategoryDialogOpen} onClose={handleDialogClose} fullWidth maxWidth="md">
-        <DialogTitle>Create a new category</DialogTitle>
+        <DialogTitle>Create a new skill</DialogTitle>
         <DialogContent>
           <TextField
-            label="Name of the category"
+            label="Name of the skill"
             variant="outlined"
             fullWidth
             value={newCategoryName}
@@ -266,7 +266,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
             Cancel
           </Button>
           <Button onClick={handleAddNewCategory} color="secondary">
-            Add new category
+            Add new skill
           </Button>
         </DialogActions>
       </Dialog>
@@ -279,7 +279,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           style: { maxHeight: '40vh' },
         }}
       >
-        <DialogTitle>Adding category '{newCategoryName}'</DialogTitle>
+        <DialogTitle>Adding skill '{newCategoryName}'</DialogTitle>
         <DialogContent
           style={{
             position: 'relative',
@@ -306,7 +306,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
                 label={addedChip}
                 style={{ marginLeft: '0.2vw', marginRight: '0.2vw' }}
               />
-              <Typography variant="body1">to category '{newCategoryName}'.</Typography>
+              <Typography variant="body1">to skill '{newCategoryName}'.</Typography>
             </div>
           )}
           {loading && !guidelineCalculated && (
@@ -336,7 +336,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
             >
               <CheckCircleIcon style={{ color: 'green', marginRight: '0.5vw' }} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
-                Category '{newCategoryName}' is now available.
+                Skill '{newCategoryName}' is now available.
               </Typography>
             </div>
           )}
