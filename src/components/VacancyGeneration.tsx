@@ -6,9 +6,9 @@ import {
   Button,
   Backdrop,
   Typography,
-  Stack,
   Chip,
   IconButton,
+  Stack,
 } from '@mui/material';
 import { Category } from '../types/category';
 import { VacancyJobInformationProps } from './VacancyJobInformation';
@@ -26,7 +26,7 @@ interface VacancyGenerationProps {
   setGeneratedVacancy: React.Dispatch<React.SetStateAction<string>>;
   setAdjustPromptPart2: React.Dispatch<React.SetStateAction<string>>;
   setOutput: React.Dispatch<React.SetStateAction<string>>;
-  onSaveVacancy: () => void; // Add the prop function
+  onSaveVacancy: () => void;
 }
 
 const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
@@ -40,7 +40,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
   setOutput,
   onSaveVacancy,
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleGenerateVacancy = () => {
     const adjustedPrompt = `${adjustPromptPart2}`;
@@ -63,18 +63,18 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
       });
   };
 
-  // Update to use the prop function
-  const handleSaveVacancy = () => {
-    onSaveVacancy();
-  };
+  const aiFunFacts = [
+    'Fun fact: Did you know that the first AI was created in 1956?',
+    'Fun fact: Did you know that AI has been used to generate amusing pickup lines? Some are hilarious, like "Are you made of copper and tellurium? Because you are Cu-Te!"',
+    'Fun fact: Did you know that AI can generate bizarre and unconventional names for things? There was an AI experiment that generated new paint colors with names like "Burble Simp" and "Stanky Bean."',
+    'Fun fact: Did you know that sometimes, AI can misinterpret requests in funny ways? For instance, asking an AI to sing a song might result in a hilarious but off-tune rendition.',
+    'Fun fact: Did you know that Researchers are teaching AI to understand and generate jokes? Some AI-generated jokes are so bad they are good, like "Why was the math book sad? Because it had too many problems."',
+    'Fun fact: Did you know that AI has been used to generate unique and unconventional recipes, sometimes combining unexpected ingredients in strange yet oddly intriguing ways, like "banana peel bacon.".',
+  ];
 
-  const [adjustPromptPart1, setAdjustPromptPart1] = useState(
-    `Basic Information: ${Object.values(basicInformation)
-      .filter(Boolean)
-      .join(', ')} - Selected Categories: ${selectedCategories
-      .map((category) => category.name)
-      .join(', ')}`
-  );
+  const getRandomAiFunFact = () => {
+    return aiFunFacts[Math.floor(Math.random() * aiFunFacts.length)];
+  };
 
   return (
     <Box>
@@ -82,7 +82,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         Please review the generated vacancy and make any adjustments as needed.
       </Typography>
       <Box sx={{ display: 'flex' }}>
-        <Box sx={{ marginRight: '10vw' }}>
+        <Box sx={{ marginRight: '15vw' }}>
           <Typography variant="h6" sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
             Basic Information
           </Typography>
@@ -176,7 +176,12 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
                 }}
                 color="primary"
                 size="small"
-                sx={{ position: 'absolute', right: 10, top: 7 }}
+                sx={{
+                  position: 'absolute',
+                  right: 35,
+                  top: 7,
+                  visibility: output ? 'visible' : 'hidden',
+                }}
               >
                 <CloseRoundedIcon />
               </IconButton>
@@ -195,21 +200,39 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
           square={false}
           elevation={1}
           sx={{
-            width: '60%',
-            height: '5%',
+            width: '50%',
+            height: '10%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-start',
           }}
         >
-          <Typography sx={{ mr: 2, ml: 2 }}>Generating vacancy, please wait...</Typography>
-          <LinearProgress
+          <Stack
+            direction="column"
+            spacing={2}
             sx={{
               width: '100%',
-              mr: 2,
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: 'auto',
             }}
-            color="secondary"
-          />
+          >
+            <Typography variant="h6" sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+              Generating vacancy, please wait...
+            </Typography>
+            <LinearProgress
+              sx={{
+                width: '90%',
+              }}
+              color="secondary"
+            />
+            {/** Add fun facts about ai below the loading animation to entertain the user while waiting */}
+            {/**<Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
+              {getRandomAiFunFact()}
+            </Typography>*/}
+          </Stack>
         </Paper>
       </Backdrop>
     </Box>

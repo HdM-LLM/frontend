@@ -5,7 +5,6 @@ import {
   Typography,
   TextField,
   MenuItem,
-  Tooltip,
   FormControl,
   InputLabel,
   Select,
@@ -38,8 +37,6 @@ export type VacancyJobInformationProps = {
 };
 
 const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData, setFormData }) => {
-  const departments = ['HR', 'IT', 'Sales', 'Marketing', 'Finance', 'Legal', 'Other'];
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
