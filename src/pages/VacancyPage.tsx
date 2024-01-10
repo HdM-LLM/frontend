@@ -24,6 +24,7 @@ export default function VacancyPage() {
         const api = API.getAPI();
         const vacancyData = await api.fetchVacancies();
         setVacancies(vacancyData);
+        console.log(vacancyData);
       } catch (error) {
         console.error('Error fetching vacancies:', error);
       }
