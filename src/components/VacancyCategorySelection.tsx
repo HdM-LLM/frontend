@@ -290,7 +290,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
         >
           {loading && !chipAssigned && (
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2vh' }}>
-              <CircularProgress />
+              <CircularProgress color="secondary" size={25} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
                 Assigning tag for '{newCategoryName}'...
               </Typography>
@@ -311,7 +311,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           )}
           {loading && !guidelineCalculated && (
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2vh' }}>
-              <CircularProgress />
+              <CircularProgress color="secondary" size={25} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
                 Assigning rating guidelines for '{newCategoryName}'...
               </Typography>
