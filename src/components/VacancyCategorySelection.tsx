@@ -84,7 +84,8 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       setLoading(true);
 
       // Step 1: Add chip to category
-      const addedChipResult = await API.getAPI().getChipForCategory(newCategoryName);
+      let clearCategoryName = newCategoryName.replace(/[^a-zA-Z0-9]/g, '');
+      const addedChipResult = await API.getAPI().getChipForCategory(clearCategoryName);
       const addedChip = addedChipResult?.data.category ?? '';
       setAddedChip(addedChip);
 
@@ -92,7 +93,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       setChipAssigned(true);
 
       // Step 2: Calculate guideline
-      const response = await API.getAPI().getCategoryGuidelines(newCategoryName);
+      const response = await API.getAPI().getCategoryGuidelines(clearCategoryName);
       setGuideline_0(response.data.guideline_for_zero);
       setGuideline_10(response.data.guideline_for_ten);
 
