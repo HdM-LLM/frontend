@@ -51,11 +51,11 @@ export default function InquiriesPage() {
         </Box>
 
         <Box sx={{ marginTop: 7 }}>
-          <Typography
-            variant="h5"
-            sx={{ fontWeight: 'bold', marginBottom: '2vh', color: '#4d4d4d' }}
-          >
+          <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#4d4d4d' }}>
             Open Inquiries
+          </Typography>
+          <Typography sx={{ marginBottom: '2vh', color: '#8a8a8a' }}>
+            These are the inquiries that are currently open.
           </Typography>
           <InquiriesTable inquiries={inquiries} />
         </Box>

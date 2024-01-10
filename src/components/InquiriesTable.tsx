@@ -96,10 +96,10 @@ export default function InquiriesTable(props: InquiriesTableProps) {
       >
         <TableHead>
           <TableRow>
-            <StyledTableCell sx={{ paddingRight: 10 }}>Draft Title</StyledTableCell>
-            <StyledTableCell sx={{ paddingRight: 7 }}>Requested by</StyledTableCell>
+            <StyledTableCell>Position</StyledTableCell>
+            <StyledTableCell>Requested by</StyledTableCell>
             <StyledTableCell>Department</StyledTableCell>
-            <StyledTableCell>Publication Date</StyledTableCell>
+            <StyledTableCell>Requested for</StyledTableCell>
             <StyledTableCell></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -107,7 +107,7 @@ export default function InquiriesTable(props: InquiriesTableProps) {
           {props.inquiries.map((inquiry) => (
             <StyledTableRow key={inquiry.id}>
               <StyledTableCell component="th" scope="row">
-                <Typography fontWeight={'bold'}>{inquiry.positionTitle}</Typography>
+                <Typography>{inquiry.positionTitle}</Typography>
               </StyledTableCell>
               <StyledTableCell>
                 {inquiry.requester.firstName} {inquiry.requester.lastName}
@@ -124,8 +124,12 @@ export default function InquiriesTable(props: InquiriesTableProps) {
                   }}
                 ></Chip>
               </StyledTableCell>
-              <StyledTableCell>{inquiry.publishOn.toLocaleDateString()}</StyledTableCell>
               <StyledTableCell>
+                {inquiry.publishOn.getDate().toString().padStart(2, '0')}.
+                {(inquiry.publishOn.getMonth() + 1).toString().padStart(2, '0')}.
+                {inquiry.publishOn.getFullYear()}
+              </StyledTableCell>
+              <StyledTableCell align="right">
                 <Button variant="contained" disableElevation color="secondary">
                   View
                 </Button>
