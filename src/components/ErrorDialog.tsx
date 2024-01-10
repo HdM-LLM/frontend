@@ -7,7 +7,7 @@ interface ErrorProps {
 }
 
 export default function ErrorDialog(props: ErrorProps) {
-  const [openDialog, setOpenDialog] = useState<boolean>(true);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   return (
     <Box>

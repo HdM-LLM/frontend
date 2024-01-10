@@ -73,7 +73,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         fullWidth
         multiline
         disabled
-        rows={2} // Adjust the number of rows as needed
+        rows={2}
         value={adjustPromptPart1}
         sx={{ mt: 2 }}
         InputProps={{
@@ -85,7 +85,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         variant="outlined"
         fullWidth
         multiline
-        rows={2} // Adjust the number of rows as needed
+        rows={2}
         value={adjustPromptPart2}
         onChange={(e) => setAdjustPromptPart2(e.target.value)}
         sx={{ mt: 2 }}
@@ -105,7 +105,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
           variant="outlined"
           fullWidth
           multiline
-          rows={14} // Adjust the number of rows as needed
+          rows={14}
           value={output}
           onChange={(e) => setOutput(e.target.value)}
           sx={{ mt: 2 }}

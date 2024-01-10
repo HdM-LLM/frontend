@@ -1,6 +1,17 @@
 import React from 'react';
-import { Box, Stack, Typography, TextField, Select, MenuItem, FormControl, InputLabel} from '@mui/material';
+import {
+  Box,
+  Stack,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Tooltip,
+} from '@mui/material';
 import { SelectChangeEvent } from '@mui/material';
+import { Departments } from './VacancyCard';
 
 export type VacancyJobInformationProps = {
   onNext: () => void;
@@ -28,6 +39,8 @@ export type VacancyJobInformationProps = {
 };
 
 const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData, setFormData }) => {
+  const departments = ['HR', 'IT', 'Sales', 'Marketing', 'Finance', 'Legal', 'Other'];
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -45,33 +58,39 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
 
   return (
     <Box>
+      <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+        Please enter the basic information about the job
+      </Typography>
       {/* Basic information form */}
       <Stack spacing={2}>
+        <Tooltip
+          arrow
+          title="This is the name of the job that will be used to generate the vacancy."
+        >
+          <TextField
+            label="Job Name"
+            name="jobName"
+            value={formData.jobName}
+            onChange={handleChange}
+            fullWidth
+            required
+          />
+        </Tooltip>
         <TextField
-          label="Job Name"
-          name="jobName"
-          value={formData.jobName}
-          onChange={handleChange}
-          fullWidth
+          id="department"
+          name="department"
+          label="Department"
+          value={handleDepartmentChange}
           required
-        />
-         <FormControl fullWidth>
-          <InputLabel id="department-label">Department</InputLabel>
-          <Select
-            labelId="department-label"
-            id="department"
-            name="department"
-            label="Department"
-            value={formData.department}
-            onChange={handleDepartmentChange}
-          >
-            
-            {/* TODO:  Replace with actual department options fetched from backend (Departments should be switched to ENUM in backend and db)*/}
-            <MenuItem value="department1">Department 1</MenuItem>
-            <MenuItem value="department2">Department 2</MenuItem>
-          </Select>
-        </FormControl>
-      
+          fullWidth
+          select
+        >
+          {departments.map((department) => (
+            <MenuItem key={department} value={department}>
+              {department}
+            </MenuItem>
+          ))}
+        </TextField>
 
         <TextField
           label="Tasks and Responsibilities"
@@ -80,14 +99,6 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           onChange={handleChange}
           fullWidth
           multiline
-          required
-        />
-        <TextField
-          label="Required Skills"
-          name="requiredSkills"
-          value={formData.requiredSkills}
-          onChange={handleChange}
-          fullWidth
           required
         />
         {/* TODO: This should use radio buttons to make a selection */}

@@ -119,7 +119,7 @@ export default function VacancyCreationPage() {
   };
 
   return (
-    <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2 }}>
+    <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2, marginRight: 3 }}>
       <Box>
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
           New Vacancy
