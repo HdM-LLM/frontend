@@ -4,9 +4,9 @@
 export enum Departments {
   IT = 'IT',
   HR = 'HR',
-  MARKETING = 'MARKETING',
-  SALES = 'SALES',
-  FINANCE = 'FINANCE',
-  LEGAL = 'LEGAL',
-  OTHER = 'OTHER',
+  MARKETING = 'Marketing',
+  SALES = 'Sales',
+  FINANCE = 'Finance',
+  LEGAL = 'Legal',
+  OTHER = 'Other',
 }
