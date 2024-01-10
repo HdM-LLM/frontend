@@ -177,7 +177,13 @@ export default function VacancyCreationPage() {
               disableElevation
               onClick={handleBack}
               startIcon={<ClearRoundedIcon />}
-              sx={{ textTransform: 'none', backgroundColor: '#cc7a7a' }}
+              sx={{
+                textTransform: 'none',
+                backgroundColor: '#cc7a7a',
+                '&:hover': {
+                  backgroundColor: '#966b6b',
+                },
+              }}
             >
               Cancel
             </Button>

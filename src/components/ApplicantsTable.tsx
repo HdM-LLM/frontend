@@ -49,9 +49,9 @@ export default function ApplicantsTable(props: ApplicantsTableProps) {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table
-        sx={{ minWidth: '60%', maxWidth: '85%', flexDirection: 'row', boxShadow: 0 }}
+        sx={{ minWidth: '60%', maxWidth: '100%', flexDirection: 'row', boxShadow: 0 }}
         aria-label="table with skills and their rating"
         size="medium"
       >

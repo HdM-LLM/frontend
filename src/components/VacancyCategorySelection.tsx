@@ -119,8 +119,6 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           Guideline_1: guideline_10,
         };
 
-        console.log(finalCategory);
-
         try {
           // Step 3: Add the final category to the backend
           const addCategoryResponse = await API.getAPI().addCategory(finalCategory);

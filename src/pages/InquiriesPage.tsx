@@ -30,7 +30,7 @@ export default function InquiriesPage() {
           sx={{
             width: '100%',
             maxWidth: '95%',
-            borderRadius: '10px',
+            borderRadius: 2,
             bgcolor: '#f5f5f5',
             p: 2,
             mb: 2,
