@@ -140,16 +140,11 @@ export default function VacancyCard(props: VacancyCardProps) {
                 : props.vacancy.description}
             </Typography>
           </Grid>
-          <Grid item sx={{ paddingBottom: '1vh' }}>
-            {/** TODO: Show number of received applications (functionality in backend currently missing) */}
-            <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-              Applications received: TODO
-            </Typography>
-          </Grid>
+
           <Grid item sx={{ paddingBottom: '1vh' }}>
             {/** TODO: Show name of person that requested this vacancy (functionality in backend currently missing) */}
             <Typography variant="body2" component="div" sx={{ fontFamily: FONT_FAMILY }}>
-              Requested by: TODO
+              Requested by: Mike Fisher
             </Typography>
           </Grid>
         </Grid>
