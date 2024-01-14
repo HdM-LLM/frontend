@@ -4,34 +4,32 @@ import {
   Stack,
   Typography,
   TextField,
+  Select,
   MenuItem,
   FormControl,
   InputLabel,
-  Select,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material';
+import { Departments } from '../enums/Departments.enum';
+import { WorkingHours } from '../enums/WorkingHours.enum';
 
 export type VacancyJobInformationProps = {
   onNext: () => void;
   formData: {
-    jobName: string;
+    title: string;
     department: string;
     tasksAndResponsibilities: string;
-    requiredSkills: string;
-    workplaceAndWorkingHours: string;
-    languageRequirements: string;
-    additionalInformation: string;
+    workingHours: string;
+    description: string;
     [key: string]: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
-      jobName: string;
+      title: string;
       department: string;
       tasksAndResponsibilities: string;
-      requiredSkills: string;
-      workplaceAndWorkingHours: string;
-      languageRequirements: string;
-      additionalInformation: string;
+      workingHours: string;
+      description: string;
     }>
   >;
 };
@@ -52,6 +50,13 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
     }));
   };
 
+  const handleWorkingHourChange = (event: SelectChangeEvent<string>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      workingHours: event.target.value as string,
+    }));
+  };
+
   return (
     <Box>
       <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
@@ -60,9 +65,9 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
       {/* Basic information form */}
       <Stack spacing={2}>
         <TextField
-          label="Job Name"
-          name="jobName"
-          value={formData.jobName}
+          label="Job Title"
+          name="title"
+          value={formData.title}
           onChange={handleChange}
           fullWidth
           required
@@ -77,12 +82,15 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
             value={formData.department}
             onChange={handleDepartmentChange}
           >
-            {/* TODO:  Replace with actual department options fetched from backend (Departments should be switched to ENUM in backend and db)*/}
-            <MenuItem value="department1">Department 1</MenuItem>
-            <MenuItem value="department2">Department 2</MenuItem>
+            <MenuItem value={Departments.FINANCE}>Finance</MenuItem>
+            <MenuItem value={Departments.HR}>HR</MenuItem>
+            <MenuItem value={Departments.IT}>IT</MenuItem>
+            <MenuItem value={Departments.LEGAL}>Legal</MenuItem>
+            <MenuItem value={Departments.MARKETING}>Marketing</MenuItem>
+            <MenuItem value={Departments.SALES}>Sales</MenuItem>
+            <MenuItem value={Departments.OTHER}>Other</MenuItem>
           </Select>
         </FormControl>
-
         <TextField
           label="Tasks and Responsibilities"
           name="tasksAndResponsibilities"
@@ -92,36 +100,25 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           multiline
           required
         />
+        <FormControl fullWidth>
+          <InputLabel id="Working Hours">Working Hours</InputLabel>
+          <Select
+            labelId="workingHours"
+            id="workingHours"
+            name="workingHours"
+            label="workingHours"
+            value={formData.workingHours}
+            onChange={handleWorkingHourChange}
+          >
+            <MenuItem value={WorkingHours.FULLTIME}>Full Time</MenuItem>
+            <MenuItem value={WorkingHours.PARTTIME}>Part Time</MenuItem>
+          </Select>
+        </FormControl>
+
         <TextField
-          label="Required Skills"
-          name="requiredSkills"
-          value={formData.requiredSkills}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
-        {/* TODO: This should use radio buttons to make a selection */}
-        <TextField
-          label="Workplace and Working Hours"
-          name="workplaceAndWorkingHours"
-          value={formData.workplaceAndWorkingHours}
-          onChange={handleChange}
-          fullWidth
-          required
-        />
-        {/* TODO: Would it be possible to add a skill level selection after entering a language? */}
-        {/* TODO: Spoken language or programming language? */}
-        <TextField
-          label="Language Requirements"
-          name="languageRequirements"
-          value={formData.languageRequirements}
-          onChange={handleChange}
-          fullWidth
-        />
-        <TextField
-          label="Additional Information"
-          name="additionalInformation"
-          value={formData.additionalInformation}
+          label="Description"
+          name="description"
+          value={formData.description}
           onChange={handleChange}
           fullWidth
         />

@@ -17,13 +17,11 @@ export default function VacancyCreationPage() {
   const [page, setPage] = useState<number>(1);
   const [categories, setCategories] = useState<Category[]>([]);
   const [formData, setFormData] = useState<VacancyJobInformationProps['formData']>({
-    jobName: '',
+    title: '',
     department: '',
     tasksAndResponsibilities: '',
-    requiredSkills: '',
-    workplaceAndWorkingHours: '',
-    languageRequirements: '',
-    additionalInformation: '',
+    workingHours: '',
+    description: '',
   });
 
   const [generatedVacancy, setGeneratedVacancy] = useState('');
@@ -85,11 +83,11 @@ export default function VacancyCreationPage() {
   const handleNext = () => {
     if (page === 1) {
       const basicInfoFields = [
-        'jobName',
+        'title',
         'department',
         'tasksAndResponsibilities',
-        'requiredSkills',
-        'workplaceAndWorkingHours',
+        'workingHours',
+        'description',
       ];
       const isBasicInfoComplete = basicInfoFields.every((field) => Boolean(formData[field]));
 
