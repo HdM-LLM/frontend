@@ -154,7 +154,7 @@ export default function VacancyTable(props: VacancyTableProps) {
                       marginRight: 2,
                     }}
                   ></LinearProgress>
-                  {applicant.ratingScore}/10
+                  {applicant.ratingScore.toFixed(1)}/10
                 </Box>
               </StyledTableCell>
               {/** TODO: backend currently does not serve this information */}

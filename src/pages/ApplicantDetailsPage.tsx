@@ -158,7 +158,7 @@ export default function ApplicantDetailsPage() {
               color="text.secondary"
               sx={{ paddingLeft: '1vw', fontSize: 30 }}
             >
-              {meanApplicantRating + '/10'}
+              {meanApplicantRating.toFixed(1) + '/10'}
             </Typography>
           </Box>
         </Box>

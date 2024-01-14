@@ -121,6 +121,7 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           value={formData.description}
           onChange={handleChange}
           fullWidth
+          required
         />
         <Typography sx={{ color: '#B3B3B3' }}>
           All fields marked with an asterisk (*) are required fields

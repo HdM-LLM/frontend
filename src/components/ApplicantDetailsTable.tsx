@@ -135,7 +135,9 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
               </StyledTableCell>
               <StyledTableCell>{rating.justification}</StyledTableCell>
               <StyledTableCell>
-                {rating.quote.length === 0 ? 'No quote available.' : '"' + rating.quote + '"'}
+                {rating.quote.includes('No quote available')
+                  ? 'No quote available'
+                  : '"' + rating.quote + '"'}
               </StyledTableCell>
               {/** TODO: This is currently not provided by the backend */}
               <StyledTableCell align="center">TODO %</StyledTableCell>
