@@ -76,7 +76,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   useEffect(() => {
     fetchCategories();
   }, []);
-  
+
   const handleAddNewCategory = async () => {
     try {
       // Reset state
@@ -84,7 +84,8 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       setLoading(true);
 
       // Step 1: Add chip to category
-      const addedChipResult = await API.getAPI().getChipForCategory(newCategoryName);
+      let clearCategoryName = newCategoryName.replace(/[^a-zA-Z0-9]/g, '');
+      const addedChipResult = await API.getAPI().getChipForCategory(clearCategoryName);
       const addedChip = addedChipResult?.data.category ?? '';
       setAddedChip(addedChip);
 
@@ -92,7 +93,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
       setChipAssigned(true);
 
       // Step 2: Calculate guideline
-      const response = await API.getAPI().getCategoryGuidelines(newCategoryName);
+      const response = await API.getAPI().getCategoryGuidelines(clearCategoryName);
       setGuideline_0(response.data.guideline_for_zero);
       setGuideline_10(response.data.guideline_for_ten);
 
@@ -117,8 +118,6 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           Guideline_0: guideline_0,
           Guideline_1: guideline_10,
         };
-
-        console.log(finalCategory);
 
         try {
           // Step 3: Add the final category to the backend
@@ -235,7 +234,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           disableElevation
           startIcon={<AddCircleIcon />}
         >
-          New Category
+          New Skill
         </Button>
 
         <Button
@@ -250,10 +249,10 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
 
       {/* Dialog for creating a new category */}
       <Dialog open={isNewCategoryDialogOpen} onClose={handleDialogClose} fullWidth maxWidth="md">
-        <DialogTitle>Create a new category</DialogTitle>
+        <DialogTitle>Create a new skill</DialogTitle>
         <DialogContent>
           <TextField
-            label="Name of the category"
+            label="Name of the skill"
             variant="outlined"
             fullWidth
             value={newCategoryName}
@@ -266,7 +265,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
             Cancel
           </Button>
           <Button onClick={handleAddNewCategory} color="secondary">
-            Add new category
+            Add new skill
           </Button>
         </DialogActions>
       </Dialog>
@@ -279,7 +278,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
           style: { maxHeight: '40vh' },
         }}
       >
-        <DialogTitle>Adding category '{newCategoryName}'</DialogTitle>
+        <DialogTitle>Adding skill '{newCategoryName}'</DialogTitle>
         <DialogContent
           style={{
             position: 'relative',
@@ -290,7 +289,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
         >
           {loading && !chipAssigned && (
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2vh' }}>
-              <CircularProgress />
+              <CircularProgress color="secondary" size={25} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
                 Assigning tag for '{newCategoryName}'...
               </Typography>
@@ -306,12 +305,12 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
                 label={addedChip}
                 style={{ marginLeft: '0.2vw', marginRight: '0.2vw' }}
               />
-              <Typography variant="body1">to category '{newCategoryName}'.</Typography>
+              <Typography variant="body1">to skill '{newCategoryName}'.</Typography>
             </div>
           )}
           {loading && !guidelineCalculated && (
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2vh' }}>
-              <CircularProgress />
+              <CircularProgress color="secondary" size={25} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
                 Assigning rating guidelines for '{newCategoryName}'...
               </Typography>
@@ -336,7 +335,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
             >
               <CheckCircleIcon style={{ color: 'green', marginRight: '0.5vw' }} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
-                Category '{newCategoryName}' is now available.
+                Skill '{newCategoryName}' is now available.
               </Typography>
             </div>
           )}

@@ -13,7 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import { DropZone } from '../components/DropZone';
 import { useEffect, useState } from 'react';
 import { APP_BAR_HEIGHT } from '../constants';
-import { Typography } from '@mui/material';
+import { AlertTitle, Typography } from '@mui/material';
 
 export default function UploadPage() {
   const [cv, setCv] = useState<File | null>(null);
@@ -22,6 +22,8 @@ export default function UploadPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alert, setAlert] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+
+  let errorMessage = '';
 
   useEffect(() => {
     const fetchVacancies = async () => {
@@ -76,8 +78,6 @@ export default function UploadPage() {
     setSelectedVacancy(event.target.value);
   };
 
-  let errorMessage = 'Oops, something went wrong... Try again later.';
-
   const isSendButtonDisabled = !cv || selectedVacancy === '';
 
   return (
@@ -124,7 +124,7 @@ export default function UploadPage() {
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
         <DropZone setFile={setFile} />
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 30 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 20 }}>
         <LoadingButton
           size="medium"
           color="secondary"
@@ -132,15 +132,25 @@ export default function UploadPage() {
           component="label"
           sx={{ width: '100px' }}
           onClick={sendFiles}
-          disabled={isSendButtonDisabled} // Disable the button conditionally
+          disabled={isSendButtonDisabled}
           loading={isLoading}
           disableElevation
         >
           Send
         </LoadingButton>
       </Box>
-      {alert ? <Alert severity="error">{errorMessage}</Alert> : <></>}
-      {success ? <Alert severity="success">🎉 File sent successfully!</Alert> : <></>}
+      {alert === true && (
+        <Alert severity="error" sx={{ marginBottom: 2, marginRight: 3 }}>
+          <AlertTitle>Error</AlertTitle>
+          Oops something went wrong! {errorMessage}
+        </Alert>
+      )}
+      {success === true && (
+        <Alert severity="success" sx={{ marginBottom: 2, marginRight: 3 }}>
+          <AlertTitle>Success</AlertTitle>
+          Your application has been sent!
+        </Alert>
+      )}
     </Box>
   );
 }

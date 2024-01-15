@@ -44,7 +44,7 @@ export default function OverviewPage() {
           flexDirection: 'column',
         }}
       >
-        <Box>
+        <Box sx={{ mb: 2 }}>
           <ApplicantsTable applicants={applicants} receivingDate={receivingDate} />
         </Box>
       </Box>

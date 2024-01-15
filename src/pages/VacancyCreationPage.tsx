@@ -117,22 +117,22 @@ export default function VacancyCreationPage() {
   };
 
   return (
-    <Box sx={{}}>
-      <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2 }}>
+    <Box sx={{ marginLeft: 3, marginTop: 10, pb: 2, marginRight: 3 }}>
+      <Box>
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          New Vacancy
+          Generating a new vacancy
         </Typography>
-        <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+        <Typography variant="h5" sx={{ color: '#4d4d4d', marginTop: '1vh' }}>
           Step {page}/3:{' '}
           {page === 1
-            ? 'Basic Information'
+            ? 'Basic job information'
             : page === 2
-            ? 'Category Selection'
+            ? 'Skill Selection'
             : 'Vacancy Generation'}
         </Typography>
       </Box>
 
-      <Box maxWidth="xl" sx={{ marginTop: '1vh', marginLeft: 3 }}>
+      <Box maxWidth="xl" sx={{ marginTop: '1vh' }}>
         {page === 1 && (
           <VacancyJobInformation
             onNext={handleNext}
@@ -175,7 +175,13 @@ export default function VacancyCreationPage() {
               disableElevation
               onClick={handleBack}
               startIcon={<ClearRoundedIcon />}
-              sx={{ textTransform: 'none', backgroundColor: '#cc7a7a' }}
+              sx={{
+                textTransform: 'none',
+                backgroundColor: '#cc7a7a',
+                '&:hover': {
+                  backgroundColor: '#966b6b',
+                },
+              }}
             >
               Cancel
             </Button>
@@ -219,20 +225,6 @@ export default function VacancyCreationPage() {
           )}
           {page === 3 && (
             <>
-              <Button
-                variant="contained"
-                color="secondary"
-                disableElevation
-                onClick={() => {
-                  setGeneratedVacancy('');
-                  setAdjustPromptPart2('');
-                  setOutput('');
-                }}
-                startIcon={<ClearRoundedIcon />}
-                sx={{ textTransform: 'none' }}
-              >
-                Clear
-              </Button>
               <Button
                 variant="contained"
                 color="secondary"

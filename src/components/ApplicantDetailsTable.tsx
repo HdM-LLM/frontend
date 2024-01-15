@@ -82,13 +82,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
     setRatings(ratingList);
   }, [categories, props.applicantRatings]);
 
-  // Remove first two characters before each quote
-  ratings.forEach((rating) => {
-    if (rating.quote) {
-      rating.quote = rating.quote.substring(1);
-    }
-  });
-
   const maxProgressBarValue = 10;
 
   return (
@@ -109,7 +102,6 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
             <StyledTableCell>Justification</StyledTableCell>
             <StyledTableCell>Quote</StyledTableCell>
             <StyledTableCell>Weight</StyledTableCell>
-            <StyledTableCell>Adjust Rating</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -143,17 +135,12 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
               </StyledTableCell>
               <StyledTableCell>{rating.justification}</StyledTableCell>
               <StyledTableCell>
-                {rating.quote.length === 0 ? 'No quote available.' : '"' + rating.quote + '"'}
+                {rating.quote.includes('No quote available')
+                  ? 'No quote available'
+                  : '"' + rating.quote + '"'}
               </StyledTableCell>
               {/** TODO: This is currently not provided by the backend */}
               <StyledTableCell align="center">TODO %</StyledTableCell>
-              <StyledTableCell align="center">
-                <TextField
-                  id="outlined-rating-adjustment"
-                  type="number"
-                  defaultValue={rating.score}
-                />
-              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

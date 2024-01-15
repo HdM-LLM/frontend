@@ -59,6 +59,9 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
 
   return (
     <Box>
+      <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
+        Please fill out the following information about the job.
+      </Typography>
       {/* Basic information form */}
       <Stack spacing={2}>
         <TextField
@@ -118,6 +121,7 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
           value={formData.description}
           onChange={handleChange}
           fullWidth
+          required
         />
         <Typography sx={{ color: '#B3B3B3' }}>
           All fields marked with an asterisk (*) are required fields

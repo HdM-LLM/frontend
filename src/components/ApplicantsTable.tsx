@@ -49,15 +49,16 @@ export default function ApplicantsTable(props: ApplicantsTableProps) {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table
-        sx={{ minWidth: '60%', maxWidth: '85%', flexDirection: 'row', boxShadow: 0 }}
+        sx={{ minWidth: '60%', maxWidth: '100%', flexDirection: 'row', boxShadow: 0 }}
         aria-label="table with skills and their rating"
         size="medium"
       >
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{ paddingRight: 10 }}>Name</StyledTableCell>
+            {/** TODO: Change this to application date? Would be easier to display */}
             <StyledTableCell sx={{ paddingRight: 15 }}>Applied for</StyledTableCell>
             <StyledTableCell align="center">Contact</StyledTableCell>
             <StyledTableCell></StyledTableCell>

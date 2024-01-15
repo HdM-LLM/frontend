@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import { Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { APP_BAR_HEIGHT } from '../constants';
+import InquiriesTable from '../components/InquiriesTable';
+import { inquiries } from '../mock-data/inquiries';
 
 export default function InquiriesPage() {
   return (
@@ -27,7 +29,8 @@ export default function InquiriesPage() {
         <Box
           sx={{
             width: '100%',
-            borderRadius: '10px',
+            maxWidth: '95%',
+            borderRadius: 2,
             bgcolor: '#f5f5f5',
             p: 2,
             mb: 2,
@@ -47,17 +50,14 @@ export default function InquiriesPage() {
           </NavLink>
         </Box>
 
-        <Box
-          sx={{
-            width: '100%',
-            height: '200px',
-            borderRadius: '10px',
-            bgcolor: '#f5f5f5',
-            p: 2,
-            textAlign: 'center',
-          }}
-        >
-          <Typography>Insert Mockup Data here</Typography>
+        <Box sx={{ marginTop: 7 }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#4d4d4d' }}>
+            Open Inquiries
+          </Typography>
+          <Typography sx={{ marginBottom: '2vh', color: '#8a8a8a' }}>
+            These are the inquiries that are currently open.
+          </Typography>
+          <InquiriesTable inquiries={inquiries} />
         </Box>
       </Box>
     </Box>

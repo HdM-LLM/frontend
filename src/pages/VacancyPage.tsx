@@ -90,7 +90,7 @@ export default function VacancyPage() {
                 <VacancyCard
                   vacancy={vacancy}
                   cardWidth={400}
-                  cardHeight={250}
+                  cardHeight={220}
                   marginRight={2}
                   marginBottom={2}
                 />
