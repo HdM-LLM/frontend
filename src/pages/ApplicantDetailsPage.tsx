@@ -66,9 +66,13 @@ export default function ApplicantDetailsPage() {
 
   useEffect(() => {
     // Set mean rating
-    const meanRating = applicantRatings.reduce((a, b) => a + b.score, 0) / applicantRatings.length;
-    setMeanApplicantRating(meanRating);
-  }, [applicantRatings]);
+    if (applicant) {
+      const totalScoreNumber = parseFloat(applicant.totalScore);
+      setMeanApplicantRating(totalScoreNumber);
+    } else {
+      setMeanApplicantRating(0);
+    }
+  }, [applicant]);
 
   // Function to get pdf from backend
   const getCvAsPdf = () => {
@@ -84,8 +88,6 @@ export default function ApplicantDetailsPage() {
 
     return api.fetchCvURL(applicant_id, vacancy_id);
   };
-
-  const linearProgressValue = (meanApplicantRating / maxProgressBarValue) * 100;
 
   return (
     <Box
@@ -142,24 +144,28 @@ export default function ApplicantDetailsPage() {
               display: 'flex',
             }}
           >
-            <LinearProgress
-              variant="determinate"
-              value={linearProgressValue}
-              color="secondary"
-              sx={{
-                height: 10,
-                borderRadius: 5,
-                minWidth: '85%',
-                alignSelf: 'center',
-              }}
-            />
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ paddingLeft: '1vw', fontSize: 30 }}
-            >
-              {meanApplicantRating.toFixed(1) + '/10'}
-            </Typography>
+            {applicant && (
+              <>
+                <LinearProgress
+                  variant="determinate"
+                  value={(meanApplicantRating / maxProgressBarValue) * 100}
+                  color="secondary"
+                  sx={{
+                    height: 10,
+                    borderRadius: 5,
+                    minWidth: '85%',
+                    alignSelf: 'center',
+                  }}
+                />
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ paddingLeft: '1vw', fontSize: 30 }}
+                >
+                  {meanApplicantRating.toFixed(1) + '/10'}
+                </Typography>
+              </>
+            )}
           </Box>
         </Box>
         <Box sx={{ maxWidth: '25%', width: '17%', marginRight: 3 }}>
@@ -237,6 +243,7 @@ const defaultApplicant: Applicant = {
   skills: [],
   img: '',
   dateCreated: '20.08.2023',
+  totalScore: '7',
 };
 
 ApplicantDetailsPage.defaultProps = {

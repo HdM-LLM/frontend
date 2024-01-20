@@ -12,4 +12,5 @@ export type Applicant = BusinessObject & {
   phoneNumber: string;
   skills: Skill[];
   img: string;
+  totalScore: string;
 };
