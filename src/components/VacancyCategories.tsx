@@ -109,7 +109,7 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
 
       // Calculate equal weight without adjusting
       const equalWeight = +(remainingWeight / totalUnlockedCategories).toFixed(2);
-
+      // Calculate the total weight of the unlocked categories
       const updatedCategories = categories.map((cat, index) => {
         if (!cat.locked && cat.weight !== undefined && cat.weight !== null) {
           const adjustedWeight =

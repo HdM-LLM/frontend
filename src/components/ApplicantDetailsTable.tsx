@@ -49,6 +49,7 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
   const [categories, setCategories] = useState<Category[]>([]);
   const [ratings, setRatings] = useState<ExtRating[]>([]);
 
+  //Fetch category data
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
@@ -66,6 +67,7 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
     fetchCategoryData();
   }, [props.applicantRatings]);
 
+  //Set rating data
   useEffect(() => {
     if (props.applicantRatings.length !== categories.length) {
       return;
