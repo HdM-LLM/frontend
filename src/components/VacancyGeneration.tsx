@@ -64,19 +64,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
     console.log(basicInformation);
   };
 
-  const aiFunFacts = [
-    'Fun fact: Did you know that the first AI was created in 1956?',
-    'Fun fact: Did you know that AI has been used to generate amusing pickup lines? Some are hilarious, like "Are you made of copper and tellurium? Because you are Cu-Te!"',
-    'Fun fact: Did you know that AI can generate bizarre and unconventional names for things? There was an AI experiment that generated new paint colors with names like "Burble Simp" and "Stanky Bean."',
-    'Fun fact: Did you know that sometimes, AI can misinterpret requests in funny ways? For instance, asking an AI to sing a song might result in a hilarious but off-tune rendition.',
-    'Fun fact: Did you know that Researchers are teaching AI to understand and generate jokes? Some AI-generated jokes are so bad they are good, like "Why was the math book sad? Because it had too many problems."',
-    'Fun fact: Did you know that AI has been used to generate unique and unconventional recipes, sometimes combining unexpected ingredients in strange yet oddly intriguing ways, like "banana peel bacon.".',
-  ];
-
-  const getRandomAiFunFact = () => {
-    return aiFunFacts[Math.floor(Math.random() * aiFunFacts.length)];
-  };
-
   return (
     <Box>
       <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
@@ -230,10 +217,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
               }}
               color="secondary"
             />
-            {/** Add fun facts about ai below the loading animation to entertain the user while waiting */}
-            {/**<Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
-              {getRandomAiFunFact()}
-            </Typography>*/}
           </Stack>
         </Paper>
       </Backdrop>
