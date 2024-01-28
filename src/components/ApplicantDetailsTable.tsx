@@ -6,7 +6,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Box, LinearProgress, TextField } from '@mui/material';
+import { Box, LinearProgress, Typography } from '@mui/material';
 import { Rating } from '../types/rating';
 import { Category } from '../types/category';
 import API from '../api/api';
@@ -63,6 +63,7 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
         console.error('Error fetching category data:', error);
       }
     };
+
     fetchCategoryData();
   }, [props.applicantRatings]);
 
@@ -78,11 +79,33 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
         ratingList.push({ ...rating, categoryName: category.name });
       }
     });
-
     setRatings(ratingList);
   }, [categories, props.applicantRatings]);
 
   const maxProgressBarValue = 10;
+
+  /**
+   * Checks if the quote starts with a bullet point and removes it if it does
+   * @param {string} quote - The quote to check for bullet points
+   * @returns {string} - The quote without bullet points
+   */
+  const checkQuoteForBulletPoints = (quote: string) => {
+    if (quote.startsWith('\u2022')) {
+      // Quote can contain multiple sentences, so we need to split it
+      const sentences = quote.split('.');
+      // Remove the first two elements of each sentence (the bullet point and the space after it)
+      const newSentences = sentences.map((sentence) => sentence.slice(2));
+      // Join the sentences back together
+      quote = newSentences.join('. ');
+    }
+    return quote;
+  };
+
+  const noQuoteAvailable = (quote: string) => {
+    return (
+      <Typography sx={{ color: '#4d4d4d', fontStyle: 'italic' }}>No quote available</Typography>
+    );
+  };
 
   return (
     <TableContainer
@@ -136,8 +159,8 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
               <StyledTableCell>{rating.justification}</StyledTableCell>
               <StyledTableCell>
                 {rating.quote.includes('No quote available')
-                  ? 'No quote available'
-                  : '"' + rating.quote + '"'}
+                  ? noQuoteAvailable(rating.quote)
+                  : checkQuoteForBulletPoints(rating.quote)}
               </StyledTableCell>
               {/** TODO: This is currently not provided by the backend */}
               <StyledTableCell align="center">TODO %</StyledTableCell>

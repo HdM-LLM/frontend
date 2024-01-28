@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, Stack, Box, Alert } from '@mui/material';
+import { Typography, Button, Stack, Box, Alert, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import VacancyJobInformation, {
   VacancyJobInformationProps,
@@ -27,6 +27,7 @@ export default function VacancyCreationPage() {
   const [generatedVacancy, setGeneratedVacancy] = useState('');
   const [adjustPromptPart2, setAdjustPromptPart2] = useState('');
   const [output, setOutput] = useState('');
+  const [openSnackbar, setOpenSnachbar] = useState(false);
 
   const handleCategorySelectionChange = (selectedCategories: Category[]) => {
     setCategories(selectedCategories);
@@ -51,14 +52,14 @@ export default function VacancyCreationPage() {
         })
         .then((response) => {
           // Handle the response as needed
-          console.log('Vacancy saved successfully:', response);
+          //console.log('Vacancy saved successfully:', response);
 
           // You can clear the generatedVacancy and adjustPromptPart2 if needed
           setGeneratedVacancy('');
           setAdjustPromptPart2('');
 
-          // Set the output after saving if needed
-          setOutput('Vacancy saved successfully');
+          // Show a success message with an alert
+          setOpenSnachbar(true);
         })
         .catch((error) => {
           // Handle errors if needed
@@ -75,6 +76,15 @@ export default function VacancyCreationPage() {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      navigate('/vacancies');
+    }
+
+    setOpenSnachbar(false);
+    navigate('/vacancies');
+  };
 
   useEffect(() => {
     setAlertMessage(null);
@@ -235,6 +245,21 @@ export default function VacancyCreationPage() {
               >
                 Save
               </Button>
+              <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  variant="filled"
+                  sx={{ width: '100%' }}
+                >
+                  Vacancy saved successfully! You will be redirected to the Vacancies page.
+                </Alert>
+              </Snackbar>
             </>
           )}
         </Stack>
