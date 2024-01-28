@@ -61,6 +61,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         console.error('Error generating vacancy:', error);
         setOpen(false);
       });
+    console.log(basicInformation);
   };
 
   const aiFunFacts = [
@@ -79,7 +80,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
   return (
     <Box>
       <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
-        Please review the generated vacancy and make any adjustments as needed.
+        Let the AI generate a vacancy for you. You can adjust the prompt to fit your needs.
       </Typography>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ marginRight: '15vw' }}>
@@ -92,7 +93,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
               color: '#4d4d4d',
             }}
           >
-            Job Name: {basicInformation.jobName}
+            Job Name: {basicInformation.title}
           </Typography>
           <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
             Department: {basicInformation.department}
@@ -101,7 +102,8 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
             Tasks and Responsibilities: {basicInformation.tasksAndResponsibilities}
           </Typography>
           <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
-            Full-Time: {basicInformation.workplaceAndWorkingHours ? 'Yes' : 'No'}
+            Full-Time position:{' '}
+            {basicInformation.workplaceAndWorkingHours === 'Full Time' ? 'Yes' : 'No'}
           </Typography>
         </Box>
         <Box>
