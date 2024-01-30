@@ -21,7 +21,7 @@ export default function ApplicantDetailsPage() {
         const api = API.getAPI();
         // if ID is provided, fetch applicant by ID
         if (applicant_id) {
-          const applicantObject = await api.fetchApplicant(applicant_id);
+          const applicantObject = await api.fetchApplicant(applicant_id, vacancy_id);
           // null check to prevent errors during rendering
           if (!applicantObject) {
             console.error('Error fetching applicant: No applicant found');
