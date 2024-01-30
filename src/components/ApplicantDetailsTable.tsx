@@ -140,7 +140,7 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
                   : '"' + rating.quote + '"'}
               </StyledTableCell>
               {/** TODO: This is currently not provided by the backend */}
-              <StyledTableCell align="center">TODO %</StyledTableCell>
+              <StyledTableCell align="center">{rating.weight}%</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
