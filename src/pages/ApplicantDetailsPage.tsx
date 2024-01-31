@@ -20,7 +20,7 @@ export default function ApplicantDetailsPage() {
       try {
         const api = API.getAPI();
         // if ID is provided, fetch applicant by ID
-        if (applicant_id) {
+        if (applicant_id && vacancy_id) {
           const applicantObject = await api.fetchApplicant(applicant_id, vacancy_id);
           // null check to prevent errors during rendering
           if (!applicantObject) {
@@ -39,7 +39,7 @@ export default function ApplicantDetailsPage() {
     };
 
     fetchApplicant();
-  }, [applicant_id]);
+  }, [applicant_id, vacancy_id]);
 
   useEffect(() => {
     const fetchRating = async () => {
