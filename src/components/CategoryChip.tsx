@@ -18,12 +18,12 @@ const getContrastText = (backgroundColor: string) => {
   const g = (rgb >>  8) & 0xff;
   const b = (rgb >>  0) & 0xff;
 
-  const luminance = 0.2126 * Math.pow(r / 255, 2.2) +
-                    0.7152 * Math.pow(g / 255, 2.2) +
-                    0.0722 * Math.pow(b / 255, 2.2);
-
+  const luminance = 0.2126 * (r) +
+                    0.7152 * (g) +
+                    0.0722 * (b);
+                    
   // Use black text for light backgrounds and white text for dark backgrounds
-  return luminance > 0.5 ? 'black' : 'white';
+  return luminance > 20 ? 'black' : 'white';
 };
 
 interface ColoredChipProps {

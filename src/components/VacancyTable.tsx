@@ -12,6 +12,7 @@ import { Applicant } from '../types/applicant';
 import { useEffect, useState } from 'react';
 import API from '../api/api';
 
+
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#FFFFFF',
@@ -39,6 +40,7 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
+
 export interface VacancyTableProps {
   applicants: Applicant[];
   receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
@@ -51,15 +53,13 @@ type ExtApplicant = Applicant & {
 export default function VacancyTable(props: VacancyTableProps) {
   const maxProgressBarValue = 10;
   const { vacancy_id } = useParams();
-  const [applicants, setApplicants] = useState<ExtApplicant[]>([]);
+  const [applicants, setApplicants] = useState<Applicant[]>([]);
 
   const linkStyle = {
     textDecoration: 'none',
   };
 
   useEffect(() => {
-    const fetchRating = async () => {
-      try {
         if (!props.applicants) {
           console.error('Error fetching rating: No Applicants provided');
           return;
@@ -68,27 +68,15 @@ export default function VacancyTable(props: VacancyTableProps) {
           console.error('Error fetching rating: No Vacancy ID provided');
           return;
         }
-
-        const api = API.getAPI();
-        let applicantList: ExtApplicant[] = [];
-        for (const applicant of props.applicants) {
-          const ratings = await api.fetchApplicantRatings(vacancy_id, applicant.id);
-          let extApplicant = applicant as ExtApplicant;
-          extApplicant.ratingScore = 0;
-          for (const rating of ratings) {
-            extApplicant.ratingScore += rating.score;
-          }
-          extApplicant.ratingScore = extApplicant.ratingScore / ratings.length;
-          applicantList.push(extApplicant);
+        
+        if (props.applicants) {
+          setApplicants(props.applicants);
         }
-        setApplicants(applicantList);
-      } catch (error) {
-        console.error('Error fetching rating:', error);
-      }
-    };
+        console.log(props.applicants)
+      }, [props.applicants, vacancy_id]);
 
-    fetchRating();
-  }, [props.applicants, vacancy_id]);
+
+
 
   return (
     <TableContainer
@@ -145,7 +133,7 @@ export default function VacancyTable(props: VacancyTableProps) {
                 >
                   <LinearProgress
                     variant="determinate"
-                    value={(applicant.ratingScore / maxProgressBarValue) * 100}
+                    value={Number(applicant.totalScore) / maxProgressBarValue * 100}
                     color="secondary"
                     sx={{
                       height: 5,
@@ -154,7 +142,11 @@ export default function VacancyTable(props: VacancyTableProps) {
                       marginRight: 2,
                     }}
                   ></LinearProgress>
-                  {applicant.ratingScore.toFixed(1)}/10
+                  {
+                    applicant.totalScore !== null && !isNaN(Number(applicant.totalScore))
+                      ? `${Number(applicant.totalScore).toFixed(1)}/10`
+                      : 'NaN'
+                  }
                 </Box>
               </StyledTableCell>
               {/** TODO: backend currently does not serve this information */}
