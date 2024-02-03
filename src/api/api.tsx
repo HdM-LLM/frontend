@@ -9,13 +9,15 @@ export default class API {
   //URLs
   addPdfURL = () => `${this.URL}/upload`;
   getApplicantsURL = () => `${this.URL}/applicants`;
-  getApplicantURL = (id: string) => `${this.URL}/applicant/${id}`;
+  getApplicantURL = (applicantId: string, vacancyId: string) =>
+    `${this.URL}/applicants/${applicantId}/${vacancyId}`;
 
   // Get applicants by vacancy ID or all applicants
   fetchApplicantsURL = () => `${this.URL}/applicants`;
 
   // Get applicants by vacancy ID or all applicants
-  fetchApplicantURL = (applicantId: string) => `${this.URL}/applicants${`/${applicantId}`}`;
+  fetchApplicantURL = (applicantId: string, vacancyId: string) =>
+    `${this.URL}/applicants/${applicantId}/${vacancyId}`;
 
   // Get all applicants by vacancy ID
   fetchApplicantsByVacancyURL = (vacancyId: string) =>
@@ -88,8 +90,8 @@ export default class API {
     return this.fetchAdvanced(this.fetchApplicantsURL(), {});
   }
 
-  fetchApplicant(applicantId: string) {
-    return this.fetchAdvanced(this.fetchApplicantURL(applicantId), {});
+  fetchApplicant(applicantId: string, vacancyId: string) {
+    return this.fetchAdvanced(this.fetchApplicantURL(applicantId, vacancyId), {});
   }
 
   fetchApplicantsByVacancyId(vacancyId: string) {

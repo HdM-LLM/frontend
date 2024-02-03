@@ -10,4 +10,5 @@ export type Rating = BusinessObject & {
   score: number;
   justification: string;
   quote: string;
+  weight: number;
 };
