@@ -109,6 +109,7 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
             label="workingHours"
             value={formData.workingHours}
             onChange={handleWorkingHourChange}
+            required
           >
             <MenuItem value={WorkingHours.FULLTIME}>Full Time</MenuItem>
             <MenuItem value={WorkingHours.PARTTIME}>Part Time</MenuItem>

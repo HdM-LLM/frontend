@@ -18,7 +18,6 @@ export default function Dashboard() {
       try {
         const api = API.getAPI();
         const allApplicants = await api.fetchApplicants();
-        console.log(allApplicants);
         setApplicants(allApplicants);
       } catch (error) {
         console.error('Error fetching all applicants:', error);

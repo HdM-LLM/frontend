@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, Stack, Box, Alert } from '@mui/material';
+import {
+  Typography,
+  Button,
+  Stack,
+  Box,
+  Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import VacancyJobInformation, {
   VacancyJobInformationProps,
@@ -27,6 +38,12 @@ export default function VacancyCreationPage() {
   const [generatedVacancy, setGeneratedVacancy] = useState('');
   const [adjustPromptPart2, setAdjustPromptPart2] = useState('');
   const [output, setOutput] = useState('');
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+  const [openFailedDialog, setOpenFailedDialog] = useState(false);
+  const [basicInfoCompleted, setBasicInfoCompleted] = useState(false);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const handleCategorySelectionChange = (selectedCategories: Category[]) => {
     setCategories(selectedCategories);
@@ -50,20 +67,18 @@ export default function VacancyCreationPage() {
           generatedVacancy: output, // Use the output directly, whether it's generated or custom
         })
         .then((response) => {
-          // Handle the response as needed
-          console.log('Vacancy saved successfully:', response);
-
-          // You can clear the generatedVacancy and adjustPromptPart2 if needed
+          // Clear the generatedVacancy and adjustPromptPart2
           setGeneratedVacancy('');
           setAdjustPromptPart2('');
 
-          // Set the output after saving if needed
-          setOutput('Vacancy saved successfully');
+          // Show a success message with a dialog
+          setOpenSuccessDialog(true);
         })
         .catch((error) => {
           // Handle errors if needed
           console.error('Error saving vacancy:', error);
-          setOutput('Error saving vacancy');
+          // Show a failure message with a dialog
+          setOpenFailedDialog(true);
         });
     } else {
       // Handle the case where there is no content to save
@@ -71,10 +86,15 @@ export default function VacancyCreationPage() {
     }
   };
 
-  const [basicInfoCompleted, setBasicInfoCompleted] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const handleInquiriesClick = () => {
+    setOpenSuccessDialog(false);
+    navigate('/inquiries');
+  };
 
-  const navigate = useNavigate();
+  const handleVacanciesClick = () => {
+    setOpenSuccessDialog(false);
+    navigate('/vacancies');
+  };
 
   useEffect(() => {
     setAlertMessage(null);
@@ -235,6 +255,29 @@ export default function VacancyCreationPage() {
               >
                 Save
               </Button>
+              <Dialog open={openSuccessDialog}>
+                <DialogTitle>Vacancy saved successfully!</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Do you want to create another vacancy or go to the vacancies page?
+                  </DialogContentText>
+                  <DialogActions>
+                    <Button onClick={handleInquiriesClick}>New Vacancy</Button>
+                    <Button onClick={handleVacanciesClick}>All Vacancies</Button>
+                  </DialogActions>
+                </DialogContent>
+              </Dialog>
+              <Dialog open={openFailedDialog}>
+                <DialogTitle>Error while saving!</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    An error occurred while saving your vacancy. Please contact the system admin.
+                  </DialogContentText>
+                  <DialogActions>
+                    <Button onClick={() => setOpenFailedDialog(false)}>Close</Button>
+                  </DialogActions>
+                </DialogContent>
+              </Dialog>
             </>
           )}
         </Stack>

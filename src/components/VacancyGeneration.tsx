@@ -61,25 +61,13 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         console.error('Error generating vacancy:', error);
         setOpen(false);
       });
-  };
-
-  const aiFunFacts = [
-    'Fun fact: Did you know that the first AI was created in 1956?',
-    'Fun fact: Did you know that AI has been used to generate amusing pickup lines? Some are hilarious, like "Are you made of copper and tellurium? Because you are Cu-Te!"',
-    'Fun fact: Did you know that AI can generate bizarre and unconventional names for things? There was an AI experiment that generated new paint colors with names like "Burble Simp" and "Stanky Bean."',
-    'Fun fact: Did you know that sometimes, AI can misinterpret requests in funny ways? For instance, asking an AI to sing a song might result in a hilarious but off-tune rendition.',
-    'Fun fact: Did you know that Researchers are teaching AI to understand and generate jokes? Some AI-generated jokes are so bad they are good, like "Why was the math book sad? Because it had too many problems."',
-    'Fun fact: Did you know that AI has been used to generate unique and unconventional recipes, sometimes combining unexpected ingredients in strange yet oddly intriguing ways, like "banana peel bacon.".',
-  ];
-
-  const getRandomAiFunFact = () => {
-    return aiFunFacts[Math.floor(Math.random() * aiFunFacts.length)];
+    console.log(basicInformation);
   };
 
   return (
     <Box>
       <Typography variant="h6" sx={{ marginBottom: '1vh', color: '#8a8a8a' }}>
-        Please review the generated vacancy and make any adjustments as needed.
+        Let the AI generate a vacancy for you. You can adjust the prompt to fit your needs.
       </Typography>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ marginRight: '15vw' }}>
@@ -92,7 +80,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
               color: '#4d4d4d',
             }}
           >
-            Job Name: {basicInformation.jobName}
+            Job Name: {basicInformation.title}
           </Typography>
           <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
             Department: {basicInformation.department}
@@ -101,7 +89,8 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
             Tasks and Responsibilities: {basicInformation.tasksAndResponsibilities}
           </Typography>
           <Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
-            Full-Time: {basicInformation.workplaceAndWorkingHours ? 'Yes' : 'No'}
+            Full-Time position:{' '}
+            {basicInformation.workplaceAndWorkingHours === 'Full Time' ? 'Yes' : 'No'}
           </Typography>
         </Box>
         <Box>
@@ -112,7 +101,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
             <Chip
               label={category.name}
               key={category.id}
-              sx={{ color: '#4d4d4d', mr: 1, borderRadius: 2 }}
+              sx={{ color: '#4d4d4d', mr: 1, mb: 1, borderRadius: 2 }}
             />
           ))}
         </Box>
@@ -152,7 +141,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         disableElevation
         startIcon={<SmartToyRoundedIcon />}
       >
-        (Re-)Generate Vacancy
+        Generate Vacancy
       </Button>
       <Box sx={{ mt: '2vh' }}>
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
@@ -228,10 +217,6 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
               }}
               color="secondary"
             />
-            {/** Add fun facts about ai below the loading animation to entertain the user while waiting */}
-            {/**<Typography sx={{ marginTop: '1vh', color: '#4d4d4d' }}>
-              {getRandomAiFunFact()}
-            </Typography>*/}
           </Stack>
         </Paper>
       </Backdrop>

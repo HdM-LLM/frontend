@@ -7,11 +7,13 @@ import ApplicantDetailsTable from '../components/ApplicantDetailsTable';
 import API from '../api/api';
 import { useParams } from 'react-router-dom';
 import { Rating } from '../types/rating';
+import { Vacancy } from '../types/vacancy';
 
 export default function ApplicantDetailsPage() {
   const [applicantRatings, setApplicantRatings] = useState<Rating[]>([]);
   const [applicant, setApplicant] = useState<Applicant | null>(null);
   const [meanApplicantRating, setMeanApplicantRating] = useState<number>(0);
+  const [vacancyData, setVacancyData] = useState<Vacancy | null>(null);
   const maxProgressBarValue = 10;
   const { vacancy_id, applicant_id } = useParams();
 
@@ -74,6 +76,32 @@ export default function ApplicantDetailsPage() {
     }
   }, [applicant]);
 
+  // fetch vacancy by ID
+  useEffect(() => {
+    const fetchVacancy = async () => {
+      try {
+        if (!vacancy_id) {
+          console.error('Error fetching vacancy: No ID provided');
+          return;
+        }
+
+        const api = API.getAPI();
+        const vacancyData = await api.fetchVacancy(vacancy_id);
+        // null check to prevent errors during rendering
+        if (!vacancyData) {
+          console.error('Error fetching vacancy: No vacancy found');
+          return;
+        }
+        // set vacancy
+        setVacancyData(vacancyData);
+      } catch (error) {
+        console.error('Error fetching vacancy:', error);
+      }
+    };
+
+    fetchVacancy();
+  }, [vacancy_id]);
+
   // Function to get pdf from backend
   const getCvAsPdf = () => {
     const api = API.getAPI();
@@ -99,10 +127,10 @@ export default function ApplicantDetailsPage() {
     >
       <Stack sx={{ marginLeft: 3, marginTop: 10, pb: 2 }} direction="column">
         <Typography variant="h4" fontWeight={'bold'} sx={{ color: '#4d4d4d' }}>
-          Java Developer Backend
+          {vacancyData && vacancyData.title}
         </Typography>
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
-          IT Department
+          {vacancyData && vacancyData.department}
         </Typography>
       </Stack>
       <Box
@@ -188,7 +216,7 @@ export default function ApplicantDetailsPage() {
           </Stack>
         </Box>
       </Box>
-      {/** TODO: add receiving date */}
+      {/** #TODO: add receiving date */}
       <Typography
         variant="h6"
         sx={{ marginBottom: '2vh', color: '#4d4d4d', marginLeft: 3, marginTop: '2vh' }}
@@ -213,7 +241,6 @@ export default function ApplicantDetailsPage() {
         </Box>
         <Box>
           <Typography variant="h6">Attached Documents</Typography>
-          {/** TODO: Add functionality to view pdf in browser */}
           <Button
             variant="contained"
             startIcon={<AttachFileIcon />}

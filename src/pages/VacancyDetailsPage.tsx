@@ -75,7 +75,13 @@ export default function VacancyDetailsPage() {
         }}
       >
         <Box>
-          <VacancyTable applicants={applicants} receivingDate={receivingDate} />
+          {applicants.length === 0 ? (
+            <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
+              No applications received yet
+            </Typography>
+          ) : (
+            <VacancyTable applicants={applicants} receivingDate={receivingDate} />
+          )}
         </Box>
       </Box>
     </Box>
