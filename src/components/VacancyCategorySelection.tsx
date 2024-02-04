@@ -173,23 +173,6 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
     setCategoryAdded(false);
   };
 
-  const StepWithLoadingCircle: React.FC<{ loading: boolean; success: boolean; text: string }> = ({
-    loading,
-    success,
-    text,
-  }) => {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <CheckCircleIcon style={{ color: success ? 'green' : 'inherit', marginRight: '8px' }} />
-        )}
-        <p>{text}</p>
-      </div>
-    );
-  };
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Box
@@ -320,7 +303,7 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2vh' }}>
               <CheckCircleIcon style={{ color: 'green', marginRight: '0.5vw' }} />
               <Typography variant="body1" style={{ marginLeft: '0.5vw' }}>
-                Assigned guidelines for 0 and 10 points.
+                Assigned rating guidelines for 0 and 10 points.
               </Typography>
             </div>
           )}

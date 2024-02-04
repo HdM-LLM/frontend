@@ -101,7 +101,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
             <Chip
               label={category.name}
               key={category.id}
-              sx={{ color: '#4d4d4d', mr: 1, borderRadius: 2 }}
+              sx={{ color: '#4d4d4d', mr: 1, mb: 1, borderRadius: 2 }}
             />
           ))}
         </Box>
@@ -141,7 +141,7 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
         disableElevation
         startIcon={<SmartToyRoundedIcon />}
       >
-        (Re-)Generate Vacancy
+        Generate Vacancy
       </Button>
       <Box sx={{ mt: '2vh' }}>
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
