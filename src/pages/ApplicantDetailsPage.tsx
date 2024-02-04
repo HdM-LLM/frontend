@@ -130,7 +130,7 @@ export default function ApplicantDetailsPage() {
           {vacancyData && vacancyData.title}
         </Typography>
         <Typography variant="h6" sx={{ color: '#4d4d4d' }}>
-          Department: {vacancyData && vacancyData.department}
+          {vacancyData && vacancyData.department}
         </Typography>
       </Stack>
       <Box

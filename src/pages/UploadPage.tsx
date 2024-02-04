@@ -95,12 +95,12 @@ export default function UploadPage() {
         fontWeight={'bold'}
         sx={{ color: '#4d4d4d', marginTop: 10, marginBottom: 3 }}
       >
-        Upload your application
+        Upload an application
       </Typography>
       <Typography variant="h6" sx={{ color: '#4d4d4d', marginBottom: 2 }}>
-        Select the vacancy you are applying for
+        Select a vacancy
       </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 4 }}>
         <FormControl sx={{ width: 300 }} size="small">
           <InputLabel id="vacancy-label">Vacancy</InputLabel>
           <Select
@@ -121,7 +121,7 @@ export default function UploadPage() {
       <Typography variant="h6" sx={{ color: '#4d4d4d', marginBottom: 2 }}>
         Upload your CV
       </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', mb: 4 }}>
         <DropZone setFile={setFile} />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', mb: 20 }}>
