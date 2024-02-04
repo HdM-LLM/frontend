@@ -20,7 +20,7 @@ export default function VacancyDetailsPage() {
           console.error('Error fetching vacancy: No ID provided');
           return;
         }
-
+        // fetch vacancy data
         const api = API.getAPI();
         const vacancyData = await api.fetchVacancy(vacancy_id);
         setVacancy(vacancyData);

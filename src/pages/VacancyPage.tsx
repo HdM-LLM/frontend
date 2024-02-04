@@ -28,7 +28,6 @@ export default function VacancyPage() {
         console.error('Error fetching vacancies:', error);
       }
     };
-
     fetchVacancies();
   }, []);
 

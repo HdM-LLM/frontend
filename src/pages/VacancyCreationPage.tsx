@@ -110,7 +110,7 @@ export default function VacancyCreationPage() {
         'description',
       ];
       const isBasicInfoComplete = basicInfoFields.every((field) => Boolean(formData[field]));
-
+      // User is on first page and clicks next without filling out all required fields
       if (!isBasicInfoComplete) {
         setAlertMessage('Please fill out all required fields to continue');
         return;

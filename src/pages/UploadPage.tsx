@@ -35,15 +35,17 @@ export default function UploadPage() {
         console.error('Error fetching vacancies:', error);
       }
     };
-
+    //fetch vacancies
     fetchVacancies();
   }, []);
 
+  // Sets CV file
   const setFile = (file: File) => {
     setCv(file);
   };
 
   const sendFiles = async () => {
+    // Check if there is both a cv file uploaded and a vacancy selected
     if (!cv || !selectedVacancy) {
       setAlert(true);
       setTimeout(() => {
@@ -52,6 +54,7 @@ export default function UploadPage() {
     } else {
       try {
         setIsLoading(true);
+        // Send file
         await API.getAPI()
           .addPdfs(cv, selectedVacancy)
           .then(() => {
@@ -78,6 +81,7 @@ export default function UploadPage() {
     setSelectedVacancy(event.target.value);
   };
 
+  // Disable send button if no cv file is uploaded or no vacancy is selected
   const isSendButtonDisabled = !cv || selectedVacancy === '';
 
   return (
