@@ -12,7 +12,14 @@ import Typography from '@mui/material/Typography';
 import CallMergeIcon from '@mui/icons-material/CallMerge';
 import { FONT_FAMILY } from '../constants';
 
+/**
+ * AppBar component styled with MUI and custom configurations.
+ * Includes a logo, search bar, and user information area with an avatar, name, and notifications icon.
+ */
 export default function AppBar() {
+  /**
+   * AppBarMod component with custom styles applied.
+   */
   const AppBarMod = styled(MuiAppBar)(({ theme }) => ({
     background: theme.palette.grey[100],
     boxShadow: 'none',
@@ -21,6 +28,9 @@ export default function AppBar() {
     zIndex: theme.zIndex.drawer + 1,
   }));
 
+  /**
+   * Search component styled to include a search icon and input field.
+   */
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: 8,
@@ -28,6 +38,9 @@ export default function AppBar() {
     width: '50%',
   }));
 
+  /**
+   * SearchIconWrapper component positions the search icon inside the search input.
+   */
   const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     color: 'black',
@@ -39,6 +52,9 @@ export default function AppBar() {
     justifyContent: 'center',
   }));
 
+  /**
+   * StyledInputBase component customizes the appearance of the search input.
+   */
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {

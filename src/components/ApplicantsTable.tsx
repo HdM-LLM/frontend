@@ -10,6 +10,9 @@ import { Box, Button, Avatar } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { Applicant } from '../types/applicant';
 
+/**
+ * Applies custom styling to TableCell components for both header and body cells.
+ */
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#FFFFFF',
@@ -25,6 +28,9 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
+/**
+ * Applies custom styling to TableRow components, including zebra striping for rows and hiding the last border.
+ */
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#f3f3f3',
@@ -42,6 +48,10 @@ export interface ApplicantsTableProps {
   receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
 }
 
+/**
+ * Renders a table of applicants using custom styled components.
+ * @param {ApplicantsTableProps} props - The properties passed to the ApplicantsTable component.
+ */
 export default function ApplicantsTable(props: ApplicantsTableProps) {
   const linkStyle = {
     textDecoration: 'none',

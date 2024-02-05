@@ -12,6 +12,9 @@ import { Category } from '../types/category';
 import API from '../api/api';
 import { useEffect, useState } from 'react';
 
+/**
+ * StyledTableCell component applying custom styles to table cell headers and bodies.
+ */
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#FFFFFF',
@@ -25,6 +28,9 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
+/**
+ * StyledTableRow component applying custom styles to table rows, including alternating row colors and hiding the last border.
+ */
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#f3f3f3',
@@ -45,10 +51,17 @@ type ExtRating = Rating & {
   categoryName: string;
 };
 
+/**
+ * Displays a table of applicant ratings along with category names.
+ * @param {ApplicantDetailsTableProps} props - Component props containing applicant ratings.
+ */
 export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [ratings, setRatings] = useState<ExtRating[]>([]);
 
+  /**
+   * Fetches category data for each rating and updates the categories state.
+   */
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
@@ -67,6 +80,9 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
     fetchCategoryData();
   }, [props.applicantRatings]);
 
+  /**
+   * Updates the ratings state with the category names included.
+   */
   useEffect(() => {
     if (props.applicantRatings.length !== categories.length) {
       return;
@@ -101,6 +117,11 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
     return quote;
   };
 
+  /**
+   * Renders a placeholder text when no quote is available.
+   * @param {string} quote - The quote to check for availability.
+   * @returns {JSX.Element} A Typography component displaying "No quote available".
+   */
   const noQuoteAvailable = (quote: string) => {
     return (
       <Typography sx={{ color: '#4d4d4d', fontStyle: 'italic' }}>No quote available</Typography>
