@@ -12,7 +12,9 @@ import { Applicant } from '../types/applicant';
 import { useEffect, useState } from 'react';
 import API from '../api/api';
 
-
+/**
+ * Custom styled TableCell component for enhanced table cell appearance.
+ */
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#FFFFFF',
@@ -28,6 +30,9 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
+/**
+ * Custom styled TableRow component for zebra striping and hiding the last border.
+ */
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#f3f3f3',
@@ -40,43 +45,59 @@ const StyledTableRow = styled(TableRow)(() => ({
   },
 }));
 
-
+/**
+ * Properties for the VacancyTable component.
+ * @typedef {Object} VacancyTableProps
+ * @property {Applicant[]} applicants - Array of applicants to be displayed in the table.
+ * @property {string} receivingDate - The date when the applicants were received. Planned to change to Date type.
+ */
 export interface VacancyTableProps {
   applicants: Applicant[];
   receivingDate: string; // TODO: Change this later to Date once the backend and database are connected
 }
 
+/**
+ * Extended Applicant type with additional ratingScore property.
+ * @typedef {Applicant & {ratingScore: number}} ExtApplicant
+ */
 type ExtApplicant = Applicant & {
   ratingScore: number;
 };
 
+/**
+ * Component to render a table of applicants for a specific vacancy.
+ *
+ * @param {VacancyTableProps} props - The properties passed to the VacancyTable component.
+ * @returns {JSX.Element} - The component rendering a table of applicants.
+ */
 export default function VacancyTable(props: VacancyTableProps) {
   const maxProgressBarValue = 10;
   const { vacancy_id } = useParams();
   const [applicants, setApplicants] = useState<Applicant[]>([]);
 
+  /**
+   * Inline style for links within the table, specifically to remove text decoration.
+   */
   const linkStyle = {
     textDecoration: 'none',
   };
 
   useEffect(() => {
-        if (!props.applicants) {
-          console.error('Error fetching rating: No Applicants provided');
-          return;
-        }
-        if (!vacancy_id) {
-          console.error('Error fetching rating: No Vacancy ID provided');
-          return;
-        }
-        
-        if (props.applicants) {
-          setApplicants(props.applicants);
-        }
-        console.log(props.applicants)
-      }, [props.applicants, vacancy_id]);
+    if (!props.applicants) {
+      console.error('Error fetching rating: No Applicants provided');
+      return;
+    }
+    if (!vacancy_id) {
+      console.error('Error fetching rating: No Vacancy ID provided');
+      return;
+    }
 
-
-
+    // Set the applicants from props to state
+    if (props.applicants) {
+      setApplicants(props.applicants);
+    }
+    console.log(props.applicants);
+  }, [props.applicants, vacancy_id]);
 
   return (
     <TableContainer
@@ -133,7 +154,7 @@ export default function VacancyTable(props: VacancyTableProps) {
                 >
                   <LinearProgress
                     variant="determinate"
-                    value={Number(applicant.totalScore) / maxProgressBarValue * 100}
+                    value={(Number(applicant.totalScore) / maxProgressBarValue) * 100}
                     color="secondary"
                     sx={{
                       height: 5,
@@ -142,11 +163,9 @@ export default function VacancyTable(props: VacancyTableProps) {
                       marginRight: 2,
                     }}
                   ></LinearProgress>
-                  {
-                    applicant.totalScore !== null && !isNaN(Number(applicant.totalScore))
-                      ? `${Number(applicant.totalScore).toFixed(1)}/10`
-                      : 'NaN'
-                  }
+                  {applicant.totalScore !== null && !isNaN(Number(applicant.totalScore))
+                    ? `${Number(applicant.totalScore).toFixed(1)}/10`
+                    : 'NaN'}
                 </Box>
               </StyledTableCell>
               {/** TODO: backend currently does not serve this information */}

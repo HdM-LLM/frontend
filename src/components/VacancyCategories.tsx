@@ -18,6 +18,14 @@ import CategorySelector from './VacancyCategorySelection';
 import ColoredChip from './CategoryChip';
 import { Category } from '../types/category';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+/**
+ * Defines the properties for the VacancyCategories component,
+ * allowing for the manipulation and display of categories within a vacancy creation or editing process.
+ * @typedef {Object} VacancyCategoriesProps
+ * @property {(selectedCategories: Category[]) => void} onNext - Callback function to proceed to the next step with the selected categories.
+ * @property {(categories: Category[]) => void} onSelectedCategoriesChange - Callback function to update the parent component with changes to the selected categories.
+ * @property {Category[]} categories - Array of categories to be displayed and managed within the component.
+ */
 
 type VacancyCategoriesProps = {
   onNext: (selectedCategories: Category[]) => void;
@@ -25,6 +33,13 @@ type VacancyCategoriesProps = {
   categories: Category[]; // Add categories prop
 };
 
+/**
+ * A component that allows users to manage categories associated with a vacancy,
+ * including adding, deleting, and adjusting the weight of categories.
+ *
+ * @param {VacancyCategoriesProps} props - The properties passed to the VacancyCategories component.
+ * @returns {JSX.Element} The rendered component for managing vacancy categories.
+ */
 const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
   onNext,
   onSelectedCategoriesChange,
@@ -33,15 +48,17 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
   const [categories, setCategories] = useState<Category[]>(parentCategories);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
+  // useEffect to synchronize categories state with parent component's categories prop
   useEffect(() => {
     setCategories(parentCategories);
   }, [parentCategories]);
 
+  // Handles the deletion of a category from the selected categories
   const handleDeleteCategory = (categoryId: string) => {
     const updatedCategories = categories.filter((cat) => cat.id !== categoryId);
     setCategories(updatedCategories);
 
-    // Notify the parent component about the changes
+    // Notifies the parent component about the changes
     onSelectedCategoriesChange(
       updatedCategories.map((category) => ({
         name: category.name,
@@ -52,12 +69,14 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
     );
   };
 
+  // Handles changes to the weight of a category
   const handleWeightChange = (categoryId: string, value: number) => {
     const updatedCategories = categories.map((cat) =>
       cat.id === categoryId ? { ...cat, weight: value } : cat
     );
     setCategories(updatedCategories);
 
+    // Notifies the parent component about the changes
     onSelectedCategoriesChange(
       updatedCategories.map((category) => ({
         name: category.name,
@@ -68,6 +87,7 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
     );
   };
 
+  // Toggles the lock status of a category
   const handleToggleLock = (categoryId: string) => {
     const updatedCategories = categories.map((cat) =>
       cat.id === categoryId ? { ...cat, locked: !cat.locked } : cat
@@ -75,14 +95,17 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
     setCategories(updatedCategories);
   };
 
+  // Opens the dialog for adding new categories
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
 
+  // Closes the dialog for adding new categories
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
 
+  // Handles the selection of categories from the dialog
   const handleCategorySelection = (selectedCategories: Category[]) => {
     if (selectedCategories.length > 0) {
       const newCategories: Category[] = selectedCategories.map((category) => ({
@@ -97,6 +120,7 @@ const VacancyCategories: React.FC<VacancyCategoriesProps> = ({
     }
   };
 
+  // Automatically distributes the weight among unlocked categories
   const handleAutoWeight = () => {
     const lockedCategories = categories.filter((cat) => cat.locked);
     const unlockedCategories = categories.filter((cat) => !cat.locked);

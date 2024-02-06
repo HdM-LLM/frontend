@@ -11,6 +11,9 @@ import { Inquiry } from '../types/inquiry';
 import { FONT_FAMILY } from '../constants';
 import { Departments } from './VacancyCard';
 
+/**
+ * Custom styled TableCell components for table headers and body cells.
+ */
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#FFFFFF',
@@ -26,6 +29,9 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
+/**
+ * Custom styled TableRow component for zebra striping and hiding the last border.
+ */
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#f3f3f3',
@@ -42,8 +48,16 @@ export interface InquiriesTableProps {
   inquiries: Inquiry[];
 }
 
+/**
+ * Functional component to render a table of inquiries with department-based color coding.
+ * @param {InquiriesTableProps} props - Component props containing an array of inquiries.
+ */
 export default function InquiriesTable(props: InquiriesTableProps) {
-  // Get chip color based on department that is fed in
+  /**
+   * Determines the background color of a chip based on the department.
+   * @param {string} department - The department name.
+   * @returns {string} The hex color code for the department's chip background.
+   */
   const getDepartmentChipColor = (department: string) => {
     switch (department) {
       case Departments.HR:
@@ -65,7 +79,11 @@ export default function InquiriesTable(props: InquiriesTableProps) {
     }
   };
 
-  // Get chip text color based on department that is fed in
+  /**
+   * Determines the text color of a chip based on the department.
+   * @param {string} department - The department name.
+   * @returns {string} The hex color code for the department's chip text.
+   */
   const getDepartmentChipTextColor = (department: string) => {
     switch (department) {
       case Departments.HR:

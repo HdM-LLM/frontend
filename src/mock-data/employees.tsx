@@ -1,5 +1,6 @@
 import { Employee } from '../types/employee';
 
+// Mock data for employees
 export const employees: Employee[] = [
   {
     firstName: 'Jeff',

@@ -1,7 +1,7 @@
 import { Inquiry } from '../types/inquiry';
 import { employees } from './employees';
 
-// create an array of inquiry objects
+// Mock data for inquiries
 export const inquiries: Inquiry[] = [
   {
     id: 1,

@@ -5,6 +5,13 @@ import DrawerItems from '../helper/DrawerItems';
 import { DRAWER_WIDTH } from '../constants';
 import { APP_BAR_HEIGHT } from '../constants';
 
+/**
+ * Functional component that renders a custom styled Material UI Drawer.
+ * The drawer's styling is modified to fit alongside a top app bar, with a fixed position, custom background color,
+ * width, and adjusted height to account for the app bar's presence.
+ *
+ * @returns {JSX.Element} A Material UI Drawer component with custom styling.
+ */
 export default function Drawer() {
   const DrawerMod = styled(MuiDrawer)(({ theme }) => ({
     '& .MuiDrawer-paper': {

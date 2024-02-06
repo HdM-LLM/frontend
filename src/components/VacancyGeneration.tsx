@@ -17,6 +17,19 @@ import LinearProgress from '@mui/material/LinearProgress';
 import SmartToyRoundedIcon from '@mui/icons-material/SmartToyRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
+/**
+ * Interface for props required by the VacancyGeneration component.
+ * @interface VacancyGenerationProps
+ * @property {Category[]} selectedCategories - The categories selected for the vacancy.
+ * @property {VacancyJobInformationProps['formData']} basicInformation - The basic information about the vacancy, such as job title and description.
+ * @property {string} generatedVacancy - The generated vacancy text.
+ * @property {string} adjustPromptPart2 - Additional text to adjust or refine the vacancy generation prompt.
+ * @property {string} output - The final output text for the generated vacancy.
+ * @property {React.Dispatch<React.SetStateAction<string>>} setGeneratedVacancy - State setter function for updating the generated vacancy text.
+ * @property {React.Dispatch<React.SetStateAction<string>>} setAdjustPromptPart2 - State setter function for updating the adjustment text.
+ * @property {React.Dispatch<React.SetStateAction<string>>} setOutput - State setter function for the final output text.
+ * @property {() => void} onSaveVacancy - Callback function to trigger when the vacancy is to be saved.
+ */
 interface VacancyGenerationProps {
   selectedCategories: Category[];
   basicInformation: VacancyJobInformationProps['formData'];
@@ -29,6 +42,12 @@ interface VacancyGenerationProps {
   onSaveVacancy: () => void;
 }
 
+/**
+ * Component for generating vacancy descriptions based on selected categories and basic information.
+ *
+ * @param {VacancyGenerationProps} props - The props for the VacancyGeneration component.
+ * @returns {JSX.Element} - Renders the vacancy generation interface with options to adjust prompt and save the generated vacancy.
+ */
 const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
   selectedCategories,
   basicInformation,
@@ -42,17 +61,20 @@ const VacancyGeneration: React.FC<VacancyGenerationProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
 
+  /**
+   * Handles the generation of a vacancy description by calling an API with the provided information and selected categories.
+   * Adjusts the prompt as needed, sets the generated vacancy and output state, and handles any errors that may occur.
+   */
   const handleGenerateVacancy = () => {
     const adjustedPrompt = `${adjustPromptPart2}`;
     setOpen(true);
 
+    // Call API to generate the vacancy description
     API.getAPI()
       .generateVacancy(basicInformation, selectedCategories, adjustedPrompt)
       .then((response) => {
-        // Handle the response as needed
+        // Update state with the response from the API
         setGeneratedVacancy(response.generatedVacancy);
-
-        // Set the output after the API call is complete
         setOutput(response.generatedVacancy);
         setOpen(false);
       })

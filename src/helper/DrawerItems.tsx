@@ -14,22 +14,40 @@ import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-
+/**
+ * Inline styles for link elements within the drawer.
+ */
 const linkStyle = {
   textDecoration: 'none',
   color: '#808080',
 };
 
+/**
+ * Component to render navigation items in a collapsible drawer.
+ *
+ * @returns {JSX.Element} A list of navigation links that can be expanded or collapsed.
+ */
 export default function DrawerItems() {
   const [open, setOpen] = useState(true);
   const [selectedLink, setSelectedLink] = useState<string>('/');
 
+  /**
+   * Spacing value to be used between items in the drawer for visual separation.
+   */
   const SPACE_BETWEEN_ITEMS = '2vh';
 
+  /**
+   * Toggles the open state of the drawer to show or hide items.
+   */
   const handleClick = () => {
     setOpen(!open);
   };
 
+  /**
+   * Sets the currently selected link in the state.
+   *
+   * @param {string} link - The path to set as the currently selected link.
+   */
   const handleLinkClick = (link: string) => {
     setSelectedLink(link);
   };

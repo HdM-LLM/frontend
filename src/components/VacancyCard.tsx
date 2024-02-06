@@ -3,6 +3,15 @@ import { Box, Card, Grid, Typography, Chip, Stack } from '@mui/material';
 import { Vacancy } from '../types/vacancy';
 import { FONT_FAMILY } from '../constants';
 
+/**
+ * Represents the properties required to render a VacancyCard component.
+ * @typedef {Object} VacancyCardProps
+ * @property {Vacancy} vacancy - The vacancy data to display.
+ * @property {number} cardWidth - The width of the card.
+ * @property {number} cardHeight - The height of the card.
+ * @property {number} marginRight - The right margin of the card.
+ * @property {number} marginBottom - The bottom margin of the card.
+ */
 export interface VacancyCardProps {
   vacancy: Vacancy;
   cardWidth: number;
@@ -11,6 +20,11 @@ export interface VacancyCardProps {
   marginBottom: number;
 }
 
+/**
+ * Enum for department types to categorize vacancies.
+ * @readonly
+ * @enum {string}
+ */
 export enum Departments {
   HR = 'HR',
   IT = 'IT',
@@ -21,8 +35,19 @@ export enum Departments {
   Other = 'Other',
 }
 
+/**
+ * Functional component for rendering a card that displays vacancy details.
+ * It uses department-specific colors for visual differentiation.
+ *
+ * @param {VacancyCardProps} props - The properties to configure the vacancy card.
+ * @returns {JSX.Element} The VacancyCard component.
+ */
 export default function VacancyCard(props: VacancyCardProps) {
-  // Get chip color based on department that is fed in
+  /**
+   * Determines the chip color based on the department.
+   * @param {string} department - The department of the vacancy.
+   * @returns {string} The hex code for the department's color.
+   */
   const getDepartmentChipColor = (department: string) => {
     switch (department) {
       case Departments.HR:
@@ -44,7 +69,11 @@ export default function VacancyCard(props: VacancyCardProps) {
     }
   };
 
-  // Get chip text color based on department that is fed in
+  /**
+   * Determines the chip text color based on the department.
+   * @param {string} department - The department of the vacancy.
+   * @returns {string} The hex code for the department's text color.
+   */
   const getDepartmentChipTextColor = (department: string) => {
     switch (department) {
       case Departments.HR:

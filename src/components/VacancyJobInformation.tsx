@@ -13,6 +13,18 @@ import { SelectChangeEvent } from '@mui/material';
 import { Departments } from '../enums/Departments.enum';
 import { WorkingHours } from '../enums/WorkingHours.enum';
 
+/**
+ * Type definition for properties required by the VacancyJobInformation component.
+ * @typedef {Object} VacancyJobInformationProps
+ * @property {() => void} onNext - Callback function to trigger the next step in the vacancy creation process.
+ * @property {Object} formData - Data object containing form values for vacancy information.
+ * @property {string} formData.title - The title of the vacancy.
+ * @property {string} formData.department - The department the vacancy belongs to.
+ * @property {string} formData.tasksAndResponsibilities - Tasks and responsibilities associated with the vacancy.
+ * @property {string} formData.workingHours - Working hours for the vacancy.
+ * @property {string} formData.description - Description of the vacancy.
+ * @property {React.Dispatch<React.SetStateAction<Object>>} setFormData - State setter function to update formData.
+ */
 export type VacancyJobInformationProps = {
   onNext: () => void;
   formData: {
@@ -34,7 +46,18 @@ export type VacancyJobInformationProps = {
   >;
 };
 
+/**
+ * Component for capturing and editing basic job information for a vacancy.
+ *
+ * @param {VacancyJobInformationProps} props - Properties passed to the VacancyJobInformation component.
+ * @returns {JSX.Element} - React component for entering and editing basic vacancy job information.
+ */
 const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData, setFormData }) => {
+  /**
+   * Handles changes to input fields and updates the formData state accordingly.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event from the input field.
+   */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -43,6 +66,11 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
     }));
   };
 
+  /**
+   * Specialized handler for changes in the department selection field.
+   *
+   * @param {SelectChangeEvent<string>} event - The change event from the department select field.
+   */
   const handleDepartmentChange = (event: SelectChangeEvent<string>) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -50,6 +78,11 @@ const VacancyJobInformation: React.FC<VacancyJobInformationProps> = ({ formData,
     }));
   };
 
+  /**
+   * Specialized handler for changes in the working hours selection field.
+   *
+   * @param {SelectChangeEvent<string>} event - The change event from the working hours select field.
+   */
   const handleWorkingHourChange = (event: SelectChangeEvent<string>) => {
     setFormData((prevData) => ({
       ...prevData,

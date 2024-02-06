@@ -17,6 +17,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Category } from '../types/category';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+/**
+ * Defines the structure for props expected by the CategorySelector component.
+ * @typedef {Object} CategorySelectorProps
+ * @property {Category[]} selectedCategories - The current list of selected categories.
+ * @property {(selectedCategories: Category[]) => void} onCategorySelection - Callback function to update the selected categories.
+ * @property {() => void} onClose - Callback function to handle the closing of the category selector component.
+ */
+
 type ExpectedCategoryType = {
   Name: string;
   Chip: string;
@@ -40,11 +48,19 @@ const columns: GridColDef[] = [
   },
 ];
 
+/**
+ * Component for selecting and managing categories related to a specific context, such as a vacancy.
+ * Allows for the addition of new categories through a dialog interface.
+ *
+ * @param {CategorySelectorProps} props - The props for the CategorySelector component.
+ * @returns {JSX.Element} A component that renders the interface for selecting and adding new categories.
+ */
 const CategorySelector: React.FC<CategorySelectorProps> = ({
   selectedCategories,
   onCategorySelection,
   onClose,
 }) => {
+  // State declarations and initialization
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedRows, setSelectedRows] = useState<GridRowId[]>([]);
   const [filterText, setFilterText] = useState<string>('');
@@ -59,6 +75,9 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   const [guidelineCalculated, setGuidelineCalculated] = useState(false);
   const [categoryAdded, setCategoryAdded] = useState(false);
 
+  /**
+   * Fetches the list of categories from the backend and updates the component state.
+   */
   const fetchCategories = async () => {
     try {
       const response = await fetch(API.getAPI().allCategoriesURL());
@@ -77,7 +96,12 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
     fetchCategories();
   }, []);
 
+  /**
+   * Handles the addition of a new category by interacting with the backend services.
+   * It performs the necessary steps to add a category, including setting a chip, calculating guidelines, and finalizing the addition.
+   */
   const handleAddNewCategory = async () => {
+    // Implementation for adding a new category
     try {
       // Reset state
       setBackendMessage('');
@@ -141,6 +165,9 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
     handleFinalCategory();
   }, [guidelineCalculated, guideline_0, guideline_10, addedChip, newCategoryName]);
 
+  /**
+   * Finalizes the selection process, updating the parent component with the new list of selected categories and closing the selector.
+   */
   const handleDoneButtonClick = () => {
     const newSelectedCategories = selectedRows
       .map((uuid) => categories.find((cat) => cat.id === uuid)!)
@@ -155,14 +182,24 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
     onClose();
   };
 
+  /**
+   * Handles the selection of categories from the grid and updates the selectedRows state.
+   * @param {GridRowId[]} newSelection - The new selection of row IDs.
+   */
   const handleSelectionModelChange = (newSelection: GridRowId[]) => {
     setSelectedRows(newSelection);
   };
 
+  /**
+   * Handles the click event for the "Create a new category" button, opening the dialog for creating a new category.
+   */
   const handleCreateNewCategoryClick = () => {
     setIsNewCategoryDialogOpen(true);
   };
 
+  /**
+   * Handles the closing of the "Create a new category" dialog, resetting the state and closing the dialog.
+   */
   const handleDialogClose = () => {
     setIsNewCategoryDialogOpen(false);
     setNewCategoryName('');
