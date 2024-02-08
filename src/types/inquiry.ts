@@ -1,5 +1,8 @@
 import { Employee } from './employee';
 
+/**
+ * Inquiry type.
+ */
 export type Inquiry = {
   id: number;
   positionTitle: string;

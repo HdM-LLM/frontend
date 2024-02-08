@@ -181,9 +181,8 @@ export default function ApplicantDetailsTable(props: ApplicantDetailsTableProps)
               <StyledTableCell>
                 {rating.quote.includes('No quote available')
                   ? noQuoteAvailable(rating.quote)
-                  : checkQuoteForBulletPoints(rating.quote)}
+                  : rating.quote}
               </StyledTableCell>
-              {/** TODO: This is currently not provided by the backend */}
               <StyledTableCell align="center">{rating.weight}%</StyledTableCell>
             </StyledTableRow>
           ))}

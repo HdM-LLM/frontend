@@ -8,17 +8,27 @@ import { APP_BAR_HEIGHT } from '../constants';
 import { Grid, Stack, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
+/**
+ * Props for the VacancyPage component.
+ */
 export interface VacancyPageProps {
   cardWidth: number;
   cardHeight: number;
 }
 
+/**
+ * This page displays all available vacancies.
+ * @returns A page displaying all vacancies.
+ */
 export default function VacancyPage() {
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const vacanciesPerPage = 15;
 
   useEffect(() => {
+    /**
+     * Fetches vacancies from the API and sets the state.
+     */
     const fetchVacancies = async () => {
       try {
         const api = API.getAPI();
@@ -40,6 +50,11 @@ export default function VacancyPage() {
     textDecoration: 'none',
   };
 
+  /**
+   * Handles the page change event.
+   * @param event Event object.
+   * @param page The new page number.
+   */
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };

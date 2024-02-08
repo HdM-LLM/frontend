@@ -9,6 +9,10 @@ import { useParams } from 'react-router-dom';
 import { Rating } from '../types/rating';
 import { Vacancy } from '../types/vacancy';
 
+/**
+ * This page displays the details of an applicant for a specific vacancy.
+ * @returns A page displaying the details of an applicant.
+ */
 export default function ApplicantDetailsPage() {
   const [applicantRatings, setApplicantRatings] = useState<Rating[]>([]);
   const [applicant, setApplicant] = useState<Applicant | null>(null);
@@ -18,6 +22,10 @@ export default function ApplicantDetailsPage() {
   const { vacancy_id, applicant_id } = useParams();
 
   useEffect(() => {
+    /**
+     * Fetches applicant by ID of the previously selected vacancy.
+     * @returns {Promise<void>}
+     */
     const fetchApplicant = async () => {
       try {
         const api = API.getAPI();
@@ -44,6 +52,10 @@ export default function ApplicantDetailsPage() {
   }, [applicant_id, vacancy_id]);
 
   useEffect(() => {
+    /**
+     * Fetches ratings of the applicant by ID.
+     * @returns {Promise<void>}
+     */
     const fetchRating = async () => {
       try {
         if (!applicant_id) {
@@ -78,6 +90,10 @@ export default function ApplicantDetailsPage() {
 
   // fetch vacancy by ID
   useEffect(() => {
+    /**
+     * Fetches all vacancy data with the vacancy ID provided by URL params.
+     * @returns {Promise<void>}
+     */
     const fetchVacancy = async () => {
       try {
         if (!vacancy_id) {
@@ -102,7 +118,10 @@ export default function ApplicantDetailsPage() {
     fetchVacancy();
   }, [vacancy_id]);
 
-  // Function to get pdf from backend
+  /**
+   * Fetches the URL to the CV of the applicant as PDF.
+   * @returns {string} URL to the CV of the applicant as PDF
+   */
   const getCvAsPdf = () => {
     const api = API.getAPI();
     if (!applicant_id) {

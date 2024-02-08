@@ -15,6 +15,10 @@ import { useEffect, useState } from 'react';
 import { APP_BAR_HEIGHT } from '../constants';
 import { AlertTitle, Typography } from '@mui/material';
 
+/**
+ * This page allows the user to upload a CV and select a vacancy to apply for.
+ * @returns A page for uploading a CV and selecting a vacancy.
+ */
 export default function UploadPage() {
   const [cv, setCv] = useState<File | null>(null);
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
@@ -26,6 +30,9 @@ export default function UploadPage() {
   let errorMessage = '';
 
   useEffect(() => {
+    /**
+     * Fetches vacancies from the API and sets the state.
+     */
     const fetchVacancies = async () => {
       try {
         const api = API.getAPI();
@@ -39,10 +46,17 @@ export default function UploadPage() {
     fetchVacancies();
   }, []);
 
+  /**
+   * Sets the file to be uploaded as the CV.
+   * @param file The file to be set as the CV
+   */
   const setFile = (file: File) => {
     setCv(file);
   };
 
+  /**
+   * Sends the file to the API.
+   */
   const sendFiles = async () => {
     if (!cv || !selectedVacancy) {
       setAlert(true);
@@ -74,10 +88,17 @@ export default function UploadPage() {
     }
   };
 
+  /**
+   * Handles the change of the selected vacancy.
+   * @param event The event of the change.
+   */
   const handleSelectChange = (event: SelectChangeEvent<string>) => {
     setSelectedVacancy(event.target.value);
   };
 
+  /**
+   * Checks if the send button should be disabled.
+   */
   const isSendButtonDisabled = !cv || selectedVacancy === '';
 
   return (

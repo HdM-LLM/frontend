@@ -9,11 +9,18 @@ import { useEffect, useState } from 'react';
 import API from '../api/api';
 import { Applicant } from '../types/applicant';
 
+/**
+ * This page displays the dashboard containing charts and tables.
+ * @returns A page displaying the dashboard.
+ */
 export default function Dashboard() {
   const [applicants, setApplicants] = useState<Applicant[]>([]);
   const receivingDate = '1st December 2023'; // Define receivingDate
 
   useEffect(() => {
+    /**
+     * Fetches all applicants from the API.
+     */
     const fetchAllApplicants = async () => {
       try {
         const api = API.getAPI();

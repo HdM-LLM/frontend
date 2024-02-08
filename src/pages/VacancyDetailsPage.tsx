@@ -7,6 +7,10 @@ import VacancyTable from '../components/VacancyTable';
 import API from '../api/api';
 import { Applicant } from '../types/applicant';
 
+/**
+ * This page displays all applicants for a specific vacancy.
+ * @returns A page displaying all applicants for a specific vacancy.
+ */
 export default function VacancyDetailsPage() {
   const { vacancy_id } = useParams();
   const [vacancy, setVacancy] = useState<Vacancy | null>(null);
@@ -14,6 +18,10 @@ export default function VacancyDetailsPage() {
   const receivingDate = '1st December 2023';
 
   useEffect(() => {
+    /**
+     * Fetches a vacancy by ID. If successful, fetches all applicants for the vacancy.
+     * @returns {Promise<void>}
+     */
     const fetchVacancy = async () => {
       try {
         if (!vacancy_id) {
@@ -25,7 +33,6 @@ export default function VacancyDetailsPage() {
         const vacancyData = await api.fetchVacancy(vacancy_id);
         setVacancy(vacancyData);
 
-        // Assuming you have an API method like getApplicantsByVacancyId
         const applicantsData = await api.fetchApplicantsByVacancyId(vacancy_id);
         setApplicants(applicantsData);
       } catch (error) {

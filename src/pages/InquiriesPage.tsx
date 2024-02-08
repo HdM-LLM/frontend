@@ -7,6 +7,10 @@ import { APP_BAR_HEIGHT } from '../constants';
 import InquiriesTable from '../components/InquiriesTable';
 import { inquiries } from '../mock-data/inquiries';
 
+/**
+ * This page displays all inquiries and the option to create a new vacancy.
+ * @returns A page displaying all inquiries and the option to create a new vacancy.
+ */
 export default function InquiriesPage() {
   return (
     <Box

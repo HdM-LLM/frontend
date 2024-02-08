@@ -16,6 +16,10 @@ import { DRAWER_WIDTH } from './constants';
 import ApplicantDetailsPage from './pages/ApplicantDetailsPage';
 import VacancyDetailsPage from './pages/VacancyDetailsPage';
 
+/**
+ * This function returns the main application component that contains the routing for the different pages.
+ * @returns The main application component.
+ */
 export default function App() {
   const MainBox = styled(Box)(({ theme }) => ({
     flex: 1,

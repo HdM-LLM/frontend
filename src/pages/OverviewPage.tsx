@@ -5,11 +5,18 @@ import { useEffect, useState } from 'react';
 import ApplicantsTable from '../components/ApplicantsTable';
 import { Applicant } from '../types/applicant';
 
+/**
+ * This page displays all applicants.
+ * @returns A page displaying all applicants.
+ */
 export default function OverviewPage() {
   const [applicants, setApplicants] = useState<Applicant[]>([]);
-  const receivingDate = '1st December 2023'; // Define receivingDate
+  const receivingDate = '1st December 2023';
 
   useEffect(() => {
+    /**
+     * Fetches all applicants from the API.
+     */
     const fetchAllApplicants = async () => {
       try {
         const api = API.getAPI();

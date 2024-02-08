@@ -24,6 +24,10 @@ import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 
+/**
+ * This page allows the user to create a new vacancy using a multi-step form.
+ * @returns A page for creating a new vacancy.
+ */
 export default function VacancyCreationPage() {
   const [page, setPage] = useState<number>(1);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -45,6 +49,10 @@ export default function VacancyCreationPage() {
 
   const navigate = useNavigate();
 
+  /**
+   * Handles the change of selected categories.
+   * @param selectedCategories The selected categories.
+   */
   const handleCategorySelectionChange = (selectedCategories: Category[]) => {
     setCategories(selectedCategories);
   };
@@ -52,11 +60,17 @@ export default function VacancyCreationPage() {
   // New state variable for disabling the "Next" button on page 2
   const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
 
-  // Callback function to update the total weight and enable/disable "Next" button for page 2
+  /**
+   * Handles the change of the total weight of the selected categories.
+   * @param totalWeight The total weight of the selected categories.
+   */
   const handleTotalWeightChange = (totalWeight: number) => {
     setNextButtonDisabled(totalWeight !== 100);
   };
 
+  /**
+   * Handles the saving of the vacancy. Shows a dialog on success or failure.
+   */
   const handleSaveVacancy = () => {
     // Check if there is any content in the output (either generated or custom)
     if (output.trim()) {
@@ -86,11 +100,17 @@ export default function VacancyCreationPage() {
     }
   };
 
+  /**
+   * Handles the click on the "New Vacancy" button in the success dialog.
+   */
   const handleInquiriesClick = () => {
     setOpenSuccessDialog(false);
     navigate('/inquiries');
   };
 
+  /**
+   * Handles the click on the "All Vacancies" button in the success dialog.
+   */
   const handleVacanciesClick = () => {
     setOpenSuccessDialog(false);
     navigate('/vacancies');
@@ -100,6 +120,10 @@ export default function VacancyCreationPage() {
     setAlertMessage(null);
   }, [page, formData]);
 
+  /**
+   * Handles the click on the "Next" button and validates the form data.
+   * @returns {JSX.Element}
+   */
   const handleNext = () => {
     if (page === 1) {
       const basicInfoFields = [
@@ -127,6 +151,9 @@ export default function VacancyCreationPage() {
     setPage(page + 1);
   };
 
+  /**
+   * Handles the click on the "Back" button and navigates to the previous page.
+   */
   const handleBack = () => {
     if (page === 1) {
       navigate('/inquiries');
